@@ -14,13 +14,13 @@ const NavBar = () => {
 
       <div className="linksAndInput">
         <ul>
-          <li>Home</li>
-          <li>Favoritos</li>
-          <li>Sobre</li>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Favoritos</a></li>
+          <li><a href='#'>Sobre</a></li>
         </ul>
 
         <div className="inputAndSearch">
-          <input type="text" placeholder="Buscar..." name="buscarPosto" className="inputNav"/>
+          <input type="search" placeholder="Buscar..." name="buscarPosto" className="inputNav"/>
           <span className="lupaIcon">
             <PiMagnifyingGlassDuotone />
           </span>
