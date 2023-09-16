@@ -80,6 +80,10 @@
   cursor: pointer;
 }
 
+.exitAndProfile a {
+  color: #fff;
+}
+
 .exitIcon:hover {
   color: #2a7fef;
 }

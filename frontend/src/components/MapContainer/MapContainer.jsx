@@ -11,7 +11,6 @@ function App() {
   const [currentLocation, setCurrentLocation] = useState(null);
   const [mapZoom, setMapZoom] = useState(10); 
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-  console.log(apiKey)
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -28,7 +27,7 @@ function App() {
 
   return (
     <LoadScript
-    googleMapsApiKey="AIzaSyC6izQDwqpafqLNMKlf2X1MRKgLYzPluCE">
+    googleMapsApiKey={apiKey}>
       <GoogleMap
         mapContainerStyle={containerStyle}
         center={currentLocation}

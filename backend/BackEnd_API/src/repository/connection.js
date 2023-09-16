@@ -6,7 +6,7 @@ async function connect() {
     password:"",
     port:"3306",
     database:"gasfinder",
-    user:"localhost",
+    user:"root",
   });
 
 return connection;
