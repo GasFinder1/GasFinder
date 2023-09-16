@@ -1,14 +1,15 @@
 import styles from "./Cadastro.module.css";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Logo from '../../img/mainLogo.png'
+import Logo from "../../img/mainLogo.png";
 import api from "../../api";
+import { ToastContainer, toast } from "react-toastify";
 
 const Cadastro = () => {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [name, setName] = useState("");
-  const [typeUser, setTypeUser] = useState("Comum");
+  const [email, setEmail] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [password, setPassword] = useState("");
 
   const navigate = useNavigate();
 
@@ -16,30 +17,60 @@ const Cadastro = () => {
     e.preventDefault();
     navigate("/login");
   };
-  // console.log(userName);
-  // console.log(email);
-  // console.log(password);
-  console.log(typeUser);
 
   async function handleRegister(e) {
     e.preventDefault();
+
+    if (password !== confirmPassword) {
+      toast.error("As senhas não coincidem.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      return;
+    }
+
     try {
       const data = {
         name,
         email,
         password,
-        typeUser,
       };
+      console.log(data);
       const response = await api.post("/user", data);
 
-      alert(`Usuário cadastrado com sucesso. Bem vindo(a) ao sistema ${name}`);
+      toast.success(`Conta criada com sucesso!`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
 
       setEmail("");
       setPassword("");
       setName("");
-      setTypeUser("comum");
+      setConfirmPassword("");
+      navigate("/login");
     } catch (error) {
-      alert(`Erro no cadastro. Tente novamente. \nCódigo erro: ${error}`);
+      toast.error("Tente novamente mais tarde.", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   }
 
@@ -47,7 +78,7 @@ const Cadastro = () => {
     <div>
       <div className={styles.mainCad}>
         <form className={styles.formCad} onSubmit={handleRegister}>
-          <img src={Logo} alt="logoGasFinder" className={styles.logo}/>
+          <img src={Logo} alt="logoGasFinder" className={styles.logo} />
           <h2 className={styles.welcomeCad}>Faça seu cadastro</h2>
           <div className={styles.inputsCad}>
             <input
@@ -78,17 +109,20 @@ const Cadastro = () => {
             />
             <br />
             <input
-              type="passwordAgain"
+              type="password"
               className={styles.senhaCad}
               placeholder="Confirme a senha"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
               required
             />
             <br />
             <input type="submit" className={styles.btnCad} value="Cadastrar" />
             <br />
-            <span className={styles.cadVoltar} onClick={handleSubmit}> Já tenho login </span>
+            <span className={styles.cadVoltar} onClick={handleSubmit}>
+              {" "}
+              Já tenho login{" "}
+            </span>
           </div>
         </form>
       </div>

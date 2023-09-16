@@ -5,19 +5,19 @@ import NavBar from "../../components/NavBar/NavBar"
 import CardLateral from "../../components/CardLateral/CardLateral";
 
 const Home = () => {
-  document.addEventListener("click", function click(e) {
-    let div = e.target;
+  // document.addEventListener("click", function click(e) {
+  //   let div = e.target;
 
-    if (div instanceof HTMLElement) {
-      // console.log("Element clicked:", div.tagName);
-      // console.log("Outer HTML:", div.outerHTML);
-      // console.log("Attributes:", Array.from(div.attributes).map(attr => `${attr.name}="${attr.value}"`).join(", "));
-      // console.log("Classes:", Array.from(div.classList).join(", "));
+  //   if (div instanceof HTMLElement) {
+  //     console.log("Element clicked:", div.tagName);
+  //     console.log("Outer HTML:", div.outerHTML);
+  //     console.log("Attributes:", Array.from(div.attributes).map(attr => `${attr.name}="${attr.value}"`).join(", "));
+  //     console.log("Classes:", Array.from(div.classList).join(", "));
 
-      let teste2 = div.outerHTML
-      console.log(div)
-    }
-  });
+  //     let teste2 = div.outerHTML
+  //     console.log(div)
+  //   }
+  // });
 
   return (
     <section className={styles.map}>
