@@ -1,0 +1,99 @@
+.mainNavbar {
+  color: #fff;
+  background-color: #000000d8;
+  height: 15vh;
+  width: 100%;
+  border-bottom-left-radius: 40px;
+  border-bottom-right-radius: 40px;
+  z-index: 2;
+  position: absolute;
+  top: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.logoAndText {
+  display: flex;
+  flex-direction: row;
+  width: 20%;
+  align-items: center;
+}
+
+.logoAndText img {
+  width: 20%;
+}
+
+.logoAndText h1 {
+  margin-left: 15px;
+}
+
+.inputNav {
+  border-radius: 20px;
+  background-color: #2a7fef;
+  outline: none;
+  border: none;
+  color: #fff;
+  width: 40%;
+}
+
+.inputNav::placeholder {
+  color: #fff;
+  text-align: center;
+}
+
+.linksAndInput {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10%;
+  align-items: flex-start;
+  /* justify-content: center; */
+  width: 50%;
+}
+
+.linksAndInput ul {
+  display: flex;
+  flex-direction: row;
+  column-gap: 10%;
+  align-items: center;
+  list-style: none;
+}
+
+.inputAndSearch {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+}
+
+.lupaIcon {
+  font-size: 1.5em;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.exitAndProfile {
+  font-size: 1.5em;
+  display: flex;
+  column-gap: 15%;
+  cursor: pointer;
+}
+
+.exitIcon:hover {
+  color: #2a7fef;
+}
+
+.profileIcon:hover {
+  color: #2a7fef;
+}
+
+.lupaIcon:hover {
+  color: #2a7fef;
+}
+
+.exitIcon {
+}
+
+.profileIcon {
+}

@@ -1,0 +1,166 @@
+:root {
+  --cor-do-botao: #2a7fef;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  background-image: url("../../img/backgroundPosto.jpg");
+  background-position: top;
+  background-size: cover;
+  font-family: "Roboto", sans-serif;
+}
+
+.container .formLogin {
+  width: 25%;
+  background-color: #00000080;
+  font-weight: 500;
+  padding: 30px;
+  border-radius: 8px;
+  display: flex;
+  row-gap: 10px;
+  flex-direction: column;
+}
+
+.formLogin .logo {
+  width: 20%;
+  margin: 0 auto;
+}
+
+.formLogin h2 {
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 2em;
+  color: #fff;
+  margin-top: 5%;
+}
+
+.formLogin input {
+  width: 90%;
+  height: 50px;
+  border-radius: 4px;
+  border: none;
+  margin-left: 20px;
+  background-color: #333333;
+  color: #fff;
+}
+
+.formLogin input[type="text"]::placeholder {
+ color: #2a7fef;
+} 
+
+
+.formLogin input:focus {
+  outline-color: var(--cor-do-botao);
+  border-color: var(--cor-do-botao);
+}
+
+.formLogin input::placeholder {
+  
+}
+
+.formLogin .inputsLogin {
+}
+
+.formLogin .inputEmail {
+  margin-bottom: 18px;
+}
+
+.formLogin .btnSubmit {
+  background-color: var(--cor-do-botao);
+  font-weight: 500;
+  width: 90%;
+  height: 55px;
+  padding: 30px, 10px;
+  margin-bottom: 10px;
+  color: #fff;
+  border-radius: 4px;
+  text-shadow: 2px 2px black;
+  font-size: 21px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.formLogin .btnSubmit:hover {
+  background-color: #032e69;
+}
+
+.formLogin p {
+  color: gray;
+  text-shadow: 1px 1px black;
+  font-weight: 600;
+  text-align: center;
+}
+.formLogin .cadastre {
+  color: #fff;
+  transition: 0.5s;
+}
+
+.formLogin .cadastre:hover {
+  color: var(--cor-do-botao);
+  cursor: pointer;
+}
+
+.resetPassword {
+  text-align: right;
+  margin-right: 5%;
+  color: #2a7fef;
+  text-shadow: 2px 2px #000;
+  transition: 0.5s;
+}
+
+.resetPassword:hover {
+  color: #fff;
+  text-shadow: 2px 2px #000;
+}
+
+.cadastreParagraph {
+  display: flex;
+  flex-direction: row;
+  column-gap: 7px;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-right: 6%;
+}
+
+/*medias queries*/
+
+@media (max-width: 1800px) and (min-width:1300px) {
+  .container .formLogin {
+    min-width: 500px;
+  }
+}
+
+@media (max-width: 1299px) and (min-width:950px) {
+  .container .formLogin {
+    min-width: 400px;
+  }
+}
+
+@media (max-width: 949px) and (min-width:420px) {
+  .container .formLogin {
+    min-width: 400px;
+  }
+}
+
+@media (max-width: 419px) and (min-width:320px) {
+
+  .container .formLogin {
+    width: 90%;
+    margin: unset;
+    height: 55%;
+    padding: unset;
+  }
+
+  .formLogin .logo {
+    margin-top: 10%;
+  }
+  .container .formLogin input {
+    width: 90%;
+  }
+}

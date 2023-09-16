@@ -1,0 +1,11 @@
+footer {
+    background-color: #00000080;
+    width: 100vw;
+    position: absolute;
+    bottom: 0;
+}
+
+h3 {
+    text-align: center;
+    text-shadow: 2px 2px black;
+}

@@ -1,0 +1,168 @@
+:root {
+  --cor-do-botao: #2a7fef;
+}
+
+.mainCad {
+  margin: 0;
+  padding: 0;
+  background-image: url("../../img/backgroundPosto.jpg");
+  background-position: center;
+  background-size: cover;
+  width: 100vw;
+  height: 100vh;
+  font-family: "Roboto", sans-serif;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainCad .formCad {
+  width: 25%;
+  background-color: #00000080;
+  font-weight: 500;
+  padding: 30px;
+  border-radius: 8px;
+  display: flex;
+  row-gap: 10px;
+  flex-direction: column;
+}
+
+.formCad .logo {
+  width: 20%;
+  margin: 0 auto;
+}
+
+.formCad h2 {
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  text-shadow: none;
+  font-size: 2em;
+  color: #fff;
+  margin-top: 5%;
+}
+
+.formCad input {
+  width: 90%;
+  height: 50px;
+  border-radius: 4px;
+  border: none;
+  padding-left: 10px;
+  margin-left: 20px;
+  margin-bottom: 20px;
+  background-color: #333333;
+  color: #fff;
+}
+
+.formCad p, .formCad span {
+  margin-left: 20px;
+}
+
+.formCad span:hover {
+  color: var(--cor-do-botao);
+  cursor: pointer;
+}
+
+.mainCad input[type="submit"] {
+  background-color: #2a7fef;
+  font-weight: 500;
+  width: 90%;
+  height: 55px;
+  padding: 30px, 10px;
+  margin-top: 20px;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 21px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.formCad .btnCad {
+  background-color: var(--cor-do-botao);
+  font-weight: 500;
+  width: 90%;
+  height: 55px;
+  padding: 30px, 10px;
+  margin-bottom: 10px;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 21px;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.formCad .btnCad:hover {
+  background-color: #032e69;
+}
+
+.textSelect {
+  color: #fff; 
+  text-shadow: none;
+} 
+
+select {
+  width: 90%;
+  height: 50px;
+  padding: 10px;
+  font-size: 16px;
+  border: transparent;
+  border-radius: 4px;
+  background-color: #333333;
+  color: #737272;
+  /* Estilo quando o menu está aberto */
+  appearance:none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url('../../img/double-up.png');
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: 8%;
+  background-position-x: 95%;
+}
+
+.tipoUsuario {
+  width: 50%;
+  margin-left: 20px;
+}
+
+/* input[type="submit"]:hover {
+  background-color: #9a040b;
+} */
+
+
+@media (max-width: 1800px) and (min-width:1300px) {
+  .mainCad .formCad{
+    min-width: 500px;
+  }
+}
+
+@media (max-width: 1299px) and (min-width:950px) {
+  .mainCad .formCad{
+    min-width: 400px;
+  }
+}
+
+@media (max-width: 949px) and (min-width:420px) {
+  .mainCad .formCad{
+    min-width: 400px;
+  }
+}
+
+@media (max-width: 419px) and (min-width:320px) {
+
+  .mainCad .formCad {
+    width: 90%;
+    margin: unset;
+    height: auto;
+    padding: unset;
+  }
+
+  .formCad .logo {
+    margin-top: 10%;
+  }
+  .mainCad .formCad input {
+    width: 90%;
+  }
+}
