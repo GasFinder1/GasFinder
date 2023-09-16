@@ -1,5 +1,4 @@
-import "./App.css";
-
+import './index.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify";
@@ -8,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 import Login from "./pages/Login/Login";
 import Cadastro from "./pages/Cadastro/Cadastro";
 import Home from "./pages/Home/Home.jsx"
+import RecuperarSenha from './pages/RecuperarSenha/RecuperarSenha';
 
 function App() {
   return (
@@ -19,6 +19,7 @@ function App() {
           <Route path="*" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/recuperarsenha" element={<RecuperarSenha />} />
         </Routes>
       </BrowserRouter>
     </div>
