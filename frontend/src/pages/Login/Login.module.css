@@ -87,7 +87,7 @@
   border-radius: 4px;
   font-size: 21px;
   cursor: pointer;
-
+  transition: .5s;
   /* Botão opçao 1*/
   
   /* box-shadow: 0px 10px 14px -7px #276873;
@@ -106,8 +106,9 @@
 }
 
 .formLogin .btnSubmit:hover {
-  /* font-size: 18px;
-  background-color: #032e69; */
+  transition: .5s;
+   /* font-size: 18px; */
+  background-color: #032e69; 
   /* box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2); */
   /* background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
 	background-color:#408c99; */
