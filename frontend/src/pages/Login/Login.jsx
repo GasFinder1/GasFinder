@@ -1,5 +1,5 @@
 import styles from "./Login.module.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import Logo from "../../img/mainLogo.png";
 import { useState } from "react";
 import api from "../../api";
@@ -25,7 +25,7 @@ const Login = () => {
         password,
       };
 
-      const response = await api.post("login", data);
+      const response = await api.post("/login", data);
       toast.success(`Bem vindo ao Gas Finder !`, {
         position: "top-right",
         autoClose: 5000,
@@ -79,7 +79,7 @@ const Login = () => {
           />
           <br />
         </div>
-        <span className={styles.resetPassword}>Esqueceu a senha ?</span>
+        <Link to="/resetpassword" className={styles.resetPassword}>Esqueceu a senha ?</Link>
         <input type="submit" value="Entrar" className={styles.btnSubmit} />
         <p className={styles.cadastreParagraph}>
           Não possui uma conta ?{" "}

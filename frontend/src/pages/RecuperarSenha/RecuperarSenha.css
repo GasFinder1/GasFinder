@@ -1,70 +1,110 @@
 .main-recuperarSenha-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: blue;
-    height: 100vh;
-    width: 100vw;
-    background-image: url("../../img/backgroundPosto.jpg");
-    background-position: top;
-    background-size: cover;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: blue;
+  height: 100vh;
+  width: 100vw;
+  background-image: url("../../img/backgroundPosto.jpg");
+  background-position: top;
+  background-size: cover;
 }
 
 .recuperarSenha-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    width: 600px;
-    height: 600px;
-    background-color: #030306CC;
-    border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 600px;
+  height: 500px;
+  background-color: #00000080;
+  border-radius: 10px;
+}
+
+.recuperarSenha-container img {
+  transform: translateY(30%);
 }
 
 .recuperarSenha-container h2 {
-    color: #EEE;
+  color: #eee;
 }
 
 .formulario-email-e-botao {
-    height: 70%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    row-gap: 8%;
+  height: 70%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  row-gap: 8%;
 }
 .formulario-email-e-botao input {
-    display: flex;
-    text-indent: 10%;
-    width: 400px;
-    height: 64px;
-    border-radius: 10px;
-    background-color: #333;
-    color: #EEE;
-    border: none;
-    outline: none;
+  display: flex;
+  text-indent: 10%;
+  width: 400px;
+  height: 64px;
+  border-radius: 10px;
+  background-color: #333;
+  color: #eee;
+  border: none;
+  outline: none;
+  font-size: 1.3em;
 }
 
 .formulario-email-e-botao button {
-    width: 400px;
-    height: 64px;
-    border-radius: 10px;
-    background-color: #2A7FEF;
-    color: #EEEEEE;
-    border: none;
-    outline: none;
-    font-size: 21px;
-}
-
-.formulario-email-e-botao a {
-    color:#2A7FEF;
-}
-
-.formulario-email-e-botao ::placeholder { 
-    font-size: 21px;
+  width: 400px;
+  height: 64px;
+  border-radius: 10px;
+  background-color: #2a7fef;
+  color: #eeeeee;
+  border: none;
+  outline: none;
+  font-size: 21px;
+  transition: 0.5s;
 }
 
 .formulario-email-e-botao button:hover {
-    cursor: pointer;
+  background-color: #032e69;
+  transition: 0.5s;
+}
 
+.formulario-email-e-botao a {
+  color: #2a7fef;
+  text-decoration: none;
+  transition: 0.5s;
+}
+
+.formulario-email-e-botao a:hover {
+  color: #fff;
+  text-decoration: underline;
+  transition: 0.5s;
+}
+
+.formulario-email-e-botao ::placeholder {
+  font-size: 21px;
+}
+
+.formulario-email-e-botao button:hover {
+  cursor: pointer;
+}
+
+@media (min-width: 0) and (max-width: 650px) {
+  .recuperarSenha-container {
+    width: 90%;
+  }
+
+  .formulario-email-e-botao {
+    width: 90%;
+  }
+
+  .formulario-email-e-botao button {
+    width: 90%;
+  }
+
+  .formulario-email-e-botao input {
+    width: 90%;
+  }
+
+  .formulario-email-e-botao ::placeholder {
+    font-size: 16px;
+  }
 }

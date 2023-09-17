@@ -1,23 +1,26 @@
+import { GoogleMap, useJsApiLoader, Marker } from '@react-google-maps/api';
 import React, { useState, useEffect } from 'react';
-import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
 
 const containerStyle = {
   width: '100%',
   height: '100vh',
-  zIndex: 0
 };
 
-function App() {
+function MapContainer() {
+  const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+  const { isLoaded } = useJsApiLoader({
+    id: 'google-map-script',
+    googleMapsApiKey: apiKey,
+  });
+
+  const [map, setMap] = useState(null);
   const [currentLocation, setCurrentLocation] = useState(null);
-  const [mapZoom, setMapZoom] = useState(10); 
-  const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
         setCurrentLocation({ lat: latitude, lng: longitude });
-        setMapZoom(14); 
       },
       (error) => {
         console.error(error);
@@ -25,18 +28,38 @@ function App() {
     );
   }, []);
 
-  return (
-    <LoadScript
-    googleMapsApiKey={apiKey}>
-      <GoogleMap
-        mapContainerStyle={containerStyle}
-        center={currentLocation}
-        zoom={mapZoom} 
-      >
-        {currentLocation && <Marker position={currentLocation} />}
-      </GoogleMap>
-    </LoadScript>
+  const onLoad = React.useCallback(function callback(map) {
+    if (currentLocation) {
+      const bounds = new window.google.maps.LatLngBounds(currentLocation);
+      map.fitBounds(bounds);
+    }
+
+    setMap(map);
+  }, [currentLocation]);
+
+  const onUnmount = React.useCallback(function callback() {
+    setMap(null);
+  }, []);
+
+  return isLoaded ? (
+    <GoogleMap
+      mapContainerStyle={containerStyle}
+      center={currentLocation}
+      zoom={16} // Ajuste o zoom conforme necessário
+      onLoad={onLoad}
+      onUnmount={onUnmount}
+    >
+      {currentLocation && (
+        <Marker
+          position={currentLocation}
+          title="Sua Localização Atual"
+          animation={window.google.maps.Animation.DROP}
+        />
+      )}
+    </GoogleMap>
+  ) : (
+    <></>
   );
 }
 
-export default App;
+export default React.memo(MapContainer);
