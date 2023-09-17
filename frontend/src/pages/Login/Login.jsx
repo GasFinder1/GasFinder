@@ -79,7 +79,7 @@ const Login = () => {
           />
           <br />
         </div>
-        <span className={styles.resetPassword}>Esqueceu a senha ?</span>
+        <span className={styles.resetPassword}>Esqueci minha senha</span>
         <input type="submit" value="Entrar" className={styles.btnSubmit} />
         <p className={styles.cadastreParagraph}>
           Não possui uma conta ?{" "}
