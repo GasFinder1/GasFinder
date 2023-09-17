@@ -12,7 +12,7 @@
   background-image: url("../../img/backgroundPosto.jpg");
   background-position: top;
   background-size: cover;
-  font-family: "Roboto", sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .container .formLogin {
@@ -65,10 +65,15 @@
 }
 
 .formLogin .inputsLogin {
+  
 }
 
 .formLogin .inputEmail {
   margin-bottom: 18px;
+}
+
+.inputSenha, .inputEmail {
+  text-indent: 10%;
 }
 
 .formLogin .btnSubmit {
@@ -80,14 +85,37 @@
   margin-bottom: 10px;
   color: #fff;
   border-radius: 4px;
-  text-shadow: 2px 2px black;
   font-size: 21px;
   cursor: pointer;
-  transition: 0.5s;
+
+  /* Botão opçao 1*/
+  
+  /* box-shadow: 0px 10px 14px -7px #276873;
+	background:linear-gradient(to bottom, #2a7fef 5%, #408c99 100%);
+	background-color:#2a7fef;
+	border-radius:4px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:20px;
+	font-weight:bold;
+	padding:13px 32px;
+	text-decoration:none;
+	text-shadow:0px 1px 0px #3d768a; */
 }
 
 .formLogin .btnSubmit:hover {
-  background-color: #032e69;
+  /* font-size: 18px;
+  background-color: #032e69; */
+  /* box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2); */
+  /* background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
+	background-color:#408c99; */
+}
+
+.formLogin .btnSubmit:active {
+  position: relative;
+  top: 1px;
 }
 
 .formLogin p {
@@ -97,26 +125,29 @@
   text-align: center;
 }
 .formLogin .cadastre {
-  color: #fff;
+  color: var(--cor-do-botao);
   transition: 0.5s;
 }
 
 .formLogin .cadastre:hover {
-  color: var(--cor-do-botao);
+  color: #FFF;
   cursor: pointer;
 }
 
 .resetPassword {
+  text-decoration: none;
   text-align: right;
   margin-right: 5%;
   color: #2a7fef;
-  text-shadow: 2px 2px #000;
+  text-shadow: 1px 1px #000;
   transition: 0.5s;
+  cursor: pointer;
 }
 
 .resetPassword:hover {
   color: #fff;
-  text-shadow: 2px 2px #000;
+  /* text-decoration: underline; */
+  /* text-shadow: 1px 1px #000; */
 }
 
 .cadastreParagraph {
