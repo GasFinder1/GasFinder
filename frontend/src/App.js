@@ -19,7 +19,7 @@ function App() {
           <Route path="*" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/recuperarsenha" element={<RecuperarSenha />} />
+          <Route path="/resetpassword" element={<RecuperarSenha />} />
         </Routes>
       </BrowserRouter>
     </div>
