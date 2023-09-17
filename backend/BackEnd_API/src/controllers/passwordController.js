@@ -7,8 +7,9 @@ const router = express.Router();
 
 router.post('/', async (request, response) => {
   const { email: userEmail} = request.body; // Renomeie a variável para evitar conflito
+  // console.log(userEmail)
 
-  console.log('email senha controller >>>', userEmail);
+  // console.log('email senha controller >>>', userEmail);
 
   try {
     const user = await database.checkEmail(userEmail);
