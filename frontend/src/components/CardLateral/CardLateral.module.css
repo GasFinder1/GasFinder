@@ -1,20 +1,24 @@
 .mainCard {
-  height: 60vh;
-  width: 20%;
+  flex-wrap: wrap;
+  height: auto;
+  width: 40%;
+  /* max-width: 400px; */
   position: absolute;
-  right: 0;
+  right: 12px;
   top: 20%;
   background-color: rgba(0, 0, 0, 0.61);
   z-index: 2;
-  border-top-left-radius: 20px;
-  border-bottom-left-radius: 20px;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .cardPosto {
   display: flex;
-  flex-direction: row;
-  width: 90%;
-  margin: 0 auto;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 100%;
+  /* margin: 0 auto; */
   margin-top: 10%;
 }
 

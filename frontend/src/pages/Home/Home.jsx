@@ -3,6 +3,7 @@ import styles from "./Home.module.css";
 import MapContainer from "../../components/MapContainer/MapContainer";
 import NavBar from "../../components/NavBar/NavBar"
 import CardLateral from "../../components/CardLateral/CardLateral";
+import CardPosto from "../../components/CardPosto/CardPosto";
 
 const Home = () => {
   // document.addEventListener("click", function click(e) {
@@ -24,6 +25,13 @@ const Home = () => {
       <NavBar />
       <CardLateral />
       <MapContainer />
+      <CardPosto
+      url = "https://logodownload.org/wp-content/uploads/2014/07/shell-logo-0.png"
+      distancia = "100"
+      precoGasolina = "5,19"
+      precoEtanol = "4,05"
+      precoDiesel = "5,40"
+      />
       <div></div>
     </section>
   );
