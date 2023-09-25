@@ -25,13 +25,6 @@ const Home = () => {
       <NavBar />
       <CardLateral />
       <MapContainer />
-      <CardPosto
-      url = "https://logodownload.org/wp-content/uploads/2014/07/shell-logo-0.png"
-      distancia = "100"
-      precoGasolina = "5,19"
-      precoEtanol = "4,05"
-      precoDiesel = "5,40"
-      />
       <div></div>
     </section>
   );
