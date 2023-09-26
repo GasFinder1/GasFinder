@@ -3,6 +3,7 @@ import styles from "./Home.module.css";
 import MapContainer from "../../components/MapContainer/MapContainer";
 import NavBar from "../../components/NavBar/NavBar"
 import CardLateral from "../../components/CardLateral/CardLateral";
+import CardPosto from "../../components/CardPosto/CardPosto";
 
 const Home = () => {
   // document.addEventListener("click", function click(e) {
