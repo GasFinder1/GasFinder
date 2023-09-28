@@ -25,7 +25,6 @@ const Home = () => {
       <NavBar />
       <CardLateral />
       <MapContainer />
-      <div></div>
     </section>
   );
 };

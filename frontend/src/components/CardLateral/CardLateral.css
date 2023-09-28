@@ -7,10 +7,11 @@
   max-width: 512px;
   height: 80vh; /* 40% do tamanho da tela de altura */
   background-color: rgba(0, 0, 0, 0.50);;
-  border-radius: 16px;
+  border-radius: 8px;
   z-index: 999;
   overflow: auto;
 }
+
 
 .container-janela {
   width: auto;
@@ -31,4 +32,8 @@
   font-style: normal;
   font-weight: 800;
   line-height: normal;
+}
+
+@media (max-width: 767px) {
+  /*modificar aqui*/
 }
