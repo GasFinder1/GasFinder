@@ -30,7 +30,7 @@ const CardPosto = (props) => {
                     </div>
                     <div className='div-mais-info'>
                     <a href='#'>Mais opções</a> 
-                    <AiOutlineInfoCircle size={16}/>
+                    <AiOutlineInfoCircle size={16} className='iconInfo'/>
                     </div>
                 </div>
                 <div className='container-valores-postos'>

@@ -1,6 +1,11 @@
 .div-ajuste{
-    display: inline-block;
     padding: 12px 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
 }
 
 .main-container-cardPosto {
@@ -8,7 +13,8 @@
     align-items: center;
     /* padding: 0px 16px; */
     width: 400px;
-    height: 180px;
+    width: 80%;
+    height: 160px;
     background-color: #FFF;
     border-radius: 12px;
 }
@@ -22,9 +28,8 @@
     color: #222228;
 }
 .div-bandeira img {
-    width: 100%;
+    width: 20%;
     max-width: 50px;
-    height: 100%;
 }
 
 .container-bandeira-e-distancia {
@@ -46,10 +51,11 @@
 
 .div-mais-info {
     font-size: 14px;
-    width: 60%;
+    width: 100%;
     display: flex;
     align-items:end;
-    justify-content: space-between;
+    justify-content: flex-start;
+    column-gap: 5%;
     color: #003CA0;
 }
 
@@ -65,6 +71,7 @@
     color: #467BEC;
     transition: all 0.2s ease;
 }
+
 .container-valores-postos {
     display: flex;
     flex-direction: column;
@@ -83,7 +90,7 @@
 }
 
 
-@media (max-width: 767px) {
+@media (min-width: 300px) and (max-width: 767px) {
     .main-container-cardPosto {
         width: 300px;
         height: 180px;
@@ -92,3 +99,4 @@
     }
 
 }
+
