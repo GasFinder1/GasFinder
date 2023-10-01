@@ -7,51 +7,47 @@ const CardLateral = () => {
       <div className="container-janela">
         {/* Aqui começa a janela */}
         <h2>Postos Próximos</h2>
-        <div className="card">
-          <CardPosto
-            url="https://logodownload.org/wp-content/uploads/2014/07/shell-logo-0.png"
-            distancia="100"
-            precoGasolina="5,19"
-            precoEtanol="4,05"
-            precoDiesel="5,40"
-          />
-        </div>
-        <div className="card">
-          <CardPosto
-            url="https://logodownload.org/wp-content/uploads/2014/07/shell-logo-0.png"
-            distancia="100"
-            precoGasolina="5,19"
-            precoEtanol="4,05"
-            precoDiesel="5,40"
-          />
-        </div>
-        <div className="card">
-          <CardPosto
-            url="https://logodownload.org/wp-content/uploads/2014/07/shell-logo-0.png"
-            distancia="100"
-            precoGasolina="5,19"
-            precoEtanol="4,05"
-            precoDiesel="5,40"
-          />
-        </div>
-        <div className="card">
-          <CardPosto
-            url="https://logodownload.org/wp-content/uploads/2014/07/shell-logo-0.png"
-            distancia="100"
-            precoGasolina="5,19"
-            precoEtanol="4,05"
-            precoDiesel="5,40"
-          />
-        </div>
+        <CardPosto
+          nomePosto ="Shell Brasil"
+          url="https://logodownload.org/wp-content/uploads/2014/07/shell-logo-0.png"
+          distancia="100"
+          precoGasolina="5,19"
+          precoEtanol="4,05"
+          precoDiesel="5,40"
+        />
+        <CardPosto
+          nomePosto ="Petrobras"
+          url="https://i.pinimg.com/originals/b4/e8/f3/b4e8f3a19680f3dbf2ee1e543df41ace.jpg"
+          distancia="250"
+          precoGasolina="6,00"
+          precoEtanol="4,55"
+          precoDiesel="5,30"
+        />
+        <CardPosto
+          nomePosto ="Posto Ale"
+          url="https://cdn.worldvectorlogo.com/logos/postos-ale.svg"
+          distancia="600"
+          precoGasolina="5,85"
+          precoEtanol="4,00"
+          precoDiesel="4,90"
+        />
+        <CardPosto
+          nomePosto = "Ipiranga"
+          url="https://i.pinimg.com/736x/5a/bf/e5/5abfe598255809e49bbbde713a4b48d8.jpg"
+          distancia="853"
+          precoGasolina="5,30"
+          precoEtanol="4,20"
+          precoDiesel="5,40"
+        />
+        <CardPosto
+          nomePosto = "Posto Local"
+          url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhkWOxcM35Pak60Dp5v3kM40xiNqPmIK7Aig&usqp=CAU"
+          distancia="1520"
+          precoGasolina="6,20"
+          precoEtanol="4,50"
+          precoDiesel="5,75"
+        />
 
-          <CardPosto
-            url="https://logodownload.org/wp-content/uploads/2014/07/shell-logo-0.png"
-            distancia="100"
-            precoGasolina="5,19"
-            precoEtanol="4,05"
-            precoDiesel="5,40"
-          />
-        
       </div>
     </section>
   )

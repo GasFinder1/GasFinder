@@ -1,6 +1,11 @@
 .div-ajuste{
-    display: inline-block;
     padding: 12px 0px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: auto;
 }
 
 .main-container-cardPosto {
@@ -8,25 +13,29 @@
     align-items: center;
     /* padding: 0px 16px; */
     width: 400px;
-    height: 180px;
+    width: 80%;
+    height: 160px;
     background-color: #FFF;
     border-radius: 12px;
 }
 
 .div-bandeira {
     display: flex;   
-    height: 60%;
-    width: 50%;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 30%;
+    width: 100%;
+    color: #222228;
 }
 .div-bandeira img {
-    width: auto;
-    height: auto;
+    width: 20%;
+    max-width: 50px;
 }
 
 .container-bandeira-e-distancia {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     width: 100%;
     height: 100%;
@@ -34,11 +43,33 @@
 }
 
 .div-distancia {
-    height: 40%;
     width: 100%;
     display: flex;
-    align-items:flex-end;
+    align-items: flex-end;
     justify-content: space-evenly;
+}
+
+.div-mais-info {
+    font-size: 14px;
+    width: 100%;
+    display: flex;
+    align-items:end;
+    justify-content: flex-start;
+    column-gap: 5%;
+    color: #003CA0;
+}
+
+
+.div-mais-info a {
+    text-decoration: none;
+    color: #003CA0
+}
+
+.div-mais-info a:hover {
+    /* background-color: red; */
+    /* text-decoration: underline; */
+    color: #467BEC;
+    transition: all 0.2s ease;
 }
 
 .container-valores-postos {
@@ -48,7 +79,6 @@
     width: 100%;
     height: 100%;
     border-radius: 12px;
-    background-color: black;
 }
 
 .div-combustiveis{
@@ -58,3 +88,15 @@
     height: 64px;
     color: #FFF;
 }
+
+
+@media (min-width: 300px) and (max-width: 767px) {
+    .main-container-cardPosto {
+        width: 300px;
+        height: 180px;
+        /*modificar aqui*/
+        
+    }
+
+}
+

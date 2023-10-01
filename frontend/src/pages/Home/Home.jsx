@@ -22,10 +22,9 @@ const Home = () => {
 
   return (
     <section className={styles.map}>
-      <NavBar />
-      <CardLateral />
+      <NavBar /> 
+       <CardLateral />
       <MapContainer />
-      <div></div>
     </section>
   );
 };
