@@ -121,7 +121,7 @@ const Cadastro = () => {
             <br />
             <span className={styles.cadVoltar} onClick={handleSubmit}>
               {" "}
-              Já tenho login{" "}
+              Já tenho uma conta{" "}
             </span>
           </div>
         </form>
