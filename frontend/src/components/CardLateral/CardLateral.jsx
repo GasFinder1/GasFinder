@@ -1,23 +1,54 @@
-import styles from "./CardLateral.module.css"
-import LogoShell from "../../img/ipiranga.png"
+import "./CardLateral.css"
+import CardPosto from "../CardPosto/CardPosto"
 
 const CardLateral = () => {
   return (
-    <section className={styles.mainCard}>
-        <h2 className={styles.titleCardLateral}>Postos próximos</h2>
-        <div className={styles.cardPosto}>
-            <div className={styles.logoPosto}>
-               <img src={LogoShell} alt="" />
-               <p>Shell Brasil</p>
-            </div>
-            <div className={styles.divList}>
-            <ul className={styles.listCard}>
-                <li>E R$5,19</li>
-                <li>E R$3,49</li>
-                <li>E R$4,11</li>
-            </ul>
-            </div>
-        </div>
+    <section className="main-container-CardLateral">
+      <div className="container-janela">
+        {/* Aqui começa a janela */}
+        <h2>Postos Próximos</h2>
+        <CardPosto
+          nomePosto ="Shell Brasil"
+          url="https://logodownload.org/wp-content/uploads/2014/07/shell-logo-0.png"
+          distancia="100"
+          precoGasolina="5,19"
+          precoEtanol="4,05"
+          precoDiesel="5,40"
+        />
+        <CardPosto
+          nomePosto ="Petrobras"
+          url="https://i.pinimg.com/originals/b4/e8/f3/b4e8f3a19680f3dbf2ee1e543df41ace.jpg"
+          distancia="250"
+          precoGasolina="6,00"
+          precoEtanol="4,55"
+          precoDiesel="5,30"
+        />
+        <CardPosto
+          nomePosto ="Posto Ale"
+          url="https://cdn.worldvectorlogo.com/logos/postos-ale.svg"
+          distancia="600"
+          precoGasolina="5,85"
+          precoEtanol="4,00"
+          precoDiesel="4,90"
+        />
+        <CardPosto
+          nomePosto = "Ipiranga"
+          url="https://i.pinimg.com/736x/5a/bf/e5/5abfe598255809e49bbbde713a4b48d8.jpg"
+          distancia="853"
+          precoGasolina="5,30"
+          precoEtanol="4,20"
+          precoDiesel="5,40"
+        />
+        <CardPosto
+          nomePosto = "Posto Local"
+          url="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhkWOxcM35Pak60Dp5v3kM40xiNqPmIK7Aig&usqp=CAU"
+          distancia="1520"
+          precoGasolina="6,20"
+          precoEtanol="4,50"
+          precoDiesel="5,75"
+        />
+
+      </div>
     </section>
   )
 }

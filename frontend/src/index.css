@@ -32,3 +32,33 @@ h1 {
 p {
   font-size: 1rem;
 }
+
+/*Estilos de barra scroll*/
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #222228 #2822227a;
+}
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+*::-webkit-scrollbar-track {
+  background-color: rgba(0, 0, 0, 0.50);
+}
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 8px;
+  background-color: #222228;
+}
+
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #000;
+}
+
+*::-webkit-scrollbar-thumb:active {
+  background-color: #222228;
+}
