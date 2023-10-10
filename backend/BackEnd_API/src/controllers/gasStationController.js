@@ -10,10 +10,8 @@ route.get('/', async (request, response) => {
     const cep = request.query.cep;
     const endereco = request.query.endereco;
     const posto = request.query.nomePosto;
-    // const data = await gss.getGasStation(cep, endereco, posto)
 
     response.json(await gss.getGasStation(lat, lon, cep, endereco, posto));
-    // response.json(data);
 });
 
 export default route;

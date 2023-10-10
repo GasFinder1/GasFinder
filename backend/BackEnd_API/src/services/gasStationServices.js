@@ -81,6 +81,7 @@ async function getGasStation(lat, lon, cep, endereco, posto) {
 
     sql = "SELECT * FROM dados_posto WHERE cep = ? OR (";
     values = [cep];
+    
     if (endereco ?? false) {
         const endereco_array = infoFormatter.removeDoubleSpaces(endereco).split(" ");
         for (let i = 0; i < endereco_array.length; i++) {

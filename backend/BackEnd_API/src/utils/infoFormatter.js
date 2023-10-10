@@ -13,6 +13,7 @@ function gasInfoFormat(jsonData) {
                 unidade_medida: produto.UNIDADE_DE_MEDIDA
             })
         }
+        
         const data = {
             cnpj: formatarCNPJ(`${posto.CNPJ}`),
             nome_posto: removeDoubleSpaces(posto.RAZAO),

@@ -3,7 +3,6 @@ import natural from "natural";
 const tokenizer = new natural.WordTokenizer();
 const metaphone = natural.Metaphone;
 
-// Função para calcular a similaridade entre duas strings usando o coeficiente de Jaccard
 function calculateJaccardSimilarity(str1, str2) {
     const tokens1 = new Set(tokenizer.tokenize(str1));
     const tokens2 = new Set(tokenizer.tokenize(str2));
@@ -14,7 +13,6 @@ function calculateJaccardSimilarity(str1, str2) {
     return intersection.size / union.size;
 }
 
-// Função para calcular a similaridade usando o algoritmo Metaphone
 function calculateMetaphoneSimilarity(str1, str2) {
     const metaphone1 = metaphone.process(str1);
     const metaphone2 = metaphone.process(str2);
