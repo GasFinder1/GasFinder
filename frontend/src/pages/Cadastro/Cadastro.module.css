@@ -131,6 +131,27 @@ select {
   background-color: #9a040b;
 } */
 
+.containerLoader {
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: #00000047;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-loader {
+  width:50px;
+  height:50px;
+  border-radius:50%;
+  border:8px solid;
+  border-color:#E4E4ED;
+  border-right-color: #2a7fef;
+  animation:s2 1s infinite linear;
+}
 
 @media (max-width: 1800px) and (min-width:1300px) {
   .mainCad .formCad{

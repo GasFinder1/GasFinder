@@ -5,7 +5,7 @@ import "./MapContainer.css"
 
 const containerStyle = {
   width: '100%',
-  height: '100vh'
+  height: '100vh',
 };
 
 function MapContainer() {
@@ -83,6 +83,7 @@ function MapContainer() {
   return isLoaded ? (
     <div>
       <GoogleMap
+        className="mapContainer"
         mapContainerStyle={containerStyle}
         center={currentLocation}
         zoom={16} // Ajuste o zoom conforme necessário
