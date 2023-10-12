@@ -15,9 +15,9 @@ const NavBar = () => {
 
       <div className="linksAndInput">
         <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Favoritos</a></li>
-          <li><a href='#'>Sobre</a></li>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/favoritos">Favoritos</a></li>
+          <li><a href='/sobre'>Sobre</a></li>
         </ul>
 
         <div className="inputAndSearch">
