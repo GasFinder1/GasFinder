@@ -65,7 +65,7 @@
 
 .options span:nth-child(2) {
   position: absolute;
-  right: 10px;
+  left: 32px;
   font-size: 20px;
 }
 
@@ -76,7 +76,7 @@
 }
 
 .options.logout:hover {
-  background-color: rgb(218, 2, 2);
+  background-color: #F8333C;
   color: #ffffff;
   cursor: pointer;
 }

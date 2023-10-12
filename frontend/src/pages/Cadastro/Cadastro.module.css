@@ -155,6 +155,10 @@ select {
   animation:s2 1s infinite linear;
 }
 
+.logo {
+  cursor: pointer;
+}
+
 @media (max-width: 1800px) and (min-width:1300px) {
   .mainCad .formCad{
     min-width: 500px;

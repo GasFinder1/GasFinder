@@ -60,7 +60,7 @@ const Login = () => {
   return (
     <section className={styles.container}>
       <form className={styles.formLogin} onSubmit={handleLogin}>
-        <img src={Logo} alt="logoGasFinder" className={styles.logo} />
+        <img src={Logo} alt="logoGasFinder" className={styles.logo} onClick={() => navigate('/')} />
         <h2>Entrar</h2>
         <div className={styles.inputsLogin}>
           <input
