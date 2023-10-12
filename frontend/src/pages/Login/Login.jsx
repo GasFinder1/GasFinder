@@ -10,6 +10,7 @@ const Login = () => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [loader, setLoader] = useState(false)
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,6 +21,7 @@ const Login = () => {
     e.preventDefault();
 
     try {
+      setLoader(true)
       const data = {
         email,
         password,
@@ -38,7 +40,7 @@ const Login = () => {
       });
       setEmail("");
       setPassword("");
-
+      setLoader(false)
       navigate("/");
     } catch (err) {
       toast.error("Erro ao fazer login.", {
@@ -51,6 +53,7 @@ const Login = () => {
         progress: undefined,
         theme: "light",
       });
+      setLoader(false)
     }
   }
 
@@ -88,6 +91,11 @@ const Login = () => {
           </span>
         </p>
       </form>
+      {
+        !loader ? '' : <div class="containerLoader">
+          <div class="custom-loader"></div>
+        </div>
+      }
     </section>
   );
 };

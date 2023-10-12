@@ -1,8 +1,12 @@
 /* Map.module.css */
 .customMap {
     z-index: -1;
+    display: none !important;
   }
   
   .gmnoprint, .gm-control-active.gm-fullscreen-control {
     display: none;
+  }
+
+  .mapContainer {
   }
