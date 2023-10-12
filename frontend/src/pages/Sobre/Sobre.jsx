@@ -14,7 +14,7 @@ function Sobre() {
           <div className={styles.description}>
             <p>O Gás Finder teve sua origem como um projeto de TCC na Etec de Embu. Nasceu da necessidade de simplificar a busca por postos de combustível confiáveis e preços acessíveis, tornando a tarefa mais eficiente no cotidiano e especialmente em viagens longas.
             Com o motorista em mente, nossa aplicação web foi concebida para ser intuitiva, de fácil navegação e amigável, visando proporcionar uma experiência livre de complicações.<br />
-            Utilizamos diversas linguagens e tecnologias, incluindo React, Node.js, SQL e outras</p><br />
+            Utilizamos diversas linguagens e tecnologias, incluindo React, Node.js, SQL e outras.</p><br />
             <h3>Desenvolvedores</h3>
           </div>
         </div>
