@@ -15,7 +15,6 @@ const NavBar = () => {
       </div>
 
       <div className="linksAndInput">
-
         <div className="inputAndSearch">
           <input type="search" placeholder="Buscar..." name="buscarPosto" className="inputNav"/>
           <span className="lupaIcon">
