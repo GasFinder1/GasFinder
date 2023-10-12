@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import "./BotaoUsuario.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsArrowLeftShort } from "react-icons/bs";
-import {AiOutlineStar} from 'react-icons/ai'
+import {AiOutlineHome, AiOutlineStar,AiOutlineUser, AiOutlineExclamationCircle, AiOutlineMail } from 'react-icons/ai'
+import {RxExit} from 'react-icons/rx'
+
 
 function BotaoUsuario() {
   const [barraLateralAberta, setBarraLateralAberta] = useState(false);
@@ -62,10 +64,10 @@ function BotaoUsuario() {
               Cadastrar
             </Link>
             <Link to="/sobre" className="options">
-              Sobre-nós
+            <span>Sobre-Nós</span> <span><AiOutlineExclamationCircle/></span>
             </Link>
             <Link to="/suporte" className="options">
-              Suporte
+            <span>Suporte</span> <span><AiOutlineMail/></span>
             </Link>
           </div>
         ) : (
@@ -73,22 +75,22 @@ function BotaoUsuario() {
             <p>Olá, user</p>
 
             <Link to="/" className="options">
-              Home
+            <span>Home</span> <span><AiOutlineHome/></span>
             </Link>
             <Link to="/favoritos" className="options">
               <span>Favoritos</span> <span><AiOutlineStar/></span>
             </Link>
             <Link to="/perfil" className="options">
-              Perfil
+            <span>Perfil</span> <span><AiOutlineUser/></span>
             </Link>
             <Link to="/sobre" className="options">
-              Sobre-nós
+            <span>Sobre-Nós</span> <span><AiOutlineExclamationCircle/></span>
             </Link>
             <Link to="/suporte" className="options">
-              Suporte
+            <span>Suporte</span> <span><AiOutlineMail/></span>
             </Link>
             <Link to="/" className="options logout">
-              Sair
+            <span>Sair</span> <span><RxExit/></span>
             </Link>
           </div>
         )}
