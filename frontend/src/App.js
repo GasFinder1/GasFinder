@@ -8,8 +8,9 @@ import Login from "./pages/Login/Login";
 import Cadastro from "./pages/Cadastro/Cadastro";
 import Home from "./pages/Home/Home.jsx"
 import RecuperarSenha from './pages/RecuperarSenha/RecuperarSenha';
+import Favoritos from './pages/Favoritos/Favoritos';
+import Suporte from './pages/Suporte/Suporte';
 import Perfil from './pages/Perfil/Perfil.jsx';
-import Favoritos from './pages/Favoritos/favoritos';
 import Sobre from './pages/Sobre/Sobre';
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/favoritos" element={<Favoritos />} />
+          <Route path="/suporte" element={<Suporte />} />
           <Route path="/resetpassword" element={<RecuperarSenha />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/perfil" element={<Perfil />} />
