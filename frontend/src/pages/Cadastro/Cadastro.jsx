@@ -83,7 +83,7 @@ const Cadastro = () => {
     <div>
       <div className={styles.mainCad}>
         <form className={styles.formCad} onSubmit={handleRegister}>
-          <img src={Logo} alt="logoGasFinder" className={styles.logo} />
+          <img src={Logo} alt="logoGasFinder" className={styles.logo} onClick={() => navigate('/')}/>
           <h2 className={styles.welcomeCad}>Faça seu cadastro</h2>
           <div className={styles.inputsCad}>
             <input

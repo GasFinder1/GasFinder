@@ -7,10 +7,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  width: 100vw;
   height: 100vh;
+  background-position: center;
   background-image: url("../../img/backgroundPosto.jpg");
-  background-position: top;
+  background-color: #000;
   background-size: cover;
   font-family: "Inter", sans-serif;
 }
@@ -48,6 +52,7 @@
   margin-left: 20px;
   background-color: #333333;
   color: #fff;
+  text-indent: 3%;
 }
 
 .formLogin input[type="text"]::placeholder {
@@ -60,9 +65,9 @@
   border-color: var(--cor-do-botao);
 }
 
-.formLogin input::placeholder {}
+/* .formLogin input::placeholder {}
 
-.formLogin .inputsLogin {}
+.formLogin .inputsLogin {} */
 
 .formLogin .inputEmail {
   margin-bottom: 18px;
@@ -117,9 +122,9 @@
 }
 
 .formLogin p {
-  color: gray;
-  text-shadow: 1px 1px black;
-  font-weight: 600;
+  color: rgb(255, 255, 255);
+  /* text-shadow: 1px 1px black; */
+  font-weight: 500;
   text-align: center;
 }
 
@@ -150,12 +155,12 @@
 }
 
 .cadastreParagraph {
+  color: #FFF;
   display: flex;
   flex-direction: row;
   column-gap: 7px;
   justify-content: center;
   flex-wrap: wrap;
-  margin-right: 6%;
 }
 
 .containerLoader {
@@ -180,6 +185,10 @@
   animation: s2 1s infinite linear;
 }
 
+.logo {
+  cursor: pointer;
+}
+
 /*medias queries*/
 
 @media (max-width: 1800px) and (min-width:1300px) {
@@ -201,7 +210,6 @@
 }
 
 @media (max-width: 419px) and (min-width:320px) {
-
   .container .formLogin {
     width: 90%;
     margin: unset;

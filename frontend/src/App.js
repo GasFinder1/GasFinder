@@ -10,6 +10,8 @@ import Home from "./pages/Home/Home.jsx"
 import RecuperarSenha from './pages/RecuperarSenha/RecuperarSenha';
 import Favoritos from './pages/Favoritos/Favoritos';
 import Suporte from './pages/Suporte/Suporte';
+import Perfil from './pages/Perfil/Perfil.jsx';
+import Sobre from './pages/Sobre/Sobre';
 
 function App() {
   return (
@@ -24,6 +26,8 @@ function App() {
           <Route path="/favoritos" element={<Favoritos />} />
           <Route path="/suporte" element={<Suporte />} />
           <Route path="/resetpassword" element={<RecuperarSenha />} />
+          <Route path="/sobre" element={<Sobre />} />
+          <Route path="/perfil" element={<Perfil />} />
         </Routes>
       </BrowserRouter>
     </div>

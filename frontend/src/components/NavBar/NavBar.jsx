@@ -11,16 +11,10 @@ const NavBar = () => {
     <section className="mainNavbar">
       <div className="logoAndText">
         <img src={Logo} alt="logo" />
-        <h1>Gas Finder</h1>
+        <h1 translate="no">Gas Finder</h1>
       </div>
 
       <div className="linksAndInput">
-        <ul>
-          <li><a href="/home">Home</a></li>
-          <li><a href="/favoritos">Favoritos</a></li>
-          <li><a href='/sobre'>Sobre</a></li>
-        </ul>
-
         <div className="inputAndSearch">
           <input type="search" placeholder="Buscar..." name="buscarPosto" className="inputNav"/>
           <span className="lupaIcon">
