@@ -9,6 +9,7 @@ import Cadastro from "./pages/Cadastro/Cadastro";
 import Home from "./pages/Home/Home.jsx"
 import RecuperarSenha from './pages/RecuperarSenha/RecuperarSenha';
 import Favoritos from './pages/Favoritos/favoritos';
+import Sobre from './pages/Sobre/Sobre';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/favoritos" element={<Favoritos />} />
           <Route path="/resetpassword" element={<RecuperarSenha />} />
+          <Route path="/sobre" element={<Sobre />} />
         </Routes>
       </BrowserRouter>
     </div>

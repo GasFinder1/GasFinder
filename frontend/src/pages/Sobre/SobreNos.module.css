@@ -1,0 +1,68 @@
+.containerSobreNos {
+    height: 100vh;
+    width: 100%;
+    background-image: url('../../img/backgroundPosto.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  h3{
+    color: rgb(165, 165, 165);
+  }
+  .mainSobreNos {
+    border-radius: 15px;
+    width: 60%;
+    height: 82%;
+    margin-top: 6%;
+    background-color: rgba(0, 0, 0, 0.612);
+
+  }
+  
+  .title {
+    display: flex;
+    flex-direction: column; /* Adiciona um layout de coluna para o título e o texto */
+    align-items: center;
+    justify-content: center;
+    margin-top: 2%;
+  }
+  
+  .title h1 {
+    text-align: center;
+    color: #ffffff;
+    font-size: 30px;
+  }
+
+
+  .description {
+    text-align: center; 
+    margin-top: 15px; 
+    color: #FFF; 
+    font-size: 18px; 
+    margin-left: 55px; 
+    margin-right: 55px;
+    margin-bottom: 5px;
+
+  }
+  
+  .imageContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .imageRow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .imageRow img {
+    width: 100px; /*tamanho das imagens */
+    height: 100px;
+    margin: 12px; /* Espaçamento entre as imagens */
+    margin-left: 20px; 
+  }
+  
