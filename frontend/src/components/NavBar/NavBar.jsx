@@ -11,7 +11,7 @@ const NavBar = () => {
     <section className="mainNavbar">
       <div className="logoAndText">
         <img src={Logo} alt="logo" />
-        <h1>Gas Finder</h1>
+        <h1 translate="no">Gas Finder</h1>
       </div>
 
       <div className="linksAndInput">
