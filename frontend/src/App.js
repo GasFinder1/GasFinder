@@ -8,6 +8,7 @@ import Login from "./pages/Login/Login";
 import Cadastro from "./pages/Cadastro/Cadastro";
 import Home from "./pages/Home/Home.jsx"
 import RecuperarSenha from './pages/RecuperarSenha/RecuperarSenha';
+import Perfil from './pages/Perfil/Perfil.jsx';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/resetpassword" element={<RecuperarSenha />} />
+          <Route path="/perfil" element={<Perfil />} />
         </Routes>
       </BrowserRouter>
     </div>

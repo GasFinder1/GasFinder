@@ -15,7 +15,7 @@ const NavBar = () => {
 
       <div className="linksAndInput">
         <ul>
-          <li><a href="#">Home</a></li>
+          <li><a href="../">Home</a></li>
           <li><a href="#">Favoritos</a></li>
           <li><a href='#'>Sobre</a></li>
         </ul>
