@@ -1,0 +1,39 @@
+.containerFavoritos {
+    height: 100vh;
+    width: 100%;
+    background-image: url('../../img/backgroundPosto.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.mainFavoritos {
+    border-radius: 15px;
+    width: 60%;
+    height: 70%;
+    margin-top: 5%;
+    background-color: rgba(0, 0, 0, 0.612);
+}
+
+.title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2%;
+}
+
+.mainFavoritos h1 {
+    text-align: center;
+    color: #FFB800;
+    font-size: 30px;
+}
+
+.mainFavoritos span {
+    margin-right: 2%;
+    font-size: 1em;
+    font-size: 40px;
+    color: #FFB800;
+}
