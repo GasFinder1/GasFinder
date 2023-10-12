@@ -9,6 +9,7 @@ import Cadastro from "./pages/Cadastro/Cadastro";
 import Home from "./pages/Home/Home.jsx"
 import RecuperarSenha from './pages/RecuperarSenha/RecuperarSenha';
 import Perfil from './pages/Perfil/Perfil.jsx';
+import Favoritos from './pages/Favoritos/favoritos';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="*" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/favoritos" element={<Favoritos />} />
           <Route path="/resetpassword" element={<RecuperarSenha />} />
           <Route path="/perfil" element={<Perfil />} />
         </Routes>
@@ -27,5 +29,6 @@ function App() {
     </div>
   );
 }
+
 
 export default App;

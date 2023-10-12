@@ -286,6 +286,7 @@ function MapContainer() {
               ]
             }
           ]],
+          maxZoom: 18,
           mapId: mapsId
         }}
       >
@@ -305,9 +306,6 @@ function MapContainer() {
           />
         )}
       </GoogleMap>
-      {clickedLocationAddress && (
-        <p>Endereço do Local Clicado: {clickedLocationAddress}</p>
-      )}
     </div>
   ) : (
     <></>

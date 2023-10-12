@@ -4,6 +4,7 @@ import { MdOutlineExitToApp } from "react-icons/md";
 import { CgProfile } from "react-icons/cg";
 import Logo from "../../img/mainLogo.png";
 import { Link } from "react-router-dom";
+import BotaoUsuario from "../BotaoUsuario/BotaoUsuario";
 
 const NavBar = () => {
   return (
@@ -14,12 +15,6 @@ const NavBar = () => {
       </div>
 
       <div className="linksAndInput">
-        <ul>
-          <li><a href="../">Home</a></li>
-          <li><a href="#">Favoritos</a></li>
-          <li><a href='#'>Sobre</a></li>
-        </ul>
-
         <div className="inputAndSearch">
           <input type="search" placeholder="Buscar..." name="buscarPosto" className="inputNav"/>
           <span className="lupaIcon">
@@ -27,15 +22,7 @@ const NavBar = () => {
           </span>
         </div>
       </div>
-
-      <div className="exitAndProfile">
-        <Link to='/login' className="exitIcon">
-          <MdOutlineExitToApp  />
-        </Link>
-        <Link to='/cadastro' className="profileIcon">
-          <CgProfile/>
-        </Link>
-      </div>
+        <BotaoUsuario/>
     </section>
   );
 };

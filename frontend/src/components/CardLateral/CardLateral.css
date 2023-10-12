@@ -13,7 +13,7 @@
   background-color: rgba(0, 0, 0, 0.50);
   ;
   border-radius: 8px;
-  z-index: 999;
+  z-index: 1;
   overflow: auto;
   transition: all 2s;
 }
