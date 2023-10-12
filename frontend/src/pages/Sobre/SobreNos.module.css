@@ -9,9 +9,7 @@
     align-items: center;
     justify-content: center;
   }
-  h3{
-    color: rgb(255, 255, 255);
-  }
+
   .mainSobreNos {
     border-radius: 15px;
     width: 60%;
@@ -45,6 +43,10 @@
     margin-right: 55px;
     margin-bottom: 5px;
 
+  }
+
+  .description h3{
+    color: #ffffff;
   }
   
   .imageContainer {
