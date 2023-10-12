@@ -8,6 +8,7 @@ import Login from "./pages/Login/Login";
 import Cadastro from "./pages/Cadastro/Cadastro";
 import Home from "./pages/Home/Home.jsx"
 import RecuperarSenha from './pages/RecuperarSenha/RecuperarSenha';
+import Perfil from './pages/Perfil/Perfil.jsx';
 import Favoritos from './pages/Favoritos/favoritos';
 import Sobre from './pages/Sobre/Sobre';
 
@@ -18,12 +19,13 @@ function App() {
         <ToastContainer />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/home" element={<Home />} />
+          <Route path="*" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
           <Route path="/favoritos" element={<Favoritos />} />
           <Route path="/resetpassword" element={<RecuperarSenha />} />
           <Route path="/sobre" element={<Sobre />} />
+          <Route path="/perfil" element={<Perfil />} />
         </Routes>
       </BrowserRouter>
     </div>

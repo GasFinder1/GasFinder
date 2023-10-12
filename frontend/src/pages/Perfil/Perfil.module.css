@@ -1,0 +1,108 @@
+.map {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  padding-bottom: 2vh;
+  color: #fff;
+  width: 100vw;
+  height: 100vh;
+  background-position: center;
+  background-image: url("../../img/mapa-img.png");
+  background-color: #000;
+  background-size: cover;
+  font-family: "Inter", sans-serif;
+}
+
+.map .boxProfile {
+  width: 75%;
+  height: 81vh;
+  background-color: #00000080;
+  font-weight: 500;
+  padding: 10px;
+  border-radius: 8px;
+  display: flex;
+  row-gap: 10px;
+  align-items: center;
+  flex-direction: column;
+}
+
+.boxProfile h2 {
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 2em;
+  color: #fff;
+  margin-top: 2%;
+}
+
+.inputsProfile .emailUser {
+  width: 100%;
+  height: 50px;
+  border-radius: 4px;
+  border: none;
+  margin-bottom: 20px;
+  color: #797979;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  background-color: #333333;
+  text-indent: 20px;
+} 
+
+.boxProfile .inputsProfile {
+  width: 27vw;
+}
+
+.boxProfile input {
+  width: 100%;
+  height: 50px;
+  border-radius: 4px;
+  border: none;
+  margin-bottom: 20px;
+  background-color: #333333;
+  color: #fff;
+}
+
+.boxProfile input[type="submit"] {
+  color: #fff;
+  font-weight: 550;
+  font-size: 20px;
+}
+
+.nameProfile, .passwordProfile, .conf_password_profile {
+  text-indent: 5%;
+}
+
+.boxProfile .btnCad {
+  background-color: #0056c7;
+  transition: 0.5s;
+}
+
+.boxProfile .btnCad:hover {
+  background-color: #032e69;
+  cursor: pointer;
+}
+
+.boxProfile .photoAndName {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 15vw;
+  height: 39vh;
+  margin: 10px;  
+  background-color: rgb(165, 165, 165);
+  border-radius: 7px;
+}
+
+.boxProfile img {
+  display: block;
+  height: 45%;
+  margin: 10px;
+}
+
+.boxProfile p {
+  color: #000;
+}
