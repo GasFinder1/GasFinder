@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import axios from "axios";
 import "./MapContainer.css";
 
+
 const containerStyle = {
   width: "100%",
   height: "100vh",
@@ -15,6 +16,7 @@ function MapContainer() {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
     googleMapsApiKey: apiKey,
+    libraries: ["places"]
   });
 
   const [map, setMap] = useState(null);
@@ -75,9 +77,6 @@ function MapContainer() {
     }
   };
 
-  let input = document.getElementById("searchInput");
-
-  
 
   return isLoaded ? (
     <div>
