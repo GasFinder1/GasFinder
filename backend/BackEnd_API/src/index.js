@@ -11,5 +11,5 @@ api.use(express.json());
 api.use('/', routes);
 
 api.listen(3333, () => {
-    console.log ('Server is running')
+    console.log('Server is running')
 });
