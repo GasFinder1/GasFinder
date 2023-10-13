@@ -8,7 +8,7 @@ import BotaoUsuario from "../BotaoUsuario/BotaoUsuario";
 import { useNavigate } from "react-router-dom";
 import { Autocomplete } from "@react-google-maps/api";
 import { useRef } from "react";
-import MapContainer from "../MapContainer/MapContainer";
+// import MapContainer from "../MapContainer/MapContainer";
 
 const NavBar = () => {
   const inputRef = useRef();
