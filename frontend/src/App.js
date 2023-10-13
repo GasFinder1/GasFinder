@@ -12,11 +12,12 @@ import Favoritos from './pages/Favoritos/Favoritos';
 import Suporte from './pages/Suporte/Suporte';
 import Perfil from './pages/Perfil/Perfil.jsx';
 import Sobre from './pages/Sobre/Sobre';
+import { SearchContextProvider } from './context/SearchContext';
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
+    <BrowserRouter>
         <ToastContainer />
         <Routes>
           <Route path="/" element={<Home />} />

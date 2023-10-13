@@ -1,12 +1,118 @@
 /* Map.module.css */
 .customMap {
-    z-index: -1;
-    display: none !important;
-  }
-  
-  .gmnoprint, .gm-control-active.gm-fullscreen-control {
-    display: none;
-  }
+  z-index: -1;
+  display: none !important;
+}
 
-  .mapContainer {
-  }
+.gmnoprint,
+.gm-control-active.gm-fullscreen-control {
+  display: none;
+}
+
+.containerCardRoutes {
+  background-color: #00000097 !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  min-width: 320px;
+  height: 30%;
+  min-height: 280px;
+  border-radius: 20px;
+  color: #fff;
+}
+
+.inputsRoutes {
+  display: flex;
+  flex-direction: column;
+  row-gap: 15px;
+  width: 100%;
+}
+
+.inputsRoutes input {
+  width: 80%;
+  margin-left: 5px;
+  height: 40px;
+  border-radius: 2px;
+  text-indent: 10px;
+  border: none;
+  outline: 1px solid #000;
+}
+
+.infoRoutes {
+  margin-top: 5%;
+  align-self: flex-start;
+}
+
+.btnCalcRoute {
+  position: absolute !important;
+  right: 8px;
+  top: 50px;
+  background-color: #2a7fef;
+  color: #fff;
+  border-radius: 50%;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.btnRedirectUser {
+  background-color: #fff;
+  color: #2a7fef;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  position: absolute !important;
+  right: 8px;
+  top: 110px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.btnClearRoute {
+  background-color: #fff;
+  color: #2a7fef;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  position: absolute !important;
+  right: 8px;
+  top: 220px;
+  cursor: pointer;
+  transition: all 0.5s;
+}
+
+.btnLocationUser {
+  background-color: #fff;
+  color: #2a7fef;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  position: absolute !important;
+  right: 8px;
+  top: 165px;
+  cursor: pointer;
+  font-size: 25px;
+  transition: all 0.5s;
+}
+
+.btnLocationUser:hover {
+  color: blue;
+}
+
+.btnCalcRoute:hover {
+  color: yellow;
+}
+
+.btnRedirectUser:hover {
+  color: rgb(2, 196, 2);
+}
+
+.btnClearRoute:hover {
+  color: red;
+}
