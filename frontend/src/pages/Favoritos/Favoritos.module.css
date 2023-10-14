@@ -11,10 +11,12 @@
 }
 
 .mainFavoritos {
+    position: relative;
+    top: 8%;
     border-radius: 15px;
-    width: 60%;
+    width: 95%;
+    max-width: 832px;
     height: 80%;
-    margin-top: 6%;
     background-color: rgba(0, 0, 0, 0.612);
 }
 
