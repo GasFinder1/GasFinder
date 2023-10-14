@@ -1,8 +1,7 @@
 .containerSuporte {
+  display: flex;
   height: 100vh;
   width: 100%;
-  display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
   background-image: url('../../img/backgroundPosto.jpg');
@@ -10,11 +9,11 @@
   background-size: cover;
 }
 
-.containerSuporte .mainSuporte {
+.mainSuporte {
   border-radius: 15px;
   width: 60%;
-  height: 70%;
-  margin-top: 5%;
+  height: 60%;
+  max-width: 500px;
   background-color: rgba(0, 0, 0, 0.612);
   display: flex;
   align-items: center;
@@ -24,55 +23,68 @@
 .mainSuporte h2 {
   text-align: center;
   color: #ffffff;
-  font-size: 30px;
-  margin-top: 3%;
+  font-size: 32px;
 }
 
-.mainSuporte form {
-  width: auto;
-}
-
-.mainSuporte .inputSuporte {
-  width: 27vw;
-}
-
-.mainSuporte input {
-  width: 90%;
-  height: 50px;
+.inputForm {
+  text-indent: 3%;
   border-radius: 4px;
   border: none;
-  padding-left: 10px;
-  margin-left: 20px;
-  margin-bottom: 20px;
   background-color: #333333;
   color: #fff;
+  font-family: 'Inter';
 }
 
-.mainSuporte textarea {
-  width: 90%;
+.inputEmail {
+  height: 64px;
+}
+
+.inputTxtArea{
+  padding: 6px;
   height: 150px;
-  border-radius: 4px;
-  border: none;
-  padding-left: 10px;
-  padding-top: 10px;
-  margin-left: 20px;
-  margin-bottom: 20px;
-  background-color: #333333;
-  font-family: Inter;
-  color: #fff;
   resize: none;
 }
 
-.inputSuporte .btnSup {
+.btnSup {
+  border: none;
   background-color: var(--cor-do-botao);
   font-weight: 500;
-  width: 90%;
+  /* width: 90%; */
   height: 55px;
   padding: 30px, 10px;
-  margin-bottom: 10px;
   color: #fff;
   border-radius: 4px;
   font-size: 21px;
   cursor: pointer;
   transition: 0.5s;
 }
+
+.btnSup:hover {
+  transition: .5s;
+  background-color: #032e69;
+}
+
+.suporteForm {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 85%;
+  height: 100%;
+}
+
+@media screen and (min-width: 1025px) {
+  /* Estilos para telas maiores que 1024px de largura */
+}
+
+@media screen and (max-width: 768px) {
+  .mainSuporte {
+    width: 95%;
+    max-width: 500px;
+  }
+
+  .suporteForm {
+    width: 90%;
+  }
+}
+
+

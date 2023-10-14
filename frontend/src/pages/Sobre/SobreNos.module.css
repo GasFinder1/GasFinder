@@ -1,70 +1,95 @@
+
 .containerSobreNos {
-    height: 100vh;
-    width: 100%;
-    background-image: url('../../img/backgroundPosto.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  height: 1000px;
+  background-color: #3366E9;
+  width: 100%;
+  /* background-image: url('../../img/backgroundPosto.jpg'); */
+  justify-content: center;
+
+}
+
+.mainContainerSobre {
+  position: relative;
+  top: 17%;
+  padding: 16px;
+  width: 95%;
+  max-width: 1000px;
+  height: 82%;
+  background-color: rgba(0, 0, 0, 0.50);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.textSobre {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  color: #FFF;
+  height: 40%;
+}
+
+.textSobre p {
+  text-align: justify;
+}
+
+.textSobre H3 {
+  text-align: center;
+}
+
+
+.dev {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 909px) {
+  .containerSobreNos {
+    height: 1500px;
   }
 
-  .mainSobreNos {
-    border-radius: 15px;
-    width: 60%;
-    height: 82%;
-    margin-top: 6%;
-    background-color: rgba(0, 0, 0, 0.612);
-
-  }
-  
-  .title {
-    display: flex;
-    flex-direction: column; /* Adiciona um layout de coluna para o título e o texto */
-    align-items: center;
-    justify-content: center;
-    margin-top: 2%;
-  }
-  
-  .title h1 {
-    text-align: center;
-    color: #ffffff;
-    font-size: 30px;
+  .mainContainerSobre {
+    top: 10%; 
   }
 
-
-  .description {
-    text-align: center; 
-    margin-top: 15px; 
-    color: #FFF; 
-    font-size: 18px; 
-    margin-left: 55px; 
-    margin-right: 55px;
-    margin-bottom: 5px;
-
+}
+@media screen and (max-width: 690px) {
+  .containerSobreNos {
+    height: 2000px;
   }
 
-  .description h3{
-    color: #ffffff;
+  .mainContainerSobre {
+    top: 8%; 
+  }
+
+}
+
+
+@media screen and (max-width: 472px) {
+  .containerSobreNos {
+    height: 2800px !important;
+  }
+
+  .mainContainerSobre {
+    top: 6%; 
+  }
+
+  .textSobre p {
+    font-size: 12px;
+  }
+
+  .textSobre h2 {
+    font-size: 16px;
+  }
+  .textSobre h3 {
+    font-size: 14px;
+  }
+
+  .containerSobreNos {
+    height: 1700px;
   }
   
-  .imageContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .imageRow {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  
-  .imageRow img {
-    width: 100px; /*tamanho das imagens */
-    height: 100px;
-    margin: 12px; /* Espaçamento entre as imagens */
-    margin-left: 20px; 
-  }
-  
+}

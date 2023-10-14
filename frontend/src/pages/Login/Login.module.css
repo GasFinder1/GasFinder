@@ -90,30 +90,11 @@
   font-size: 21px;
   cursor: pointer;
   transition: .5s;
-  /* Botão opçao 1*/
-
-  /* box-shadow: 0px 10px 14px -7px #276873;
-	background:linear-gradient(to bottom, #2a7fef 5%, #408c99 100%);
-	background-color:#2a7fef;
-	border-radius:4px;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:20px;
-	font-weight:bold;
-	padding:13px 32px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #3d768a; */
 }
 
 .formLogin .btnSubmit:hover {
   transition: .5s;
-  /* font-size: 18px; */
   background-color: #032e69;
-  /* box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2); */
-  /* background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
-	background-color:#408c99; */
 }
 
 .formLogin .btnSubmit:active {
@@ -123,7 +104,6 @@
 
 .formLogin p {
   color: rgb(255, 255, 255);
-  /* text-shadow: 1px 1px black; */
   font-weight: 500;
   text-align: center;
 }
