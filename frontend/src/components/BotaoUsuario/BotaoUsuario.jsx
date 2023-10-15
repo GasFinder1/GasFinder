@@ -1,10 +1,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-import "./BotaoUsuario.css";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsArrowLeftShort } from "react-icons/bs";
-import {AiOutlineHome, AiOutlineStar,AiOutlineUser, AiOutlineExclamationCircle, AiOutlineMail } from 'react-icons/ai'
-import {RxExit} from 'react-icons/rx'
+import { AiOutlineHome, AiOutlineStar,AiOutlineUser, AiOutlineExclamationCircle, AiOutlineMail } from 'react-icons/ai'
+import { RxExit } from 'react-icons/rx'
+import { BiCalculator } from 'react-icons/bi'
+import "./BotaoUsuario.css";
 
 
 function BotaoUsuario() {
@@ -77,11 +78,14 @@ function BotaoUsuario() {
             <Link to="/" className="options">
             <span>Home</span> <span><AiOutlineHome/></span>
             </Link>
+            <Link to="/perfil" className="options">
+            <span>Perfil</span> <span><AiOutlineUser/></span>
+            </Link>
             <Link to="/favoritos" className="options">
               <span>Favoritos</span> <span><AiOutlineStar/></span>
             </Link>
-            <Link to="/perfil" className="options">
-            <span>Perfil</span> <span><AiOutlineUser/></span>
+            <Link to="/calcRend" className="options">
+              <span>Cálculo de Rendimento</span> <span><BiCalculator/></span>
             </Link>
             <Link to="/sobre" className="options">
             <span>Sobre-Nós</span> <span><AiOutlineExclamationCircle/></span>

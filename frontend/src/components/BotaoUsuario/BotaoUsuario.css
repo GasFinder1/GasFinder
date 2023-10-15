@@ -51,17 +51,25 @@
 
 .options {
   display: flex;
-  justify-content: center;
   width: 90%;
-  text-align: center;
+  /* text-align: center; */
+  justify-content: center;
   padding: 10px;
   border-radius: 0.25rem;
   border: 1px solid #a3a3a3;
   color: #fff;
   text-decoration: none;
+  font-size: 14px;
   transition: background-color 0.3s ease, color 0.3s ease;
   position: relative;
 }
+
+/* PERGUNTAR SE É UMA BOA
+
+.options span:nth-child(1) {
+  margin-left: 49px;
+  font-size: 14px;
+} */
 
 .options span:nth-child(2) {
   position: absolute;
