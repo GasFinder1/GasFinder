@@ -2,9 +2,9 @@ import {
   useJsApiLoader,
   GoogleMap,
   Marker,
-  Autocomplete,
   DirectionsRenderer,
 } from "@react-google-maps/api";
+import { Autocomplete } from '@react-google-maps/api';
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import axios from "axios";
 import "./MapContainer.css";
