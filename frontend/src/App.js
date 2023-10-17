@@ -6,12 +6,13 @@ import { ToastContainer, toast } from "react-toastify";
 //Pages
 import Login from "./pages/Login/Login";
 import Cadastro from "./pages/Cadastro/Cadastro";
-import Home from "./pages/Home/Home.jsx"
 import RecuperarSenha from './pages/RecuperarSenha/RecuperarSenha';
-import Favoritos from './pages/Favoritos/Favoritos';
-import Suporte from './pages/Suporte/Suporte';
+import Home from "./pages/Home/Home.jsx"
 import Perfil from './pages/Perfil/Perfil.jsx';
+import Favoritos from './pages/Favoritos/Favoritos';
+import CalcRendimento from './pages/CalcRendimento/CalcRendimento';
 import Sobre from './pages/Sobre/Sobre';
+import Suporte from './pages/Suporte/Suporte';
 import { SearchContextProvider } from './context/SearchContext';
 
 function App() {
@@ -24,11 +25,12 @@ function App() {
           <Route path="*" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/favoritos" element={<Favoritos />} />
-          <Route path="/suporte" element={<Suporte />} />
           <Route path="/resetpassword" element={<RecuperarSenha />} />
-          <Route path="/sobre" element={<Sobre />} />
           <Route path="/perfil" element={<Perfil />} />
+          <Route path="/favoritos" element={<Favoritos />} />
+          <Route path="/calcRend" element={<CalcRendimento />} />
+          <Route path="/sobre" element={<Sobre />} />
+          <Route path="/suporte" element={<Suporte />} />
         </Routes>
       </BrowserRouter>
     </div>

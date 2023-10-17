@@ -1,14 +1,29 @@
-import "./Navbar.css";
 import { PiMagnifyingGlassDuotone } from "react-icons/pi";
-import { MdOutlineExitToApp } from "react-icons/md";
-import { CgProfile } from "react-icons/cg";
+import { useNavigate }              from "react-router-dom";
+import "./Navbar.css";
 import Logo from "../../img/mainLogo.png";
-import { Link } from "react-router-dom";
 import BotaoUsuario from "../BotaoUsuario/BotaoUsuario";
-import { useNavigate } from "react-router-dom";
-import { Autocomplete } from "@react-google-maps/api";
-import { useRef } from "react";
-// import MapContainer from "../MapContainer/MapContainer";
+import {
+  useJsApiLoader,
+  GoogleMap,
+  Marker,
+  Autocomplete,
+  DirectionsRenderer,
+} from "@react-google-maps/api";
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import axios from "axios";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Flex,
+  HStack,
+  IconButton,
+  Input,
+  SkeletonText,
+  Text,
+} from "@chakra-ui/react";
+// import MapContainer from "../MapContainer/MapContainer"; 
 
 const NavBar = () => {
   const inputRef = useRef();
@@ -28,7 +43,7 @@ const NavBar = () => {
 
       <div className="inputSearch">
         <form onSubmit={handleAdress}>
-          <Autocomplete className="divAutocomplete">
+          {/* <Autocomplete className="divAutocomplete"> */}
             <input
               type="search"
               placeholder="Buscar..."
@@ -37,7 +52,7 @@ const NavBar = () => {
               className="inputNav"
               ref={inputRef}
             />
-          </Autocomplete>
+          {/* </Autocomplete> */}
           <button type="submit" className="lupaIcon">
             <PiMagnifyingGlassDuotone />
           </button>

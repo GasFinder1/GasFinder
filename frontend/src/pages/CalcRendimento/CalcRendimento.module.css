@@ -1,0 +1,219 @@
+:root {
+  --cor-do-botao: #2a7fef;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  width: 100vw;
+  height: 100vh;
+  background-position: center;
+  background-image: url("../../img/backgroundPosto.jpg");
+  background-color: #000;
+  background-size: cover;
+  font-family: "Inter", sans-serif;
+}
+
+.container .formCalc {
+  width: 25%;
+  background-color: #00000080;
+  font-weight: 500;
+  padding: 30px;
+  border-radius: 8px;
+  display: flex;
+  row-gap: 10px;
+  flex-direction: column;
+}
+
+.formCalc .logo {
+  width: 20%;
+  margin: 0 auto;
+}
+
+.formCalc h2 {
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 2em;
+  color: #fff;
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.formCalc h3 {
+  font-weight: 600;
+  text-align: left;
+  font-size: 15px;
+  color: #fff;
+  margin-left: 4.6%;
+  margin-bottom: 2%;
+}
+
+.formCalc input {
+  width: 90%;
+  height: 50px;
+  border-radius: 4px;
+  border: none;
+  margin-left: 20px;
+  background-color: #333333;
+  color: #fff;
+  text-indent: 3%;
+}
+
+.formCalc input[type="text"]::placeholder {
+  color: #8d8d8d;
+  font-family: Inter;
+}
+
+
+.formCalc input:focus {
+  outline-color: var(--cor-do-botao);
+  border-color: var(--cor-do-botao);
+}
+
+/* .formCalc input::placeholder {}
+
+.formCalc .inputsCalc {} */
+
+.formCalc .inputGas {
+  margin-bottom: 18px;
+}
+
+.inputEtanol,
+.inputGas {
+  text-indent: 10%;
+}
+
+.formCalc .btnCalc {
+  background-color: var(--cor-do-botao);
+  font-weight: 500;
+  width: 90%;
+  height: 55px;
+  padding: 30px, 10px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  color: #fff;
+  border-radius: 4px;
+  font-size: 21px;
+  cursor: pointer;
+  transition: .5s;
+}
+
+.formCalc .btnCalc:hover {
+  transition: .5s;
+  background-color: #032e69;
+}
+
+.formCalc .btnCalc:active {
+  position: relative;
+  top: 1px;
+}
+
+.formCalc p {
+  color: rgb(255, 255, 255);
+  font-weight: 500;
+  text-align: center;
+}
+
+.formCalc .cadastre {
+  color: var(--cor-do-botao);
+  transition: 0.5s;
+}
+
+.formCalc .cadastre:hover {
+  color: #FFF;
+  cursor: pointer;
+}
+
+.resetPassword {
+  text-decoration: none;
+  text-align: right;
+  margin-right: 5%;
+  color: #2a7fef;
+  text-shadow: 1px 1px #000;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.resetPassword:hover {
+  color: #fff;
+  /* text-decoration: underline; */
+  /* text-shadow: 1px 1px #000; */
+}
+
+.cadastreParagraph {
+  color: #FFF;
+  display: flex;
+  flex-direction: row;
+  column-gap: 7px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.containerLoader {
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: #00000047;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-loader {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 8px solid;
+  border-color: #E4E4ED;
+  border-right-color: #2a7fef;
+  animation: s2 1s infinite linear;
+}
+
+.logo {
+  cursor: pointer;
+}
+
+/*medias queries*/
+
+@media (max-width: 1800px) and (min-width:1300px) {
+  .container .formCalc {
+    min-width: 500px;
+  }
+}
+
+@media (max-width: 1299px) and (min-width:950px) {
+  .container .formCalc {
+    min-width: 400px;
+  }
+}
+
+@media (max-width: 949px) and (min-width:420px) {
+  .container .formCalc {
+    min-width: 400px;
+  }
+}
+
+@media (max-width: 419px) and (min-width:320px) {
+  .container .formCalc {
+    width: 90%;
+    margin: unset;
+    height: 55%;
+    padding: unset;
+  }
+
+  .formCalc .logo {
+    margin-top: 10%;
+  }
+
+  .container .formCalc input {
+    width: 90%;
+  }
+}
