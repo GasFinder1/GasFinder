@@ -9,7 +9,7 @@ import { useRef }                   from "react";
 import "./Navbar.css";
 import Logo from "../../img/mainLogo.png";
 import BotaoUsuario from "../BotaoUsuario/BotaoUsuario";
-// import MapContainer from "../MapContainer/MapContainer"; // se der erro comente e em seguida descomente
+// import MapContainer from "../MapContainer/MapContainer"; 
 
 const NavBar = () => {
   const inputRef = useRef();
