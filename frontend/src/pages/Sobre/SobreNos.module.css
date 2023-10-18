@@ -2,7 +2,7 @@
 .containerSobreNos {
   display: flex;
   height: 1000px;
-  background-color: #3366E9;
+  background: linear-gradient(0deg, #4BAFF8 2.54%, #1D5EA0 50.25%, #083161 98.48%);
   width: 100%;
   /* background-image: url('../../img/backgroundPosto.jpg'); */
   justify-content: center;
@@ -35,7 +35,7 @@
   text-align: justify;
 }
 
-.textSobre H3 {
+.textSobre H2,H3 {
   text-align: center;
 }
 
