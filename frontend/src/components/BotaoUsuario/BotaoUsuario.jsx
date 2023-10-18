@@ -85,7 +85,7 @@ function BotaoUsuario() {
               <span>Favoritos</span> <span><AiOutlineStar/></span>
             </Link>
             <Link to="/calcRend" className="options">
-              <span>Cálculo de Rendimento</span> <span><BiCalculator/></span>
+              <span>Etanol x Gasolina</span> <span><BiCalculator/></span>
             </Link>
             <Link to="/sobre" className="options">
             <span>Sobre-Nós</span> <span><AiOutlineExclamationCircle/></span>

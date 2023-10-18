@@ -13,6 +13,8 @@ const Suporte = () => {
             type="email"
             className={`${styles.inputForm} ${styles.inputEmail}`}
             placeholder="E-mail"
+            disabled
+            value="encheotanquetec@gmail.com"
           // value={email}
           // onChange={(e) => setEmail(e.target.value)}
           // required

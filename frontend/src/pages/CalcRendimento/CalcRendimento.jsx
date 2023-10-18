@@ -65,9 +65,9 @@ const CalcRendimento = () => {
 
       // cálculo: se valor de (etanol + 42,66%) for menor que o valor da gasolina 
       if (((etanol*1.4267) < gasolina))  {
-        toast.success('Vale mais a pena abastecer com Etanol!', {
+        toast.info('Vale mais a pena abastecer com Etanol!', {
           position: "bottom-center",
-          autoClose: 5000,
+          autoClose: 8000,
           hideProgressBar: false,
           closeOnClick: true,
           pauseOnHover: true,
@@ -77,9 +77,9 @@ const CalcRendimento = () => {
           });
       } else {
         console.log(etanol*1.4267)
-        toast.success('Vale mais a pena abastecer com Gasolina!', {
+        toast.info('Vale mais a pena abastecer com Gasolina!', {
           position: "bottom-center",
-          autoClose: 5000,
+          autoClose: 8000,
           hideProgressBar: true,
           closeOnClick: true,
           pauseOnHover: false,
@@ -109,7 +109,7 @@ const CalcRendimento = () => {
       <NavBar/>
       <section className={styles.container}>
       <form className={styles.formCalc} onSubmit={calcPrice}>
-        <h2>Cálculo de Redimento</h2>
+        <h2>Cálculo de Rendimento</h2>
         <div className={styles.inputsCalc}>
           <h3>Etanol (preço por litro)</h3>
           <input
