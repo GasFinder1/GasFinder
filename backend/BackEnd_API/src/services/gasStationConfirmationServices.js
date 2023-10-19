@@ -17,17 +17,11 @@ async function insertGasStationLocation(lat, lon, id_posto) {
     if (conn == null) {
         return null;
     }
-    const sql = "INSERT INTO tbl_localizacao_posto (lat, lon, fk_id_posto) VALUES(?, ?, ?)";
+    const sql = "CALL InserirPostoELocalizacao(?, ?, ?)";
     const values = [lat, lon, id_posto];
     try {
-        const [rows] = await conn.query("SELECT * FROM tbl_localizacao_posto WHERE lat = ? and lon = ?", [lat, lon]);
-        if(rows.length < 1){
-            await conn.query(sql, values);
-            return true;
-        }
-        else {
-            return false;
-        }
+        await conn.query(sql, values);
+        return true;
     }
     catch (err) {
         console.log(err);
@@ -44,17 +38,11 @@ async function createGasStation_InsertLocation(lat, lon) {
         return null;
     }
     
-    const sql = "CALL InserirPostoELocalizacao(?, ?);";
-    const values = [lat, lon];
+    const sql = "CALL InserirPostoELocalizacao(?, ?, 0);";
+    const values = [lat, lon, 0];
     try {
-        const [rows] = await conn.query("SELECT * FROM tbl_localizacao_posto WHERE lat = ? and lon = ?", [lat, lon]);
-        if(rows.length < 1){
-            await conn.query(sql, values);
-            return true;
-        }
-        else {
-            throw new Error(`posto já cadastrado na lat: ${lat} e lon: ${lon}`);
-        }
+        await conn.query(sql, values);
+        return true;
     }
     catch (err) {
         console.log(err);
