@@ -7,10 +7,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 100%;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  width: 100vw;
   height: 100vh;
+  background-position: center;
   background-image: url("../../img/backgroundPosto.jpg");
-  background-position: top;
+  background-color: #000;
   background-size: cover;
   font-family: "Inter", sans-serif;
 }
@@ -48,11 +52,12 @@
   margin-left: 20px;
   background-color: #333333;
   color: #fff;
+  text-indent: 3%;
 }
 
 .formLogin input[type="text"]::placeholder {
- color: #2a7fef;
-} 
+  color: #2a7fef;
+}
 
 
 .formLogin input:focus {
@@ -60,19 +65,16 @@
   border-color: var(--cor-do-botao);
 }
 
-.formLogin input::placeholder {
-  
-}
+/* .formLogin input::placeholder {}
 
-.formLogin .inputsLogin {
-  
-}
+.formLogin .inputsLogin {} */
 
 .formLogin .inputEmail {
   margin-bottom: 18px;
 }
 
-.inputSenha, .inputEmail {
+.inputSenha,
+.inputEmail {
   text-indent: 10%;
 }
 
@@ -88,30 +90,11 @@
   font-size: 21px;
   cursor: pointer;
   transition: .5s;
-  /* Botão opçao 1*/
-  
-  /* box-shadow: 0px 10px 14px -7px #276873;
-	background:linear-gradient(to bottom, #2a7fef 5%, #408c99 100%);
-	background-color:#2a7fef;
-	border-radius:4px;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:20px;
-	font-weight:bold;
-	padding:13px 32px;
-	text-decoration:none;
-	text-shadow:0px 1px 0px #3d768a; */
 }
 
 .formLogin .btnSubmit:hover {
   transition: .5s;
-   /* font-size: 18px; */
-  background-color: #032e69; 
-  /* box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2); */
-  /* background:linear-gradient(to bottom, #408c99 5%, #599bb3 100%);
-	background-color:#408c99; */
+  background-color: #032e69;
 }
 
 .formLogin .btnSubmit:active {
@@ -120,11 +103,11 @@
 }
 
 .formLogin p {
-  color: gray;
-  text-shadow: 1px 1px black;
-  font-weight: 600;
+  color: rgb(255, 255, 255);
+  font-weight: 500;
   text-align: center;
 }
+
 .formLogin .cadastre {
   color: var(--cor-do-botao);
   transition: 0.5s;
@@ -152,12 +135,38 @@
 }
 
 .cadastreParagraph {
+  color: #FFF;
   display: flex;
   flex-direction: row;
   column-gap: 7px;
   justify-content: center;
   flex-wrap: wrap;
-  margin-right: 6%;
+}
+
+.containerLoader {
+  position: absolute;
+  top: 0;
+  height: 100vh;
+  width: 100%;
+  background-color: #00000047;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.custom-loader {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  border: 8px solid;
+  border-color: #E4E4ED;
+  border-right-color: #2a7fef;
+  animation: s2 1s infinite linear;
+}
+
+.logo {
+  cursor: pointer;
 }
 
 /*medias queries*/
@@ -181,7 +190,6 @@
 }
 
 @media (max-width: 419px) and (min-width:320px) {
-
   .container .formLogin {
     width: 90%;
     margin: unset;
@@ -192,6 +200,7 @@
   .formLogin .logo {
     margin-top: 10%;
   }
+
   .container .formLogin input {
     width: 90%;
   }

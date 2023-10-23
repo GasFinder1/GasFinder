@@ -5,8 +5,9 @@ const route = express.Router();
 
 route.post('/', async (request, response) => {
   try {
-    const { name_user, email, password } = request.body;
-    await database.CreateUser(name_user, email, password);
+    const { name, email, password } = request.body;
+    console.log(name)
+    await database.CreateUser(name, email, password);
     response.status(200).send({ message: 'Registrado com sucesso' });
   } catch (error) {
     response.status(500).send({ message: `Erro na requisição: \n ${error}` });
@@ -14,8 +15,8 @@ route.post('/', async (request, response) => {
 })
 route.put('/', async (request, response) => {
   try {
-    const { name_user, email, password, idUser } = request.body;
-    await database.UpdateUser(name_user, email, password, idUser);
+    const { name, email, password, idUser } = request.body;
+    await database.UpdateUser(name, email, password, idUser);
     response.status(200).send({ message: 'Atualizado com sucesso' });
   } catch (error) {
     response.status(500).send({ message: `Erro na requisição: \n ${error}` });

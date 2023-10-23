@@ -7,6 +7,7 @@ import { ToastContainer, toast } from "react-toastify";
 
 const RecuperarSenha = () => {
   const [email, setEmail] = useState("");
+  const [loader, setLoader] = useState(false)
   const navigate = useNavigate("");
 
   //   const handleSubmit = (e) => {
@@ -19,6 +20,7 @@ const RecuperarSenha = () => {
       const data = {
         email,
       };
+      setLoader(true)
       const response = await api.post("/password", data);
       toast.success(`Uma nova senha foi enviado ao seu e-mail.`, {
         position: "top-right",
@@ -32,7 +34,9 @@ const RecuperarSenha = () => {
       });
       setEmail("");
       navigate("/login");
+      setLoader(false)
     } catch (error) {
+      setLoader(true)
       toast.error("Erro ao redefinir senha.", {
         position: "top-right",
         autoClose: 5000,
@@ -43,6 +47,7 @@ const RecuperarSenha = () => {
         progress: undefined,
         theme: "light",
       });
+      setLoader(false)
     }
   }
 
@@ -63,13 +68,19 @@ const RecuperarSenha = () => {
           <button
             className="botao-recuperar-senha"
             type="submit"
-            // onClick={handleSubmit}
+          // onClick={handleSubmit}
           >
             Redefinir Senha
           </button>
+
           <Link to="/login">Voltar para tela de Login</Link>
         </form>
       </div>
+      {
+        !loader ? '' : <div class="containerLoader">
+          <div class="custom-loader"></div>
+        </div>
+      }
     </section>
   );
 };

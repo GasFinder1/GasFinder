@@ -1,0 +1,95 @@
+
+.containerSobreNos {
+  display: flex;
+  height: 1000px;
+  background: linear-gradient(0deg, #4BAFF8 2.54%, #1D5EA0 50.25%, #083161 98.48%);
+  width: 100%;
+  /* background-image: url('../../img/backgroundPosto.jpg'); */
+  justify-content: center;
+
+}
+
+.mainContainerSobre {
+  position: relative;
+  top: 17%;
+  padding: 16px;
+  width: 95%;
+  max-width: 1000px;
+  height: 82%;
+  background-color: rgba(0, 0, 0, 0.50);
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.textSobre {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  color: #FFF;
+  height: 40%;
+}
+
+.textSobre p {
+  text-align: justify;
+}
+
+.textSobre H2,H3 {
+  text-align: center;
+}
+
+
+.dev {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+@media screen and (max-width: 909px) {
+  .containerSobreNos {
+    height: 1500px;
+  }
+
+  .mainContainerSobre {
+    top: 10%; 
+  }
+
+}
+@media screen and (max-width: 690px) {
+  .containerSobreNos {
+    height: 2000px;
+  }
+
+  .mainContainerSobre {
+    top: 8%; 
+  }
+
+}
+
+
+@media screen and (max-width: 472px) {
+  .containerSobreNos {
+    height: 2800px !important;
+  }
+
+  .mainContainerSobre {
+    top: 6%; 
+  }
+
+  .textSobre p {
+    font-size: 12px;
+  }
+
+  .textSobre h2 {
+    font-size: 16px;
+  }
+  .textSobre h3 {
+    font-size: 14px;
+  }
+
+  .containerSobreNos {
+    height: 1700px;
+  }
+  
+}

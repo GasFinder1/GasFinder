@@ -1,40 +1,65 @@
-import "./Navbar.css";
 import { PiMagnifyingGlassDuotone } from "react-icons/pi";
-import { MdOutlineExitToApp } from "react-icons/md";
-import { CgProfile } from "react-icons/cg";
+import { useNavigate }              from "react-router-dom";
+import "./Navbar.css";
 import Logo from "../../img/mainLogo.png";
-import { Link } from "react-router-dom";
+import BotaoUsuario from "../BotaoUsuario/BotaoUsuario";
+import {
+  useJsApiLoader,
+  GoogleMap,
+  Marker,
+  Autocomplete,
+  DirectionsRenderer,
+} from "@react-google-maps/api";
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import axios from "axios";
+import {
+  Box,
+  Button,
+  ButtonGroup,
+  Flex,
+  HStack,
+  IconButton,
+  Input,
+  SkeletonText,
+  Text,
+} from "@chakra-ui/react";
+// import MapContainer from "../MapContainer/MapContainer"; 
 
 const NavBar = () => {
+  const inputRef = useRef();
+
+  function handleAdress(e) {
+    e.preventDefault();
+    console.log(inputRef.current.value);
+  }
+
+  const navigate = useNavigate();
   return (
     <section className="mainNavbar">
       <div className="logoAndText">
-        <img src={Logo} alt="logo" />
+        <img src={Logo} alt="logo" onClick={() => navigate("/")} />
         <h1>Gas Finder</h1>
       </div>
 
-      <div className="linksAndInput">
-        <ul>
-          <li><a href="#">Home</a></li>
-          <li><a href="#">Favoritos</a></li>
-          <li><a href='#'>Sobre</a></li>
-        </ul>
-
-        <div className="inputAndSearch">
-          <input type="search" placeholder="Buscar..." name="buscarPosto" className="inputNav"/>
-          <span className="lupaIcon">
+      <div className="inputSearch">
+        <form onSubmit={handleAdress}>
+          {/* <Autocomplete className="divAutocomplete"> */}
+            <input
+              type="search"
+              placeholder="Buscar..."
+              id="searchInput"
+              name="buscarPosto"
+              className="inputNav"
+              ref={inputRef}
+            />
+          {/* </Autocomplete> */}
+          <button type="submit" className="lupaIcon">
             <PiMagnifyingGlassDuotone />
-          </span>
-        </div>
+          </button>
+        </form>
       </div>
-
-      <div className="exitAndProfile">
-        <Link to='/login' className="exitIcon">
-          <MdOutlineExitToApp  />
-        </Link>
-        <Link to='/cadastro' className="profileIcon">
-          <CgProfile/>
-        </Link>
+      <div className="btnUser" id="btnUser">
+        <BotaoUsuario />
       </div>
     </section>
   );

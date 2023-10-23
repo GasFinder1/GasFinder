@@ -10,6 +10,7 @@ const Cadastro = () => {
   const [email, setEmail] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [password, setPassword] = useState("");
+  const [loader, setLoader] = useState(false)
 
   const navigate = useNavigate();
 
@@ -20,6 +21,7 @@ const Cadastro = () => {
 
   async function handleRegister(e) {
     e.preventDefault();
+    setLoader(true)
 
     if (password !== confirmPassword) {
       toast.error("As senhas não coincidem.", {
@@ -32,6 +34,7 @@ const Cadastro = () => {
         progress: undefined,
         theme: "light",
       });
+      setLoader(false)
       return;
     }
 
@@ -55,6 +58,7 @@ const Cadastro = () => {
         theme: "light",
       });
 
+      setLoader(false)
       setEmail("");
       setPassword("");
       setName("");
@@ -71,6 +75,7 @@ const Cadastro = () => {
         progress: undefined,
         theme: "light",
       });
+      setLoader(false)
     }
   }
 
@@ -78,7 +83,7 @@ const Cadastro = () => {
     <div>
       <div className={styles.mainCad}>
         <form className={styles.formCad} onSubmit={handleRegister}>
-          <img src={Logo} alt="logoGasFinder" className={styles.logo} />
+          <img src={Logo} alt="logoGasFinder" className={styles.logo} onClick={() => navigate('/')}/>
           <h2 className={styles.welcomeCad}>Faça seu cadastro</h2>
           <div className={styles.inputsCad}>
             <input
@@ -123,9 +128,15 @@ const Cadastro = () => {
               {" "}
               Já tenho uma conta{" "}
             </span>
+
           </div>
         </form>
       </div>
+      {
+        !loader ? '' : <div class="containerLoader">
+          <div class="custom-loader"></div>
+        </div>
+      }
     </div>
   );
 };

@@ -5,7 +5,7 @@ async function connect() {
     host: "localhost",
     password: "",
     port: "3306",
-    database: "encheotanque",
+    database: "gasfinder",
     user: "root",
   });
 

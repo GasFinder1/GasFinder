@@ -1,0 +1,190 @@
+.map {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  width: 100vw;
+  height: 100vh;
+  background-position: center;
+  background-image: url("../../img/backgroundPosto.jpg");
+  background-color: #000;
+  background-size: cover;
+  font-family: "Inter", sans-serif;
+}
+
+
+.map .boxProfile {
+  position: relative;
+  top: 8%;
+  width: 95%;
+  height: 600px;
+  max-width: 500px;
+  background-color: #00000080;
+  font-weight: 500;
+  border-radius: 8px;
+  display: flex;
+  row-gap: 12px;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.formUser {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  row-gap: 10px;
+}
+
+.boxProfile h2 {
+  font-weight: 600;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 2em;
+  color: #fff;
+  margin-top: 2%;
+}
+
+.inputsProfile {
+  width: 90%;
+}
+
+.inputsProfile input {
+  text-indent: 3%;
+  width: 100%;
+  height: 50px;
+  border-radius: 4px;
+  border: none;
+  margin-bottom: 20px;
+  background-color: #333333;
+  color: #fff;
+  outline: none;
+}
+
+.inputsProfile input:focus {
+  border: #007bff solid 1px;
+}
+
+/* .boxProfile input[type="submit"] {
+  width: 90%;
+  color: #fff;
+  font-weight: 550;
+  font-size: 20px;
+} */
+
+.boxProfile .btnCad {
+  background-color: #2a7fef;
+  transition: 0.5s;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  width: 50%;
+  height: 40px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.boxProfile .btnCad:hover {
+  background-color: #032e69;
+}
+
+.campoTrocarSenha{
+  width: 90%;
+}
+
+.separadorSenha{
+  display: flex;
+  /* justify-content: center; */
+  align-items: center;
+  margin: 16px 0px;
+}
+
+.separadorSenha hr{
+  /* border: #fff solid 1px; */
+  width: 100%;
+  height: 1px;
+}
+
+.separadorSenha h3{
+  width: 100%;
+  padding: 0px 4px;
+}
+
+.trocarSenhaContainer {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+  border-radius: 4px;
+  border: none;
+  margin-bottom: 20px;
+  background-color: #333333;
+  color: #fff;
+}
+
+.trocarSenhaContainer input {
+  border: none;
+  color: #fff;
+  background-color: #333333;
+  width: 80%;
+  height: 100%;
+}
+
+.trocarSenhaContainer input:focus {
+  outline: none;
+}
+
+.trocarSenhaContainer:focus-within {
+  border: 1px solid #007bff; 
+}
+
+.iconeOlho {
+  font-size: 24px;
+  width: 32px;
+  height: 32px;
+  width: 100%;
+  color: #fff;
+  cursor: pointer;
+}
+
+.resetPassword {
+  text-decoration: none;
+  text-align: center;
+  color: #2a7fef;
+  text-shadow: 1px 1px #000;
+  transition: 0.5s;
+  cursor: pointer;
+}
+
+.resetPassword:hover {
+  color: #fff;
+  /* text-decoration: underline; */
+  /* text-shadow: 1px 1px #000; */
+}
+
+  
+
+/* .boxProfile .photoAndName {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 15vw;
+  height: 39vh;
+  margin: 10px;  
+  background-color: rgb(165, 165, 165);
+  border-radius: 7px;
+} */
+
+/* .boxProfile img {
+  display: block;
+  height: 45%;
+  margin: 10px;
+} */
+
+/* .boxProfile p {
+  color: #000;
+} */
