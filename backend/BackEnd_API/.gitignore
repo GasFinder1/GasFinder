@@ -1,2 +1,5 @@
+node_modules
+/src/tests
+/tests
 /backend/BackEnd_API/node_modules
 /backend/BackEnd_API/tests
