@@ -13,19 +13,13 @@ const Suporte = () => {
             type="email"
             className={`${styles.inputForm} ${styles.inputEmail}`}
             placeholder="E-mail"
-            disabled
-            value="encheotanquetec@gmail.com"
-          // value={email}
-          // onChange={(e) => setEmail(e.target.value)}
-          // required
+            required
           />
           <textarea
             type="text"
             className={`${styles.inputForm} ${styles.inputTxtArea}`}
             placeholder="Escreva sua mensagem"
-          // value={email}
-          // onChange={(e) => setEmail(e.target.value)}
-          // required
+            required
           />
           <button className={styles.btnSup}> Enviar</button>
         </form>

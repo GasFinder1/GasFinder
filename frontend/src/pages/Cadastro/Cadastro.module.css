@@ -159,6 +159,14 @@ select {
   cursor: pointer;
 }
 
+.inputsCad input {
+  outline: none;
+}
+
+.inputsCad input:focus {
+  border: 1px solid #007bff; 
+}
+
 @media (max-width: 1800px) and (min-width:1300px) {
   .mainCad .formCad{
     min-width: 500px;
