@@ -4,44 +4,113 @@ async function checkEmail(email) {
   const sql = "SELECT * FROM tbl_usuario WHERE email = ?";
   const dados = [email]
 
-  const conn = await database.connect();
-  const [rows] = await conn.query(sql, dados);
-
-  conn.end();
-  return rows;
+  const conn = await database.getConnection();
+  if (conn == null) {
+    return { error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções", error_code: 500 };
+  }
+  try {
+    const [rows] = await conn.query(sql, dados);
+    if (rows.length = 0) {
+      return { error: "nenhum registro foi encontrado", error_code: 400 }
+    }
+    return rows;
+  }
+  catch (err) {
+    //LOG_HERE
+    return { error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções", error_code: 500 };
+  }
+  finally {
+    try {
+      await conn.end();
+    }
+    catch (err) {
+      //LOG_HERE
+      console.log("Erro ao fechar a conexão: " + err);
+    }
+  }
 }
 
 async function checkCode(email, codigo) {
   const sql = "SELECT * FROM tbl_usuario WHERE email = ? and senha = ?";
-
-  const conn = await database.connect();
-
   const dados = [email, codigo]
 
-  const [rows] = await conn.query(sql, dados);
-
-  conn.end();
-  return rows;
+  const conn = await database.getConnection();
+  if (conn == null) {
+    return { error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções", error_code: 500 };
+  }
+  try {
+    const [rows] = await conn.query(sql, dados);
+    if (rows.length = 0) {
+      return { error: "nenhum registro foi encontrado", error_code: 400 }
+    }
+    return rows;
+  }
+  catch (err) {
+    //LOG_HERE
+    return { error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções", error_code: 500 };
+  }
+  finally {
+    try {
+      await conn.end();
+    }
+    catch (err) {
+      //LOG_HERE
+      console.log("Erro ao fechar a conexão: " + err);
+    }
+  }
 }
 
 async function changePassword(email, newPassword) {
   const sql = "UPDATE tbl_usuario SET senha = ? WHERE email = ?";
   const dataNewPass = [newPassword, email];
 
-  const conn = await database.connect();
-  await conn.query(sql, dataNewPass);
-  conn.end();
-
+  const conn = await database.getConnection();
+  try {
+    await conn.query(sql, dataNewPass);
+  }
+  catch (err) {
+    //LOG_HERE
+    return { error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções", error_code: 500 };
+  }
+  finally {
+    try {
+      conn.end();
+    }
+    catch (err) {
+      //LOG_HERE
+      console.log("Erro ao fechar a conexão: " + err);
+    }
+  }
 }
+
 export async function checkName(userName) {
   const sql = "SELECT * FROM tbl_usuario WHERE nome_usuario = ?";
-  const dados = [name_user]
+  const dados = [userName]
 
-  const conn = await database.connect();
-  const [rows] = await conn.query(sql, dados);
-
-  conn.end();
-  return rows;
+  const conn = await database.getConnection();
+  if (conn == null) {
+    return { error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções", error_code: 500 };
+  }
+  try {
+    const [rows] = await conn.query(sql, dados);
+    if (rows.length = 0) {
+      return { error: "nenhum registro foi encontrado", error_code: 400 }
+    }
+    return rows;
+  }
+  catch (err) {
+    //LOG_HERE
+    return { error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções", error_code: 500 };
+  }
+  finally {
+    try {
+      await conn.end();
+    }
+    catch (err) {
+      //LOG_HERE
+      console.log("Erro ao fechar a conexão: " + err);
+    }
+  }
 }
 
 export default { checkEmail, changePassword, checkCode }

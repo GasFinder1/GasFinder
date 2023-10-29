@@ -2,19 +2,8 @@ import database from "../repository/connection.js";
 import infoFormatter from "../utils/infoFormatter.js";
 import naturalLanguage from "../utils/naturalLanguageComparator.js";
 
-async function connect() {
-    try {
-        const conn = await database.connect();
-        return conn;
-    }
-    catch (err) {
-        console.log(err);
-        return null;
-    }
-}
-
 async function requestData(sql, values) {
-    let conn = await connect();
+    let conn = await database.getConnection();
     if (conn == null) {
         console.log("banco de dados off-line");
         return null;
@@ -121,8 +110,8 @@ async function getGasStation(lat, lon, cep, endereco, posto) {
     }
     sql += ");"
     sql = sql.replace(" OR ();", ";")
-    console.log(sql);
-    console.log(values);
+    // console.log(sql);
+    // console.log(values);
     rows = await requestData(sql, values);
     if (rows != null && rows.length >= 1) {
         let objSender = {};

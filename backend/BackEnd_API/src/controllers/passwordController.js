@@ -6,9 +6,8 @@ import nodemailer from 'nodemailer';
 const router = express.Router();
 
 router.post('/', async (request, response) => {
-  const { email: userEmail } = request.body; // Renomeie a variável para evitar conflito
-
   try {
+    const { email: userEmail } = request.body; // Renomeie a variável para evitar conflito
     const user = await database.checkEmail(userEmail);
 
     if (user.length > 0) {
@@ -51,18 +50,20 @@ router.post('/', async (request, response) => {
       })
         .then(() => {
           console.log('E-mail enviado com sucesso.');
-          response.status(200).send('E-mail enviado com sucesso.');
+          response.status(202).json({ message: "E-mail enviado com sucesso." });
         })
         .catch((err) => {
+          //LOG_HERE
           console.log(`Houve um erro: ${err}`);
-          response.status(500).send(`Houve um erro: ${err}`);
+          response.status(500).json({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
         });
     } else {
-      response.status(404).send({ message: 'Usuário não encontrado' });
+      response.status(404).json({ error: "Usuário não encontrado" });
     }
   } catch (err) {
+    //LOG_HERE
     console.log(err);
-    response.status(500).send({ message: `Houve um erro no banco de dados. ${err}` });
+    response.status(500).json({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
   }
 });
 
