@@ -10,17 +10,20 @@ route.post('/', async (request, response) => {
       response.status(400).json({ error: "não foram enviados todos os dados necessários" })
     }
     const res = await database.CreateUser(name_user, email, password);
-    if(res.error == undefined){
+    console.log(res);
+    if(!("error" in res)){
       response.status(200).json({ message: 'Registrado com sucesso' });
     }
-    else if(res.error_code != undefined){
+    else if("error_code" in res){
       response.status(res.error_code).json({error: res.error})
     }
     else{
+      console.log("não foi possível cadastrar");
       return response.status(500).json({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
     }
   } catch (err) {
     //LOG_HERE
+    console.log(err);
     response.status(500).json({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
   }
 });

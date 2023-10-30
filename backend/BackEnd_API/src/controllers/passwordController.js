@@ -2,6 +2,7 @@ import express from 'express';
 import database from '../services/checkServices.js';
 import { generatePassword } from '../helpers/recoverPassword.js';
 import nodemailer from 'nodemailer';
+import 'dotenv/config';
 
 const router = express.Router();
 
@@ -9,6 +10,7 @@ router.post('/', async (request, response) => {
   try {
     const { email: userEmail } = request.body; // Renomeie a variável para evitar conflito
     const user = await database.checkEmail(userEmail);
+    console.log(user);
 
     if (user.length > 0) {
       const newPassword = generatePassword();
@@ -19,8 +21,8 @@ router.post('/', async (request, response) => {
         secure: true,
         port: 465,
         auth: {
-          user: 'testesgasfinder@gmail.com',
-          pass: 'hssxcyegfqrbogvf',
+          user: process.env.NODEMAILER_USER,
+          pass: process.env.NODEMAILER_PASS,
         },
         tls: {
           rejectUnauthorized: false,

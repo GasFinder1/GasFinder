@@ -1,8 +1,9 @@
 import jwt from 'jsonwebtoken';
+import 'dotenv/config';
 
 
 function verifyJWT(request, response, next) {
-   const secret = "z9Rf!nQ9*WB3";
+   const secret = process.env.JWT_PASSWORD;
 
    const authHeader = request.headers.authorization;
    if (!authHeader)

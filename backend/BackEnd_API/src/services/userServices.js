@@ -1,14 +1,17 @@
 import database from "../repository/connection.js";
+import sql_commands from "../utils/dbQueries.js";
 
 async function CreateUser(name_user, email, password) {
-  const sql = "insert into tbl_usuario(nome_usuario,email,senha) values (?,?,?)"
+  // const sql = "insert into tbl_usuario(nome_usuario,email,senha) values (?,?,?)"
+  const sql = "call user_insert(?, ?, ?)"
   const values = [name_user, email, password];
   const conn = await database.getConnection();
   if (conn == null){
     return { error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções", error_code: 500 };
   }
   try{
-    await conn.query(sql, values);
+    const res = await sql_commands.call(conn ,sql, values);
+    return res;
   }
   catch(err){
     //LOG_HERE

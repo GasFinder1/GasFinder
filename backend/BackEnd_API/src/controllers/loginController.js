@@ -21,7 +21,7 @@ route.post('/', async (request, response) => {
       response.status(401).send({ error: 'Login incorreto' });
     }
   }
-  catch (error) {
+  catch (err) {
     //LOG_HERE
     response.status(500).send({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
   }

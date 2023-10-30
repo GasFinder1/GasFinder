@@ -1,12 +1,13 @@
 import mysql2 from "mysql2/promise";
+import 'dotenv/config';
 
 async function connect() {
   const connection = await mysql2.createConnection({
-    host: "localhost",
-    password: "",
-    port: 3306,
-    database: "gasfinder",
-    user: "root",
+    host: process.env.DB_HOST,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+    database: process.env.DB_DATABASE,
+    user: process.env.DB_USER,
   });
   return connection;
 }

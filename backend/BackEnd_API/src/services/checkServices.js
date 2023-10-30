@@ -1,8 +1,10 @@
 import database from '../repository/connection.js'
 
 async function checkEmail(email) {
-  const sql = "SELECT * FROM tbl_usuario WHERE email = ?";
+  const sql = "SELECT * FROM tbl_usuario WHERE email = ?;";
   const dados = [email]
+  console.log(sql)
+  console.log(dados)
 
   const conn = await database.getConnection();
   if (conn == null) {
@@ -10,7 +12,8 @@ async function checkEmail(email) {
   }
   try {
     const [rows] = await conn.query(sql, dados);
-    if (rows.length = 0) {
+    console.log(rows)
+    if (rows.length == 0) {
       return { error: "nenhum registro foi encontrado", error_code: 400 }
     }
     return rows;
