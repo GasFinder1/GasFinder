@@ -1,15 +1,26 @@
 .main-container-CardLateral {
-  position: absolute;
-  top: 17%; /* 5% do tamanho da tela a partir do topo */
-  right: 1%; /* 5% do tamanho da tela a partir da direita */
-  width: 30%; /* 30% do tamanho da tela de largura */
+  position: fixed;
+  top: 17%;
+  /* 5% do tamanho da tela a partir do topo */
+  right: 1%;
+  /* 5% do tamanho da tela a partir da direita */
+  width: 30%;
+  /* 30% do tamanho da tela de largura */
   min-width: 320px;
   max-width: 612px;
-  height: 80vh; /* 40% do tamanho da tela de altura */
-  background-color: rgba(0, 0, 0, 0.50);;
+  height: 80vh;
+  /* 40% do tamanho da tela de altura */
+  background-color: rgba(0, 0, 0, 0.50);
+  ;
   border-radius: 8px;
-  z-index: 999;
+  z-index: 1;
   overflow: auto;
+  transition: all 2s;
+}
+
+.ocult {
+  transform: translateY(90%);
+  transition: all 2s;
 }
 
 
@@ -24,6 +35,7 @@
 }
 
 .container-janela h2 {
+  margin-top: 3%;
   color: #FFF;
   text-align: right;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
@@ -32,6 +44,19 @@
   font-style: normal;
   font-weight: 800;
   line-height: normal;
+}
+
+.btnActionCard {
+  background-color: #2a7fef;
+  color: #FFf;
+  border: none;
+  outline: none;
+  border-radius: 50%;
+  font-size: 2em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 @media (max-width: 767px) {

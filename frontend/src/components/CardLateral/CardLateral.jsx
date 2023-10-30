@@ -1,11 +1,16 @@
 import "./CardLateral.css"
 import CardPosto from "../CardPosto/CardPosto"
+import { useState } from "react"
+import {MdKeyboardArrowDown, MdKeyboardArrowUp} from 'react-icons/md'
 
 const CardLateral = () => {
+  const [btnState, setBtnState] = useState(false)
+  console.log(btnState)
   return (
-    <section className="main-container-CardLateral">
+    <section className={`main-container-CardLateral ${!btnState ? '' : 'ocult'}`}>
       <div className="container-janela">
         {/* Aqui começa a janela */}
+        <button onClick={() => setBtnState(!btnState)} className="btnActionCard">{!btnState ? <MdKeyboardArrowDown/> : <MdKeyboardArrowUp/>}</button>
         <h2>Postos Próximos</h2>
         <CardPosto
           nomePosto ="Shell Brasil"

@@ -5,11 +5,11 @@ const route = express.Router();
 
 route.post('/', async (request, response) => {
   try {
-    const { name_user, email, password } = request.body;
-    if ([name_user ?? false, email ?? false, password ?? false].includes(false)) {
+    const { name, email, password } = request.body;
+    if ([name ?? false, email ?? false, password ?? false].includes(false)) {
       response.status(400).json({ error: "não foram enviados todos os dados necessários" })
     }
-    const res = await database.CreateUser(name_user, email, password);
+    const res = await database.CreateUser(name, email, password);
     console.log(res);
     if(!("error" in res)){
       response.status(200).json({ message: 'Registrado com sucesso' });
@@ -30,12 +30,12 @@ route.post('/', async (request, response) => {
 
 route.put('/', async (request, response) => {
   try {
-    const { name_user, email, password, idUser } = request.body;
-    if ([name_user ?? false, email ?? false, password ?? false, idUser ?? false].includes(false)) {
+    const { name, email, password, idUser } = request.body;
+    if ([name ?? false, email ?? false, password ?? false, idUser ?? false].includes(false)) {
       response.status(400).json({ error: "todos os dados devem ser preênchidos" });
     }
     //PROCEDURE?
-    await database.UpdateUser(name_user, email, password, idUser);
+    await database.UpdateUser(name, email, password, idUser);
     response.status(200).json({ message: 'Atualizado com sucesso' });
   } catch (err) {
     //LOG_HERE
