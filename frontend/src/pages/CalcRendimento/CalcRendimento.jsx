@@ -6,7 +6,7 @@
   const CalcRendimento = () => {
     const [ etanol, setEtanol ] = useState("");
     const [ gasolina, setGasolina ] = useState("");
-    const [ resultado, setResultado] = useState('Aqui aparece o resultado');
+    const [ resultado, setResultado] = useState('Resultado');
 
     const handleInputChange = (e, setFuncao) => {
       e.preventDefault();
@@ -151,7 +151,7 @@
               </div>
               <div className={styles.explicacao}>
                 <h3>Como funciona o cálculo?</h3>
-                <p>O cálculo fornece uma noção aproximada de qual combustível vale mais a pena, com base no princícpio de que o etanol só vale a pena enquanto o seu preço for equivalente a <strong>até 70% do valor da gasolina</strong>.</p>
+                <p>O cálculo fornece uma noção aproximada de qual combustível vale mais a pena, com base no princípio de que o etanol só vale a pena enquanto o seu preço for equivalente a <strong>até 70% do valor da gasolina</strong>.</p>
                 <p className={styles.resultado}>{resultado}</p>
               </div>
             </div>

@@ -5,6 +5,7 @@ async function login(email, password) {
   const dataLogin = [email, password];
   const conn = await database.connect();
   const [rows] = await conn.query(sql, dataLogin);
+  console.log(rows)
   conn.end();
 
   return rows;
