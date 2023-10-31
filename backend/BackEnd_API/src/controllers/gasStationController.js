@@ -4,18 +4,29 @@ const route = express.Router();
 
 route.get('/', async (request, response) => {
     try {
-        let { lat, lon, cep, endereco, nomePosto, uf } = request.body;
-        lat = lat == undefined ? request.query.lat : lat;
-        lon = lon == undefined ? request.query.lon : lon;
+        let { place_ID, cep, endereco, nomePosto, uf } = request.body;
+        place_ID == undefined ? request.query.place_ID : place_ID;
         cep = cep == undefined ? request.query.cep : cep;
         endereco = endereco == undefined ? request.query.endereco : endereco;
         nomePosto = nomePosto == undefined ? request.query.nomePosto : nomePosto;
         uf = uf == undefined ? request.query.uf : uf;
-        if(!([lat ?? false, lon ?? false].includes(false))){
-            response.status(200).json(await gss.getGasStation(lat, lon, cep, endereco, nomePosto));
+        if(place_ID ?? false != false){
+            const res = await gss.getGasStation(place_ID, cep, endereco, nomePosto);
+            if(typeof res === "object"){
+                if("error_code" in res){
+                    response.status(res.error_code).json({ error: res.error });
+                }
+                else{
+                    response.status(200).json(res);
+                }
+            }
+            else{
+                //LOG_HERE
+                response.status(500).json({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
+            }
         }
         else{
-            return response.status(400).json({error: "os dados de latitude e longitude são obrigatórios"});
+            return response.status(400).json({error: "a place_ID é obrigatória"});
         }
     }
     catch(err){

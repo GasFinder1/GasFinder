@@ -14,8 +14,7 @@ async function requestData(sql, values) {
         for (let i = 0; i < rows.length; i++) {
             if (!compact_rows.find((posto) => posto.id_posto == rows[i].id_posto)) {
                 compact_rows.push({
-                    lat: rows[i].lat,
-                    lon: rows[i].lon,
+                    place_ID: rows[i].place_ID,
                     id_posto: rows[i].id_posto,
                     cnpj: rows[i].cnpj,
                     nome_posto: rows[i].nome_posto,
@@ -51,17 +50,23 @@ async function requestData(sql, values) {
         return compact_rows;
     }
     catch (err) {
+        //LOG_HERE
         console.log(err);
         return null;
     }
     finally {
-        conn.end();
+        try{
+            await conn.end();
+        }
+        catch(err){
+            //LOG_HERE
+        }
     }
 }
 
-async function getGasStation(lat, lon, cep, endereco, posto) {
-    let sql = "SELECT * FROM localizacao_dados_posto WHERE lat = ? AND lon = ?;";
-    let values = [lat, lon];
+async function getGasStation(place_ID, cep, endereco, posto) {
+    let sql = "SELECT * FROM localizacao_dados_posto WHERE place_ID = ?;";
+    let values = [place_ID];
 
     let rows = await requestData(sql, values);
     if (rows != null && rows.length >= 1) {
