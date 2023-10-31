@@ -181,7 +181,6 @@ function MapContainer() {
   return isLoaded ? (
     <div className="containerMap">
       <div className="inputSearchBox">
-        <div>
           <Autocomplete className="divAutocomplete">
             <input
               type="search"
@@ -189,6 +188,7 @@ function MapContainer() {
               id="searchInput"
               name="buscarPosto"
               className="inputNav"
+              value={searchBox}
               onChange={(e) => setSearchBox(e.target.value)}
             />
           </Autocomplete>
@@ -201,7 +201,6 @@ function MapContainer() {
           >
             <PiMagnifyingGlassDuotone />
           </button>
-        </div>
       </div>
       <Flex
         position="relative"

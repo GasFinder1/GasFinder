@@ -37,6 +37,7 @@
   background-color: red;
   display: flex;
   flex-direction: row;
+  justify-content: center;
 }
 
 .inputSearchBox input {
@@ -52,12 +53,7 @@
   /* border: 1px solid #2a7fef; */
 }
 
-.inputSearch form {
-  display: flex;
-  width: 100%;
-}
-
-.inputSearch .divAutocomplete {
+.inputSearchBox .divAutocomplete {
   width: 100%;
 }
 
