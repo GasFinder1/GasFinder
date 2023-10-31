@@ -1,56 +1,32 @@
+import { response } from "express";
 import database from "../repository/connection.js";
-//checagem se o posto existe feita com procedure
+import sql_commands from "../utils/dbQueries.js";
 
-async function connect() {
-    try {
-        const conn = await database.connect();
-        return conn;
-    }
-    catch (err) {
-        console.log(err);
-        return null;
-    }
-}
-
-async function insertGasStationLocation(lat, lon, id_posto) {
-    const conn = await connect();
+async function insertGasStationLocation(place_ID, id_posto) {
+    const conn = await database.getConnection();
     if (conn == null) {
-        return null;
+        console.log("erro na conexão")
+        return { error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções", error_code: 500 };
     }
-    const sql = "CALL InserirPostoELocalizacao(?, ?, ?)";
-    const values = [lat, lon, id_posto];
+    const sql = "CALL InserirPostoELocalizacao(?, ?, @msg);";
+    const values = [place_ID, id_posto];
     try {
-        await conn.query(sql, values);
-        return true;
+        let res = await sql_commands.call(conn, sql, values);
+        return res != undefined ? res : { message: "dados cadastrados com sucesso", error_code: 200};
     }
     catch (err) {
         console.log(err);
-        return false;
+        return { error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções", error_code: 500 };
     }
-    finally{
-        await conn.end();
-    }
-}
-
-async function createGasStation_InsertLocation(lat, lon) {
-    const conn = await connect();
-    if (conn == null) {
-        return null;
-    }
-    
-    const sql = "CALL InserirPostoELocalizacao(?, ?, 0);";
-    const values = [lat, lon, 0];
-    try {
-        await conn.query(sql, values);
-        return true;
-    }
-    catch (err) {
-        console.log(err);
-        return false;
-    }
-    finally{
-        await conn.end();
+    finally {
+        try{
+            await conn.end();
+        }
+        catch(err){
+            //LOG_HERE
+            console.error("erro ao fechar o banco de dados");
+        }
     }
 }
 
-export default {createGasStation_InsertLocation, insertGasStationLocation};
+export default { insertGasStationLocation };

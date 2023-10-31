@@ -2,14 +2,15 @@ import express from 'express';
 import database from '../services/checkServices.js';
 import { generatePassword } from '../helpers/recoverPassword.js';
 import nodemailer from 'nodemailer';
+import 'dotenv/config';
 
 const router = express.Router();
 
 router.post('/', async (request, response) => {
-  const { email: userEmail } = request.body; // Renomeie a variável para evitar conflito
-
   try {
+    const { email: userEmail } = request.body; // Renomeie a variável para evitar conflito
     const user = await database.checkEmail(userEmail);
+    console.log(user);
 
     if (user.length > 0) {
       const newPassword = generatePassword();
@@ -20,8 +21,8 @@ router.post('/', async (request, response) => {
         secure: true,
         port: 465,
         auth: {
-          user: 'testesgasfinder@gmail.com',
-          pass: 'hssxcyegfqrbogvf',
+          user: process.env.NODEMAILER_USER,
+          pass: process.env.NODEMAILER_PASS,
         },
         tls: {
           rejectUnauthorized: false,
@@ -51,18 +52,20 @@ router.post('/', async (request, response) => {
       })
         .then(() => {
           console.log('E-mail enviado com sucesso.');
-          response.status(200).send('E-mail enviado com sucesso.');
+          response.status(202).json({ message: "E-mail enviado com sucesso." });
         })
         .catch((err) => {
+          //LOG_HERE
           console.log(`Houve um erro: ${err}`);
-          response.status(500).send(`Houve um erro: ${err}`);
+          response.status(500).json({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
         });
     } else {
-      response.status(404).send({ message: 'Usuário não encontrado' });
+      response.status(404).json({ error: "Usuário não encontrado" });
     }
   } catch (err) {
+    //LOG_HERE
     console.log(err);
-    response.status(500).send({ message: `Houve um erro no banco de dados. ${err}` });
+    response.status(500).json({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
   }
 });
 

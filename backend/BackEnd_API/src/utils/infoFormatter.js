@@ -18,7 +18,7 @@ function gasInfoFormat(jsonData) {
             cnpj: formatarCNPJ(`${posto.CNPJ}`),
             nome_posto: removeDoubleSpaces(posto.RAZAO),
             endereco: removeDoubleSpaces(posto.ENDERECO),
-            logradouro: (typeof posto.FANTASIA !== 'undefined') ? removeDoubleSpaces(posto.FANTASIA) : "",
+            fantasia: (typeof posto.FANTASIA !== 'undefined') ? removeDoubleSpaces(posto.FANTASIA) : "",
             cep: formatarCEP(`${posto.CEP}`),
             municipio: removeDoubleSpaces(posto.MUNICIPIO),
             bandeira: removeDoubleSpaces(posto.BANDEIRA),
@@ -32,7 +32,7 @@ function gasInfoFormat(jsonData) {
             produtos: []
         };
         data.produtos = produtos;
-        console.log(data.endereco);
+        //console.log(data.endereco);
         formatedData.push(data);
     }
 

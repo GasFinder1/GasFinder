@@ -2,19 +2,8 @@ import database from "../repository/connection.js";
 import infoFormatter from "../utils/infoFormatter.js";
 import naturalLanguage from "../utils/naturalLanguageComparator.js";
 
-async function connect() {
-    try {
-        const conn = await database.connect();
-        return conn;
-    }
-    catch (err) {
-        console.log(err);
-        return null;
-    }
-}
-
 async function requestData(sql, values) {
-    let conn = await connect();
+    let conn = await database.getConnection();
     if (conn == null) {
         console.log("banco de dados off-line");
         return null;
@@ -25,8 +14,7 @@ async function requestData(sql, values) {
         for (let i = 0; i < rows.length; i++) {
             if (!compact_rows.find((posto) => posto.id_posto == rows[i].id_posto)) {
                 compact_rows.push({
-                    lat: rows[i].lat,
-                    lon: rows[i].lon,
+                    place_ID: rows[i].place_ID,
                     id_posto: rows[i].id_posto,
                     cnpj: rows[i].cnpj,
                     nome_posto: rows[i].nome_posto,
@@ -62,17 +50,23 @@ async function requestData(sql, values) {
         return compact_rows;
     }
     catch (err) {
+        //LOG_HERE
         console.log(err);
         return null;
     }
     finally {
-        conn.end();
+        try{
+            await conn.end();
+        }
+        catch(err){
+            //LOG_HERE
+        }
     }
 }
 
-async function getGasStation(lat, lon, cep, endereco, posto) {
-    let sql = "SELECT * FROM localizacao_dados_posto WHERE lat = ? AND lon = ?;";
-    let values = [lat, lon];
+async function getGasStation(place_ID, cep, endereco, posto) {
+    let sql = "SELECT * FROM localizacao_dados_posto WHERE place_ID = ?;";
+    let values = [place_ID];
 
     let rows = await requestData(sql, values);
     if (rows != null && rows.length >= 1) {
@@ -121,8 +115,8 @@ async function getGasStation(lat, lon, cep, endereco, posto) {
     }
     sql += ");"
     sql = sql.replace(" OR ();", ";")
-    console.log(sql);
-    console.log(values);
+    // console.log(sql);
+    // console.log(values);
     rows = await requestData(sql, values);
     if (rows != null && rows.length >= 1) {
         let objSender = {};
