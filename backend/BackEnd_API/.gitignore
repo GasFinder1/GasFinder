@@ -1,8 +1,5 @@
 node_modules
-<<<<<<< HEAD
-=======
 /src/tests
 /tests
-/backend/BackEnd_API/node_modules
 /backend/BackEnd_API/tests
->>>>>>> 36ffdbaaefa8aefa956c3dc62b487613311588e8
+
