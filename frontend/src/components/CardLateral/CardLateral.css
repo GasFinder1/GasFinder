@@ -59,6 +59,10 @@
   cursor: pointer;
 }
 
+.btnActionCard:hover {
+  background-color: #004EB6;
+}
+
 @media (max-width: 767px) {
   /*modificar aqui*/
 }
