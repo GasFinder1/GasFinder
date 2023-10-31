@@ -172,7 +172,7 @@ function MapContainer() {
       map.panTo(response.data.results[0].geometry.location);
       map.setZoom(20);
       setSearchBox("")
-    
+
     } catch (error) {
       alert("Erro ao buscar o endereço:");
     }
@@ -181,26 +181,26 @@ function MapContainer() {
   return isLoaded ? (
     <div className="containerMap">
       <div className="inputSearchBox">
-          <Autocomplete className="divAutocomplete">
-            <input
-              type="search"
-              placeholder="Buscar..."
-              id="searchInput"
-              name="buscarPosto"
-              className="inputNav"
-              value={searchBox}
-              onChange={(e) => setSearchBox(e.target.value)}
-            />
-          </Autocomplete>
-          <button
-            className="lupaIcon"
-            aria-label="center back"
-            onClick={() => {
-              centeredMap(searchBox);
-            }}
-          >
-            <PiMagnifyingGlassDuotone />
-          </button>
+        <Autocomplete className="divAutocomplete">
+          <input
+            type="search"
+            placeholder="Buscar..."
+            id="searchInput"
+            name="buscarPosto"
+            className="inputNav"
+            value={searchBox}
+            onChange={(e) => setSearchBox(e.target.value)}
+          />
+        </Autocomplete>
+        <button
+          className="lupaIcon"
+          aria-label="center back"
+          onClick={() => {
+            centeredMap(searchBox);
+          }}
+        >
+          <PiMagnifyingGlassDuotone />
+        </button>
       </div>
       <Flex
         position="relative"

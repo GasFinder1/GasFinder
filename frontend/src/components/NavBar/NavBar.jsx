@@ -60,7 +60,7 @@ const NavBar = () => {
       </div> */}
       <div className="btnUser" id="btnUser">
         <BotaoUsuario />
-      </div> *
+      </div>
     </section>
   );
 };
