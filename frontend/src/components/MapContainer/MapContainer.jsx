@@ -19,6 +19,7 @@ import {
   SkeletonText,
   Text,
 } from "@chakra-ui/react";
+import { PiMagnifyingGlassDuotone } from "react-icons/pi";
 import { FaLocationArrow, FaTimes } from "react-icons/fa";
 import { FaRoute } from "react-icons/fa";
 import { BiCurrentLocation } from "react-icons/bi";
@@ -44,6 +45,7 @@ function MapContainer() {
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [distance, setDistance] = useState("");
   const [duration, setDuration] = useState("");
+  const [searchBox, setSearchBox] = useState("");
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -89,7 +91,8 @@ function MapContainer() {
       if (response.data.status === "OK") {
         const street = response.data.results[1].address_components[1].long_name;
         const number = response.data.results[1].address_components[0].long_name;
-        const neighborhood = response.data.results[1].address_components[2].long_name;
+        const neighborhood =
+          response.data.results[1].address_components[2].long_name;
         const city = response.data.results[1].address_components[3].long_name;
         const state = response.data.results[1].address_components[4].short_name;
         const cep = response.data.results[1].address_components[6].long_name;
@@ -158,8 +161,48 @@ function MapContainer() {
       console.error("Erro ao buscar o endereço:", error);
     }
   }
+
+  async function centeredMap(address) {
+    try {
+      const response = await axios.get(
+        `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+          address
+        )}&key=${apiKey}`
+      );
+      map.panTo(response.data.results[0].geometry.location);
+      map.setZoom(20);
+      setSearchBox("")
+    
+    } catch (error) {
+      alert("Erro ao buscar o endereço:");
+    }
+  }
+
   return isLoaded ? (
-    <div>
+    <div className="containerMap">
+      <div className="inputSearchBox">
+        <div>
+          <Autocomplete className="divAutocomplete">
+            <input
+              type="search"
+              placeholder="Buscar..."
+              id="searchInput"
+              name="buscarPosto"
+              className="inputNav"
+              onChange={(e) => setSearchBox(e.target.value)}
+            />
+          </Autocomplete>
+          <button
+            className="lupaIcon"
+            aria-label="center back"
+            onClick={() => {
+              centeredMap(searchBox);
+            }}
+          >
+            <PiMagnifyingGlassDuotone />
+          </button>
+        </div>
+      </div>
       <Flex
         position="relative"
         flexDirection="column"
