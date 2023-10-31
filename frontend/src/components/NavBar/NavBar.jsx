@@ -41,10 +41,10 @@ const NavBar = () => {
         <h1>Gas Finder</h1>
       </div>
 
-      <div className="inputSearch">
+      {/* <div className="inputSearch">
         <form onSubmit={handleAdress}>
-          {/* <Autocomplete className="divAutocomplete"> */}
-            <input
+           <Autocomplete className="divAutocomplete"> 
+             <input
               type="search"
               placeholder="Buscar..."
               id="searchInput"
@@ -52,12 +52,12 @@ const NavBar = () => {
               className="inputNav"
               ref={inputRef}
             />
-          {/* </Autocomplete> */}
+           </Autocomplete>
           <button type="submit" className="lupaIcon">
             <PiMagnifyingGlassDuotone />
           </button>
         </form>
-      </div>
+      </div> */}
       <div className="btnUser" id="btnUser">
         <BotaoUsuario />
       </div>

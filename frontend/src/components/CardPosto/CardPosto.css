@@ -96,7 +96,7 @@
     display: flex;
     padding-top: 6px;
     background-color: #2a7fef;
-    width: 83%;
+    width: 100%;
     height: 32px;
     border-radius: 0px 0px 12px 12px;
     text-align: center;
@@ -105,6 +105,7 @@
     color: #FFF;
     cursor: pointer;
     font-size: 16px;
+    max-width: 450px;
 }
 
 .maisInfo-container:hover {

@@ -9,6 +9,10 @@
   display: none;
 }
 
+.containerMap {
+  position: relative;
+}
+
 .containerCardRoutes {
   background-color: #00000097 !important;
   display: flex !important;
@@ -21,6 +25,91 @@
   min-height: 280px;
   border-radius: 20px;
   color: #fff;
+}
+
+.inputSearchBox {
+  position: absolute;
+  /* top: 0; */
+  z-index: 2;
+  left: 35%;
+  top: 40px;
+  width: 33%;
+  min-width: 200px;
+  /* background-color: red; */
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.inputSearchBox input {
+  background-color: rgba(0, 0, 255, 0);
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100%;
+  /* margin-right: 8%; */
+  text-indent: 8%;
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border: 1px solid #2a7fef; 
+  color: #FFF;
+  outline: none;
+}
+
+.inputSearchBox input:focus {
+  border-top-left-radius: 20px;
+  border-bottom-left-radius: 20px;
+  border: 1px solid #ffffff; 
+}
+
+
+.inputSearchBox .divAutocomplete {
+  width: 100%;
+}
+
+
+/* .inputSearch input {
+  width: 100%;
+  height: 35px;
+  background-color: #50505071;
+  text-indent: 15%;
+  border-radius: 64px 0px 0px 64px;
+  -webkit-border-radius: 64px 0px 0px 64px;
+  -moz-border-radius: 64px 0px 0px 64px;
+  color: #fff;
+} */
+
+.inputNav {
+  border: none;
+}
+
+.inputNav::placeholder {
+  color: #eeeeee;
+  text-align: center;
+}
+
+.lupaIcon {
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5em;
+  cursor: pointer;
+  color: #fff;
+  border: none;
+  outline: none;
+  width: 64px;
+  border-radius: 0px 64px 64px 0px;
+  -webkit-border-radius: 0px 64px 64px 0px;
+  -moz-border-radius: 0px 64px 64px 0px;
+  background-color: #2a7fef;
+}
+
+.inputSearch input:focus {
+  border-radius: 64px 0px 0px 64px;
+  -webkit-border-radius: 64px 0px 0px 64px;
+  -moz-border-radius: 64px 0px 0px 64px;
+  border: solid 1px #2a7fef;
 }
 
 .inputsRoutes {
@@ -39,6 +128,9 @@
   border: none;
   outline: 1px solid #000;
 }
+
+
+
 
 .infoRoutes {
   margin-top: 5%;
@@ -115,4 +207,11 @@
 
 .btnClearRoute:hover {
   color: red;
+}
+
+
+@media (min-width: 0px) and (max-width: 499px) {
+  .inputSearchBox {
+    left: 30%;
+  }
 }
