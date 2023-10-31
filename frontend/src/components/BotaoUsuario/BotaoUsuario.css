@@ -33,6 +33,14 @@
   z-index: 999;
 }
 
+.paragraphWelcome {
+  font-weight: 800;
+}
+
+.paragraphWelcome span {
+  color: #2a7fef;
+}
+
 .cabecalho-barra-lateral {
   display: flex;
   align-items: center;
@@ -84,7 +92,7 @@
 }
 
 .options.logout:hover {
-  background-color: #F8333C;
+  background-color: #f8333c;
   color: #ffffff;
   cursor: pointer;
 }

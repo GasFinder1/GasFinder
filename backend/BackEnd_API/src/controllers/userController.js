@@ -6,6 +6,7 @@ const route = express.Router();
 route.post('/', async (request, response) => {
   try {
     const { name, email, password } = request.body;
+<<<<<<< HEAD
     if ([name ?? false, email ?? false, password ?? false].includes(false)) {
       response.status(400).json({ error: "não foram enviados todos os dados necessários" })
     }
@@ -25,6 +26,12 @@ route.post('/', async (request, response) => {
     //LOG_HERE
     console.log(err);
     response.status(500).json({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
+=======
+    await database.CreateUser(name, email, password);
+    response.status(200).send({ message: 'Registrado com sucesso' });
+  } catch (error) {
+    response.status(500).send({ message: `Erro na requisição: \n ${error}` });
+>>>>>>> e519ae16ab2a1a460ffab48ee6d5019b73d8ae3c
   }
 });
 

@@ -2,16 +2,36 @@ import React, { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { BsArrowLeftShort } from "react-icons/bs";
-import { AiOutlineHome, AiOutlineStar,AiOutlineUser, AiOutlineExclamationCircle, AiOutlineMail } from 'react-icons/ai'
-import { RxExit } from 'react-icons/rx'
-import { BiCalculator } from 'react-icons/bi'
+import {
+  AiOutlineHome,
+  AiOutlineStar,
+  AiOutlineUser,
+  AiOutlineExclamationCircle,
+  AiOutlineMail,
+} from "react-icons/ai";
+import { RxExit } from "react-icons/rx";
+import { BiCalculator } from "react-icons/bi";
 import "./BotaoUsuario.css";
-
 
 function BotaoUsuario() {
   const [barraLateralAberta, setBarraLateralAberta] = useState(false);
   const barraLateralRef = useRef(null);
-  const [login, setLogin] = useState(true);
+  const [login, setLogin] = useState(false);
+  let localName = null
+  const [nameLocal, setNameLocal] = useState('')
+
+  useEffect(() => {
+    let localToken = localStorage.getItem("token");
+    let localName = localStorage.getItem("name_user");
+
+    if (localToken != null) {
+      setLogin(true);
+      setNameLocal(localName);
+    } else {
+      setLogin(false);
+      setNameLocal('');
+    }
+  }, []);
 
   const toggleBarraLateral = () => {
     setBarraLateralAberta(!barraLateralAberta);
@@ -65,36 +85,65 @@ function BotaoUsuario() {
               Cadastrar
             </Link>
             <Link to="/sobre" className="options">
-            <span>Sobre-Nós</span> <span><AiOutlineExclamationCircle/></span>
+              <span>Sobre-Nós</span>{" "}
+              <span>
+                <AiOutlineExclamationCircle />
+              </span>
             </Link>
             <Link to="/suporte" className="options">
-            <span>Suporte</span> <span><AiOutlineMail/></span>
+              <span>Suporte</span>{" "}
+              <span>
+                <AiOutlineMail />
+              </span>
             </Link>
           </div>
         ) : (
           <div className="containerOptions">
-            <p>Olá, user</p>
-
+            <p className="paragraphWelcome"><span>Bem-vindo(a)</span>{nameLocal ? `, ${nameLocal} !` : ''}</p>
             <Link to="/" className="options">
-            <span>Home</span> <span><AiOutlineHome/></span>
+              <span>Home</span>{" "}
+              <span>
+                <AiOutlineHome />
+              </span>
             </Link>
             <Link to="/perfil" className="options">
-            <span>Perfil</span> <span><AiOutlineUser/></span>
+              <span>Perfil</span>{" "}
+              <span>
+                <AiOutlineUser />
+              </span>
             </Link>
             <Link to="/favoritos" className="options">
-              <span>Favoritos</span> <span><AiOutlineStar/></span>
+              <span>Favoritos</span>{" "}
+              <span>
+                <AiOutlineStar />
+              </span>
             </Link>
             <Link to="/calcRend" className="options">
-              <span>Etanol x Gasolina</span> <span><BiCalculator/></span>
+              <span>Etanol x Gasolina</span>{" "}
+              <span>
+                <BiCalculator />
+              </span>
             </Link>
             <Link to="/sobre" className="options">
-            <span>Sobre-Nós</span> <span><AiOutlineExclamationCircle/></span>
+              <span>Sobre-Nós</span>{" "}
+              <span>
+                <AiOutlineExclamationCircle />
+              </span>
             </Link>
             <Link to="/suporte" className="options">
-            <span>Suporte</span> <span><AiOutlineMail/></span>
+              <span>Suporte</span>{" "}
+              <span>
+                <AiOutlineMail />
+              </span>
             </Link>
-            <Link to="/" className="options logout">
-            <span>Sair</span> <span><RxExit/></span>
+            <Link to="/" className="options logout" onClick={() => {
+              localStorage.removeItem('token')
+              setLogin(false)
+              }}>
+              <span >Sair</span>
+              <span>
+                <RxExit />
+              </span>
             </Link>
           </div>
         )}

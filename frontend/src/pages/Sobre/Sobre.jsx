@@ -28,16 +28,16 @@ function Sobre() {
           <CardSobre
             fotoPerfil={adryan}
             nomeSobre="Adryan Sales"
-            instagram="#"s
+            instagram="https://www.instagram.com/sales.adryan/"
             linkedin="https://www.linkedin.com/in/adryan-sales/"
-            github="#"
+            github="https://github.com/AdryanSales"
           />
           <CardSobre
             fotoPerfil={carol}
             nomeSobre="Carolina Oliveira"
-            instagram="#"
+            instagram="https://www.instagram.com/carolinapvp/"
             linkedin="https://www.linkedin.com/in/carolinaoliveira34/"
-            github="#"
+            github="https://github.com/carolinapvp"
           />
           <CardSobre
             fotoPerfil={daiane}
@@ -49,16 +49,16 @@ function Sobre() {
           <CardSobre
             fotoPerfil={joao}
             nomeSobre="João Inácio"
-            instagram="#"
+            instagram="https://www.instagram.com/joao_niinguem/"
             linkedin="https://www.linkedin.com/in/joaovictorinacio/"
-            github="#"
+            github="https://github.com/J-Inacio"
           />
           <CardSobre
             fotoPerfil={pedroG}
             nomeSobre="Pedro Gonçalves"
-            instagram="#"
+            instagram="https://www.instagram.com/p_19hgs/"
             linkedin="https://www.linkedin.com/in/phgs2004/"
-            github="#"
+            github="https://github.com/PedroDeVvV"
           />
           <CardSobre
       
@@ -66,14 +66,14 @@ function Sobre() {
             nomeSobre="Pedro Silva"
             instagram="#"
             linkedin="https://www.linkedin.com/in/pedro2737/"
-            github="#"
+            github="https://github.com/pedro2737"
           />
           <CardSobre
             fotoPerfil={talita}
             nomeSobre="Talita Pereira"
             instagram="https://www.instagram.com/tatypsilva/"
             linkedin="#"
-            github="#"
+            github="https://github.com/tpsilva18"
           />
         </div>
       </div>   
