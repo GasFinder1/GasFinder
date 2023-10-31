@@ -118,4 +118,5 @@
 .arrow-icon-svg:hover {
   color: #2a7fef;
   transition: 0.5s;
+  transform: rotate(180deg);
 }
