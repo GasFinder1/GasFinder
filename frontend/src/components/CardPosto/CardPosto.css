@@ -9,14 +9,16 @@
 }
 
 .main-container-cardPosto {
-    display: flex;
-    align-items: center;
-    /* padding: 0px 16px; */
-    width: 400px;
-    width: 80%;
-    height: 160px;
+    width: 100%;
+    max-width: 450px;
     background-color: #FFF;
-    border-radius: 12px;
+    border-radius: 12px 12px 0px 0px;
+}
+
+.container-dados-posto {
+    display: flex;
+    height: 160px;
+    width: 100%;
 }
 
 .div-bandeira {
@@ -39,44 +41,45 @@
     align-items: center;
     width: 100%;
     height: 100%;
-    padding: 16px;
+    padding: 8px;
 }
 
-.div-distancia {
+.container-bandeira-e-distancia p {
+    color:#222228;
+    font-size: 18px;
+}
+
+/* .div-distancia {
     width: 100%;
     display: flex;
     align-items: flex-end;
     justify-content: space-evenly;
-}
+} */
 
-.div-mais-info {
+.div-favoritar-posto, .div-distancia {
     font-size: 14px;
     width: 100%;
     display: flex;
-    align-items:flex-end;
-    justify-content: flex-start;
+    align-items: center;
     column-gap: 5%;
     color: #003CA0;
 }
 
+.div-favoritar-posto i {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fcab10;
+    cursor: pointer;
+    font-size: 26px;
 
-.div-mais-info a {
-    text-decoration: none;
-    color: #003CA0
-}
-
-.div-mais-info a:hover {
-    /* background-color: red; */
-    /* text-decoration: underline; */
-    color: #467BEC;
-    transition: all 0.2s ease;
 }
 
 .container-valores-postos {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 100%;
+    width: 45%;
     height: 100%;
     border-radius: 12px;
 }
@@ -89,14 +92,32 @@
     color: #FFF;
 }
 
-
-@media (min-width: 300px) and (max-width: 767px) {
-    .main-container-cardPosto {
-        width: 300px;
-        height: 180px;
-        /*modificar aqui*/
-        
-    }
-
+.maisInfo-container {
+    display: flex;
+    padding-top: 6px;
+    background-color: #2a7fef;
+    width: 100%;
+    height: 32px;
+    border-radius: 0px 0px 12px 12px;
+    text-align: center;
+    justify-content: center;
+    column-gap: 5%;
+    color: #FFF;
+    cursor: pointer;
+    font-size: 16px;
 }
+
+.maisInfo-container:hover {
+    background-color: #004EB6;
+}
+
+.icon-info-posto {
+  font-size: 22px;
+}
+
+
+/* @media (min-width: 300px) and (max-width: 767px) {
+    
+
+} */
 

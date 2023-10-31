@@ -6,7 +6,6 @@ const route = express.Router();
 route.post('/', async (request, response) => {
   try {
     const { name, email, password } = request.body;
-    console.log(name)
     await database.CreateUser(name, email, password);
     response.status(200).send({ message: 'Registrado com sucesso' });
   } catch (error) {

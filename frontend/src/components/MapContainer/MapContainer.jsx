@@ -4,7 +4,7 @@ import {
   Marker,
   DirectionsRenderer,
 } from "@react-google-maps/api";
-import { Autocomplete } from '@react-google-maps/api';
+import { Autocomplete } from "@react-google-maps/api";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import axios from "axios";
 import "./MapContainer.css";
@@ -21,7 +21,7 @@ import {
 } from "@chakra-ui/react";
 import { FaLocationArrow, FaTimes } from "react-icons/fa";
 import { FaRoute } from "react-icons/fa";
-import { BiCurrentLocation } from "react-icons/bi"
+import { BiCurrentLocation } from "react-icons/bi";
 
 const containerStyle = {
   width: "100%",
@@ -44,7 +44,6 @@ function MapContainer() {
   const [directionsResponse, setDirectionsResponse] = useState(null);
   const [distance, setDistance] = useState("");
   const [duration, setDuration] = useState("");
-
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -78,8 +77,6 @@ function MapContainer() {
     const clickedLat = event.latLng.lat();
     const clickedLng = event.latLng.lng();
 
-    setClickedLocation({ lat: clickedLat, lng: clickedLng });
-
     getReverseGeocode(clickedLat, clickedLng);
   }, []);
 
@@ -90,8 +87,22 @@ function MapContainer() {
       );
 
       if (response.data.status === "OK") {
-        const address = response.data.results[0].formatted_address;
-        console.log("Endereço:", address);
+        const street = response.data.results[1].address_components[1].long_name;
+        const number = response.data.results[1].address_components[0].long_name;
+        const neighborhood = response.data.results[1].address_components[2].long_name;
+        const city = response.data.results[1].address_components[3].long_name;
+        const state = response.data.results[1].address_components[4].short_name;
+        const cep = response.data.results[1].address_components[6].long_name;
+
+        const placeId = response.data.results[1].place_id;
+        console.log("Rua: ", street);
+        console.log("Número: ", number);
+        console.log("Bairro: ", neighborhood);
+        console.log("Cidade: ", city);
+        console.log("Estado: ", state);
+        console.log("Cep: ", cep);
+        console.log("Id do local:", placeId);
+        // console.log(response.data.results[1].address_components);
       } else {
         console.error("Erro ao buscar o endereço");
       }
