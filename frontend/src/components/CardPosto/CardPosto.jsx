@@ -1,6 +1,8 @@
 import './CardPosto.css'
 import { BiMapPin } from 'react-icons/bi';
-import { AiOutlineInfoCircle } from 'react-icons/ai';
+import { useNavigate} from "react-router-dom";
+import { useState } from 'react';
+import { AiOutlineInfoCircle,AiOutlineStar, AiFillStar } from 'react-icons/ai';
 const CardPosto = (props) => {
 
     const estiloGasolina = {
@@ -12,12 +14,20 @@ const CardPosto = (props) => {
     };
     const estiloDiesel = {
         backgroundColor: '#FCAB10',
-        borderBottomRightRadius: '12px'
     };
+
+    const [iconType, setIconType] = useState("outline");
+
+    const handleIconToggle = () => {
+    setIconType(iconType === "outline" ? "filled" : "outline");
+    };
+
+    const navigate = useNavigate();
 
     return (
         <div className='div-ajuste'>
             <div className='main-container-cardPosto'>
+                <div className='container-dados-posto'>
                 <div className='container-bandeira-e-distancia'>
                     <div className='div-bandeira'>
                         <img src={props.url} alt="Bandeira do posto" />
@@ -28,9 +38,9 @@ const CardPosto = (props) => {
                         <BiMapPin size={28} color='#467BEC'/>
                         <p> A {props.distancia} metros</p>
                     </div>
-                    <div className='div-mais-info'>
-                    <a href='#'>Mais opções</a> 
-                    <AiOutlineInfoCircle size={16} className='iconInfo'/>
+                    <div className='div-favoritar-posto'>
+                    <i onClick={handleIconToggle} className='icon-favoritar-posto'>{iconType === "outline" ? <AiOutlineStar /> : <AiFillStar />}</i>
+                    <p>Favoritar posto</p>
                     </div>
                 </div>
                 <div className='container-valores-postos'>
@@ -47,7 +57,9 @@ const CardPosto = (props) => {
                         <p>R$ {props.precoDiesel}</p>
                     </div>
                 </div>
+                </div>
             </div>
+            <div className='maisInfo-container' onClick={() => navigate('/')}><AiOutlineInfoCircle className='icon-info-posto'/>Mais Informações</div>
         </div>
 
     )

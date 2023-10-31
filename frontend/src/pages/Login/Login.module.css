@@ -53,6 +53,7 @@
   background-color: #333333;
   color: #fff;
   text-indent: 3%;
+  outline: none;
 }
 
 .formLogin input[type="text"]::placeholder {
@@ -76,6 +77,10 @@
 .inputSenha,
 .inputEmail {
   text-indent: 10%;
+}
+
+.inputsLogin input:focus {
+  border: 1px solid #007bff; 
 }
 
 .formLogin .btnSubmit {

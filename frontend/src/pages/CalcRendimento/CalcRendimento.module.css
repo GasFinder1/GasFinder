@@ -181,6 +181,14 @@
   cursor: pointer;
 }
 
+.inputsCalc input {
+  outline: none;
+}
+
+.inputsCalc input:focus {
+  border: 1px solid #007bff; 
+}
+
 /*medias queries*/
 
 @media (max-width: 1800px) and (min-width:1300px) {

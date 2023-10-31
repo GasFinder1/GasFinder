@@ -33,6 +33,7 @@
   background-color: #333333;
   color: #fff;
   font-family: 'Inter';
+  outline: none;
 }
 
 .inputEmail {
@@ -70,6 +71,14 @@
   justify-content: space-evenly;
   width: 85%;
   height: 100%;
+}
+
+.suporteForm input, textarea {
+  
+}
+
+.inputForm:focus {
+  border: 1px solid #007bff; 
 }
 
 @media screen and (min-width: 1025px) {
