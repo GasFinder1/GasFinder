@@ -14,15 +14,15 @@ route.get('/', async (request, response) => {
             const res = await gss.getGasStation(place_ID, cep, endereco, nomePosto);
             if(typeof res === "object"){
                 if("error_code" in res){
-                    response.status(res.error_code).json({ error: res.error });
+                    return response.status(res.error_code).json({ error: res.error });
                 }
                 else{
-                    response.status(200).json(res);
+                    return response.status(200).json(res);
                 }
             }
             else{
                 //LOG_HERE
-                response.status(500).json({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
+                return response.status(500).json({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
             }
         }
         else{
