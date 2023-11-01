@@ -4,17 +4,17 @@ const route = express.Router();
 
 route.get('/', async (request, response) => {
     try {
-        let { place_ID, cep, endereco, nomePosto, uf } = request.body;
-        place_ID == undefined ? request.query.place_ID : place_ID;
+        let { placeID, cep, endereco, nomePosto, uf } = request.body;
+        placeID = placeID == undefined ? request.query.placeID : placeID;
         cep = cep == undefined ? request.query.cep : cep;
         endereco = endereco == undefined ? request.query.endereco : endereco;
         nomePosto = nomePosto == undefined ? request.query.nomePosto : nomePosto;
         uf = uf == undefined ? request.query.uf : uf;
-        if(place_ID ?? false != false){
-            const res = await gss.getGasStation(place_ID, cep, endereco, nomePosto);
-            if(typeof res === "object"){
+        if(placeID ?? false != false){
+            const res = await gss.getGasStation(placeID, cep, endereco, nomePosto);
+            if(typeof res === "object" && res != null){
                 if("error_code" in res){
-                    return response.status(res.error_code).json({ error: res.error });
+                    return response.status(res.error_code ?? 500).json({ error: res.error ?? "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
                 }
                 else{
                     return response.status(200).json(res);
@@ -26,7 +26,7 @@ route.get('/', async (request, response) => {
             }
         }
         else{
-            return response.status(400).json({error: "a place_ID é obrigatória"});
+            return response.status(400).json({error: "a placeID é obrigatória"});
         }
     }
     catch(err){
