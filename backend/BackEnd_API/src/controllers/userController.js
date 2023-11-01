@@ -10,15 +10,19 @@ route.post('/', async (request, response) => {
       return response.status(400).json({ error: "não foram enviados todos os dados necessários" })
     }
     const res = await database.CreateUser(name, email, password);
-    console.log(res);
-    if(!("error" in res)){
-      return response.status(200).json({ message: 'Registrado com sucesso' });
+    if (typeof res === "object" && res != null) {
+      if (!("error" in res)) {
+        return response.status(200).json({ message: 'Registrado com sucesso' });
+      }
+      else if ("error_code" in res) {
+        return response.status(res.error_code).json({ error: res.error });
+      }
+      else {
+        console.log("não foi possível cadastrar");
+        return response.status(500).json({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
+      }
     }
-    else if("error_code" in res){
-      return response.status(res.error_code).json({error: res.error});
-    }
-    else{
-      console.log("não foi possível cadastrar");
+    else {
       return response.status(500).json({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
     }
   } catch (err) {
@@ -48,7 +52,7 @@ route.delete('/:idUser', async (request, response) => {
     //trocar por JSON
     const { idUser } = request.params;
     await database.DeleteUser(idUser);
-    
+
     return response.status(200).send({ message: 'Excluído com sucesso' });
   } catch (err) {
     //LOG_HERE

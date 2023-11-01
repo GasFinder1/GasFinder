@@ -9,7 +9,7 @@ route.post('/', async (request, response) => {
             id_posto = id_posto ?? 0
             const res = await gss.insertGasStationLocation(place_ID, id_posto)
             if(res ?? false != false){
-                if(typeof res === "object"){
+                if(typeof res === "object" && res != null){
                     if("error_code" in res){
                         return response.status(res.error_code).json({ error: res.error });
                     }
