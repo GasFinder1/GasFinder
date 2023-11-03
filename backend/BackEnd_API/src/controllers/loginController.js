@@ -13,9 +13,10 @@ route.post('/', async (request, response) => {
     const users = await database.login(email, password);
     if (users.length > 0) {
       const id_user = users[0].idUser;
-      const email_user = users[0].email;
+      const emailUser = users[0].email;
       const nomeUsuario = users[0].nome_usuario;
-      const token = generateToken(id_user, email_user);
+      const token = generateToken(id_user, emailUser);
+      console.log(token)
       response
         .status(200)
         .send({ message: "Login efetuado com sucesso", token, nomeUsuario });
