@@ -59,7 +59,7 @@ const CardPosto = (props) => {
                 </div>
                 </div>
             </div>
-            <div className='maisInfo-container' onClick={() => navigate('/')}><AiOutlineInfoCircle className='icon-info-posto'/>Mais Informações</div>
+            <div className='maisInfo-container' onClick={() => navigate('/infoPosto')}><AiOutlineInfoCircle className='icon-info-posto'/>Mais Informações</div>
         </div>
 
     )

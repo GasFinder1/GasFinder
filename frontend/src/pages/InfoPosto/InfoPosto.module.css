@@ -1,0 +1,90 @@
+.mainContainer {
+    /* background-image: url("../../img/backgroundInfoPosto.jpg");
+    background-repeat: no-repeat;
+    background-size: cover; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(0deg, #4BAFF8 2.54%, #1D5EA0 50.25%, #083161 98.48%);
+    height: 100vh;
+    width: 100%;
+
+}
+
+.infoContainer {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.50);
+    border-radius: 4px;
+    height: 80%;
+    width: 80%;
+    top: 8vh;
+    overflow: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    color: #FFF;
+}
+
+.endereco {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 8px;
+}
+
+.iconePonteiro {
+    font-size: 32px;
+    color: red;
+}
+
+.containerSecundario {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80%;
+    width: 100%;
+    padding: 0px 8px;
+    background-color: red;
+}
+
+.avaliacaoContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    row-gap: 5%;
+    align-items: center;
+    background-color: #083161;
+    width: 40%;
+    height: 100%;
+
+}
+
+.cardAvaliacao {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: red;
+    width: 50%;
+    border-radius: 4px;
+    background: rgba(191, 191, 191, 0.44);
+    flex-wrap: nowrap;
+    text-wrap: nowrap;
+    padding: 4px;
+    min-width: 220px;
+}
+
+.estrelas {
+    font-size: 20px;
+    color: rgb(255, 255, 41);
+}
+
+.cardAvaliacao h4 {
+    font-size: 1em;
+}
+
+.precosContainer {
+    background-color: green;
+    width: 60%;
+    height: 100%;
+}
