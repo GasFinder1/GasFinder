@@ -51,18 +51,48 @@ const Perfil = () => {
       if ((name !== newName) && (newName != null) && ((currentPassword === null) || (newPassword === null) || (confirmNewPassword === null))) {
         setName(newName);
         const response = await api.put("/user", data);
+        toast.success("Nome de usuário atualizado com sucesso.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       }
 
       if ((name !== newName) && (newName != null) && (password === currentPassword) && (newPassword === confirmNewPassword)) {
         setName(newName);
         setPassword(newPassword)
         const response = await api.put("/user", data);
+        toast.success("Nome de usuário e senha atualizados com sucesso.", {
+          position: "top-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "light",
+        });
       } else {
         if ((password === currentPassword) && (newPassword === confirmNewPassword)) {
           setPassword(newPassword)
           const response = await api.put("/user", data);
+          toast.success("Senha atualizada com sucesso.", {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+          });
         } else if ((password !== currentPassword) && (newPassword !== confirmNewPassword)) {
-          toast.error("A senha atual está incorreta e a senha nova não coincide com a confirmação.", {
+          toast.error("A senha atual está incorreta e a nova senha não coincide com a confirmação.", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
@@ -73,8 +103,8 @@ const Perfil = () => {
             theme: "light",
           });
         } else if (password !== currentPassword) {
-          console.log(password)
-          console.log(currentPassword)
+          console.log(password); // descartável
+          console.log(currentPassword); // descartável
           toast.error("A senha atual está incorreta.", {
             position: "top-right",
             autoClose: 5000,
@@ -86,7 +116,7 @@ const Perfil = () => {
             theme: "light",
           });
         } else if (newPassword !== confirmNewPassword) {
-          toast.error("A senha nova não coincide com a confirmação de senha.", {
+          toast.error("A nova senha não coincide com a confirmação de senha.", {
             position: "top-right",
             autoClose: 5000,
             hideProgressBar: false,
