@@ -4,6 +4,7 @@ import routerUser from "./controllers/userController.js";
 import routerPassword from "./controllers/passwordController.js";
 import gasStation from "./controllers/gasStationController.js"
 import gs_Confirmation from "./controllers/gasStationConfirmationController.js";
+import evaluation from "./controllers/evaluationController.js";
 
 const routes = express();
 
@@ -12,6 +13,7 @@ routes.use('/user', routerUser);
 routes.use('/password', routerPassword);
 routes.use('/station', gasStation);
 routes.use('/confirmGasStation', gs_Confirmation);
+routes.use('/evaluation', evaluation);
 
 
 export default routes;
