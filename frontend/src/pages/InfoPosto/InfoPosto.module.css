@@ -2,13 +2,12 @@
     /* background-image: url("../../img/backgroundInfoPosto.jpg");
     background-repeat: no-repeat;
     background-size: cover; */
-    display: flex;
+    display: grid;
     align-items: center;
     justify-content: center;
     background: linear-gradient(0deg, #4BAFF8 2.54%, #1D5EA0 50.25%, #083161 98.48%);
     height: 100vh;
     width: 100%;
-
 }
 
 .infoContainer {
@@ -16,7 +15,7 @@
     background-color: rgba(0, 0, 0, 0.50);
     border-radius: 4px;
     height: 80%;
-    width: 80%;
+    width: 100%;
     top: 8vh;
     overflow: auto;
     display: flex;
@@ -40,31 +39,29 @@
 
 .containerSecundario {
     display: flex;
-    justify-content: space-between;
+    justify-content: space-around;
     align-items: center;
     height: 80%;
     width: 100%;
     padding: 0px 8px;
-    background-color: red;
+    /* background-color: red; */
 }
 
 .avaliacaoContainer {
-    display: flex;
+    display: flex;  
     flex-direction: column;
     justify-content: center;
     row-gap: 5%;
     align-items: center;
-    background-color: #083161;
-    width: 40%;
-    height: 100%;
-
+    /* background-color: rgb(59, 19, 0); */
+    width: 30%;
+    height: 70%;
 }
 
 .cardAvaliacao {
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: red;
     width: 50%;
     border-radius: 4px;
     background: rgba(191, 191, 191, 0.44);
@@ -84,11 +81,80 @@
 }
 
 .precosContainer {
-    background-color: green;
+    /* background-color: green; */
     width: 60%;
     height: 100%;
     display: flex;
+    align-items: center;
+    justify-content: end;
+    flex-direction: row;
     flex-wrap: wrap;
+    max-width: 800px;
+    max-height: 300px;
+}
+
+.switchPrice {
+    margin: 0 0 15px 0;
+    padding: 0 24px 0 20px;
+    display: grid;
+    grid-template-columns: calc(40vw - 325px) repeat(3, 1fr);
+    width: 100%;
+}
+
+div.boxSwitch {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+div.switchPrice> h3:nth-child(1) {
+    display: flex;
+    margin: 0;
+    align-items: center;
+    text-align: right;
+    justify-content: flex-end;
+}
+
+label.switch {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 60px;
+    height: 34px;
+}
+
+label.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+label.switch span.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #33b0f8;
+    border-radius: 15px;
+}
+
+label.switch span.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: #FFF;
+    border-radius: 20px;
+    transition: 0.5s;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
 }
 
 .cardPreco {
@@ -97,10 +163,11 @@
     align-items: center;
     justify-content: space-evenly;
     background-color: #FFF;
-    width: 30%;
     max-width: 280px;
     min-width: 180px;
-    height: 100px;
+    height: 110px;
+    margin: 0 20px 20px 0;    
+    border-radius: 5px
 }
 
 .title {
@@ -109,6 +176,7 @@
     height: 64px;
     justify-content: center;
     align-items: center;
+    border-radius: 5px;
 }
 
 .titleEtanol{
@@ -135,11 +203,20 @@
     background-color: #2A7FEF;
 }
 
+.pencil {
+    background-color: #d1cfcfd2;
+    border-radius: 7px;
+    width: 40px;
+    height: 40px;
+    padding: 6px;
+}
+
 .preco {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
+    padding: 7px;
     color:#303030 ;
 }

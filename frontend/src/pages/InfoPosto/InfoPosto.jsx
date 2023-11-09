@@ -1,6 +1,7 @@
 import NavBar from "../../components/NavBar/NavBar"
 import styles from "./InfoPosto.module.css"
 import { BiSolidMap } from "react-icons/bi"
+import { HiPencil } from "react-icons/hi"
 import { useState } from "react"
 
 function InfoPosto(props) {
@@ -42,16 +43,27 @@ function InfoPosto(props) {
                                 ☆☆☆☆☆
                             </div>
                         </div>
-                    </div>
+                    </div>         
 
                         {/* CARDS PREÇO */}
                     <div className={styles.precosContainer}>
+                        <div className={styles.switchPrice}>
+                            <h3>ANP</h3>
+                            <div className={styles.boxSwitch}>
+                                <label className={styles.switch}>
+                                    <input type="checkbox" />
+                                    <span className={styles.slider}></span>
+                                </label>
+                            </div>
+                            <h3>Média de sugestões</h3>
+                        </div>
                         <div className={styles.cardPreco}>
                             <div className={`${styles.titleEtanol} ${styles.title}`}>
                                 <h3>Etanol</h3>
                             </div>
                             <div className={styles.preco}>
                                 <h2>R$ {props.precoEtanol} 3,39</h2>
+                                <HiPencil className={styles.pencil}/>
                             </div>
                         </div>
 
@@ -61,6 +73,7 @@ function InfoPosto(props) {
                             </div>
                             <div className={styles.preco}>
                                 <h2>R$ {props.precoGasolinaC} 3,39</h2>
+                                <HiPencil className={styles.pencil}/>
                             </div>
                         </div>
 
@@ -70,6 +83,7 @@ function InfoPosto(props) {
                             </div>
                             <div className={styles.preco}>
                                 <h2>R$ {props.precoGasolinaADT} 3,39</h2>
+                                <HiPencil className={styles.pencil}/>
                             </div>
                         </div>
 
@@ -79,6 +93,7 @@ function InfoPosto(props) {
                             </div>
                             <div className={styles.preco}>
                                 <h2>R$ {props.precoDieselS10} 3,39</h2>
+                                <HiPencil className={styles.pencil}/>
                             </div>
                         </div>
 
@@ -88,6 +103,7 @@ function InfoPosto(props) {
                             </div>
                             <div className={styles.preco}>
                                 <h2>R$ {props.precoDieselS5} 3,39</h2>
+                                <HiPencil className={styles.pencil}/>
                             </div>
                         </div>
 
@@ -97,6 +113,7 @@ function InfoPosto(props) {
                             </div>
                             <div className={styles.preco}>
                                 <h2>R$ {props.precoGNV} 3,39</h2>
+                                <HiPencil className={styles.pencil}/>
                             </div>
                         </div>
 
