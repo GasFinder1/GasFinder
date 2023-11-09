@@ -87,4 +87,59 @@
     background-color: green;
     width: 60%;
     height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cardPreco {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #FFF;
+    width: 30%;
+    max-width: 280px;
+    min-width: 180px;
+    height: 100px;
+}
+
+.title {
+    display: flex;
+    width: 100%;
+    height: 64px;
+    justify-content: center;
+    align-items: center;
+}
+
+.titleEtanol{
+    background-color: #44AF69 ;
+}
+
+.titleGasolinaC {
+    background-color: #F8333C;
+}
+
+.titleGasolinaADT {
+    background-color: #004EB6;
+}
+
+.titleDieselS10 {
+    background-color: #FCAB10;
+}
+
+.titleDieselS5 {
+    background-color: #FB7800 ;
+}
+
+.titleGNV {
+    background-color: #2A7FEF;
+}
+
+.preco {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color:#303030 ;
 }

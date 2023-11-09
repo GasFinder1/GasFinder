@@ -44,8 +44,62 @@ function InfoPosto(props) {
                         </div>
                     </div>
 
+                        {/* CARDS PREÇO */}
                     <div className={styles.precosContainer}>
-                        <p>preço</p>
+                        <div className={styles.cardPreco}>
+                            <div className={`${styles.titleEtanol} ${styles.title}`}>
+                                <h3>Etanol</h3>
+                            </div>
+                            <div className={styles.preco}>
+                                <h2>R$ {props.precoEtanol} 3,39</h2>
+                            </div>
+                        </div>
+
+                        <div className={styles.cardPreco}>
+                            <div className={`${styles.titleGasolinaC} ${styles.title}`}>
+                                <h3>Gasolina Comum</h3>
+                            </div>
+                            <div className={styles.preco}>
+                                <h2>R$ {props.precoGasolinaC} 3,39</h2>
+                            </div>
+                        </div>
+
+                        <div className={styles.cardPreco}>
+                            <div className={`${styles.titleGasolinaADT} ${styles.title}`}>
+                                <h3>Gasolina Aditivada</h3>
+                            </div>
+                            <div className={styles.preco}>
+                                <h2>R$ {props.precoGasolinaADT} 3,39</h2>
+                            </div>
+                        </div>
+
+                        <div className={styles.cardPreco}>
+                            <div className={`${styles.titleDieselS10} ${styles.title}`}>
+                                <h3>Diesel S10</h3>
+                            </div>
+                            <div className={styles.preco}>
+                                <h2>R$ {props.precoDieselS10} 3,39</h2>
+                            </div>
+                        </div>
+
+                        <div className={styles.cardPreco}>
+                            <div className={`${styles.titleDieselS5} ${styles.title}`}>
+                                <h3>Diesel S500</h3>
+                            </div>
+                            <div className={styles.preco}>
+                                <h2>R$ {props.precoDieselS5} 3,39</h2>
+                            </div>
+                        </div>
+
+                        <div className={styles.cardPreco}>
+                            <div className={`${styles.titleGNV} ${styles.title}`}>
+                                <h3>GNV</h3>
+                            </div>
+                            <div className={styles.preco}>
+                                <h2>R$ {props.precoGNV} 3,39</h2>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>
