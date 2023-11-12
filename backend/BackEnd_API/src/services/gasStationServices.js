@@ -149,7 +149,7 @@ async function gasStationManager(placeID, gsName, gsNumber, road, neighborhood, 
     try {
         let [rows] = await conn.query(sql, values);
         if (rows.length >= 1) {
-            return rows;
+            return infoFormatter.gsInfoOrganizer(rows)[0];
         }
         sql = "SELECT * from dados_posto WHERE estado = ?"
         values = [state];
@@ -181,6 +181,17 @@ async function gasStationManager(placeID, gsName, gsNumber, road, neighborhood, 
             const searchText = ["nome_posto", "endereco", "municipio", "bairro"]
             //Rede Neural?
             let similarity = naturalLanguage.getSimilarity(comparator, gasData, searchText);
+            if(similarity[0].similarity_AVG > 0.8){
+                try{
+                    await conn.query("INSERT INTO tbl_localizacao_posto (place_ID, fk_id_posto) VALUES(?, ?)", [placeID, similarity[0].id_posto]);
+                    let [rows] = await conn.query("SELECT * FROM localizacao_dados_posto WHERE place_ID = ?;", placeID);
+                    return infoFormatter.gsInfoOrganizer(rows);
+                }
+                catch(err){
+                    //LOG_HERE
+                    console.error(err)
+                }
+            }
             return {placeID, possíveis_postos: similarity[0]};
         }
         else{

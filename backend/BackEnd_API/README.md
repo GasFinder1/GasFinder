@@ -45,6 +45,10 @@ resposta {message} em caso de erro {error}
 envio {lat, lon, cep, endereco, posto} ou ?lat=&lon=&cep=&endereco=&posto=
 resposta {posto(sem lat e lon)} <> {posto(com lat e lon)} em caso de erro {error}
 
+`post`.`JSON` pegar postos de uma área
+envio {latitude, longitude}
+resposta {message} em caso de erro {error}
+
 
 ### /confirmGasStation
 `post`.`JSON` envia o relacionamento de um posto com o dado no banco de dados
