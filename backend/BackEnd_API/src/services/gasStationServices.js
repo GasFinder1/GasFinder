@@ -192,7 +192,7 @@ async function gasStationManager(placeID, gsName, gsNumber, road, neighborhood, 
                     console.error(err)
                 }
             }
-            return {placeID, possíveis_postos: similarity[0]};
+            return {placeID, possíveis_postos: similarity};
         }
         else{
             return {placeID, error: "não foi possível encontrar um posto com nome similar"};
