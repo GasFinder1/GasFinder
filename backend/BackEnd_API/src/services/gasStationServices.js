@@ -55,10 +55,10 @@ async function requestData(sql, values) {
         return null;
     }
     finally {
-        try{
+        try {
             await conn.end();
         }
-        catch(err){
+        catch (err) {
             //LOG_HERE
         }
     }
@@ -75,7 +75,7 @@ async function getGasStation(place_ID, cep, endereco, posto) {
 
     sql = "SELECT * FROM dados_posto WHERE cep = ? OR (";
     values = [cep];
-    
+
     if (endereco ?? false) {
         const endereco_array = infoFormatter.removeDoubleSpaces(endereco).split(" ");
         for (let i = 0; i < endereco_array.length; i++) {
@@ -138,4 +138,59 @@ async function getGasStation(place_ID, cep, endereco, posto) {
     }
 }
 
-export default { getGasStation };
+async function gasStationManager(placeID, gsName, gsNumber, road, neighborhood, town, state) {
+    let conn = await database.getConnection();
+    if (conn == null) {
+        console.log("banco de dados off-line");
+        return null;
+    }
+    let sql = "SELECT * FROM localizacao_dados_posto WHERE place_ID = ?;";
+    let values = [placeID];
+    try {
+        let [rows] = await conn.query(sql, values);
+        if (rows.length >= 1) {
+            return rows;
+        }
+        sql = "SELECT * from dados_posto WHERE estado = ?"
+        values = [state];
+        if (gsName ?? false) {
+            const posto_array = infoFormatter.removeDoubleSpaces(infoFormatter.removeGasStationGenericWords(gsName.toLowerCase())).split(" ");
+            for (let i = 0; i < posto_array.length; i++) {
+                if (i === 0) {
+                    if (sql[sql.length - 1] === "(") {
+                        sql += "("
+                    }
+                    else {
+                        sql += " AND (";
+                    }
+                }
+                else {
+                    sql += " OR";
+                }
+                sql += " nome_posto LIKE ?";
+                values.push("%" + posto_array[i] + "%");
+                if (i + 1 === posto_array.length) {
+                    sql += ")";
+                }
+            }
+        }
+        [rows] = await conn.query(sql, values);
+        if (rows.length >= 1) {
+            const comparator = infoFormatter.genericComparator1(gsName, road, town, neighborhood, state);
+            const gasData = infoFormatter.gsInfoOrganizer(rows);
+            const searchText = ["nome_posto", "endereco", "municipio", "bairro"]
+            //Rede Neural?
+            let similarity = naturalLanguage.getSimilarity(comparator, gasData, searchText);
+            return {placeID, possíveis_postos: similarity[0]};
+        }
+        else{
+            return {placeID, error: "não foi possível encontrar um posto com nome similar"};
+        }
+    }
+    catch (err) {
+        console.error(err);
+        return { place_ID: placeID, error: "não foi possível pesquisar este posto" }
+    }
+}
+
+export default { getGasStation, gasStationManager };
