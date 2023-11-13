@@ -40,17 +40,17 @@ route.get('/', async (request, response) => {
 route.post('/', async (request, response) => {
     try {
         let obj = request.body
-        if (!(obj ?? false) || !(typeof obj === "object") || !("latitude" in obj) || !("longitude" in obj) || isNaN(obj.latitude) || isNaN(obj.longitude)){
-            return response.status(400).json({error: "objeto inválido, ou não contem latitude e longitude"});
+        if (!(obj ?? false) || !(typeof obj === "object") || !("latitude" in obj) || !("longitude" in obj) || isNaN(obj.latitude) || isNaN(obj.longitude)) {
+            return response.status(400).json({ error: "objeto inválido, ou não contem latitude e longitude" });
         }
-        const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${obj.latitude},${obj.longitude}&radius=5000&type=gas_station&keyword=cruise&key=${process.env.MAPS_API_KEY}`;
+        const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${obj.latitude},${obj.longitude}&radius=10000&type=gas_station&keyword=cruise&key=${process.env.MAPS_API_KEY}`;
         let data;
-        try{
+        try {
             data = await axios.get(apiUrl);
         }
-        catch(err){
+        catch (err) {
             console.log(err);
-            return response.status(500).json({error: "não foi possível pegar os postos proximos a sua região"});
+            return response.status(500).json({ error: "não foi possível pegar os postos proximos a sua região" });
         }
         obj = data.data;
         if (!(obj ?? false) || !(typeof obj === "object") || !("results" in obj) || !(Array.isArray(obj["results"]))) {
@@ -67,6 +67,7 @@ route.post('/', async (request, response) => {
             const compoundCode = item["plus_code"]["compound_code"] ?? false;
             const gsName = item["name"] ?? false;
             let matches = completeAdress.match(regexAddress1);
+            console.log(matches)
             const road = matches[1] ?? false;
             const gsNumber = matches[2] ?? false;
             const neighborhood = matches[3] ?? false;

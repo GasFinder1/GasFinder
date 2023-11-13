@@ -106,6 +106,7 @@ function MapContainer() {
         console.log("Cep: ", cep);
         console.log("Id do local:", placeId);
         // console.log(response.data.results[1].address_components);
+        console.log("Latitude: ", latitude, "Longitude: ", longitude)
       } else {
         console.error("Erro ao buscar o endereço");
       }
