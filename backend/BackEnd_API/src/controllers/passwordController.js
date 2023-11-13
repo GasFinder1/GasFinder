@@ -52,20 +52,20 @@ router.post('/', async (request, response) => {
       })
         .then(() => {
           console.log('E-mail enviado com sucesso.');
-          response.status(202).json({ message: "E-mail enviado com sucesso." });
+          return response.status(202).json({ message: "E-mail enviado com sucesso." });
         })
         .catch((err) => {
           //LOG_HERE
           console.log(`Houve um erro: ${err}`);
-          response.status(500).json({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
+          return response.status(500).json({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
         });
     } else {
-      response.status(404).json({ error: "Usuário não encontrado" });
+      return response.status(404).json({ error: "Usuário não encontrado" });
     }
   } catch (err) {
     //LOG_HERE
     console.log(err);
-    response.status(500).json({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
+    return response.status(500).json({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
   }
 });
 
