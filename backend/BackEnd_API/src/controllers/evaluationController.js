@@ -1,11 +1,17 @@
 import express, { request, response } from "express";
 import database from "../services/evaluationervices.js";
+import {verifyJWT} from "../middleswares/jwt.js";
 
 const route = express.Router();
 
-route.put('/', async (request, response) => {
+route.put('/', verifyJWT, async (request, response) => {
+  // return response.status(401).json({message: 'Não autorizado'});
   try {
-    const { idUsuario, placeID, eGasStation, eProduct, eService, opinion } = request.body;
+    const {placeID, eGasStation, eProduct, eService, opinion } = request.body;
+    const idUsuario = request.infoUser.id_usuario;
+    if(!(idUsuario ?? false)){
+      return response.status(401).json({message: 'Não autorizado'})
+    };
     if (!([idUsuario ?? false, placeID ?? false, eGasStation ?? false, eProduct ?? false, eService ?? false].includes(false))) {
       const res = await database.setEvaluation(idUsuario, placeID, eGasStation, eProduct, eService, opinion ?? "");
       if (typeof res === "object" && res != null) {
@@ -31,9 +37,15 @@ route.put('/', async (request, response) => {
   }
 });
 
-route.post('/', async (request, response) => {
+route.post('/', verifyJWT, async (request, response) => {
   try {
-    const { idUsuario, placeID } = request.body;
+    const { placeID } = request.body;
+    // const placeID = "ChIJDelHXmSrz5QRqqXgngiPqMs";
+    const idUsuario = request.infoUser.id_usuario;
+    // const idUsuario = 1;
+    if(!(idUsuario ?? false)){
+      return response.status(401).json({message: 'Não autorizado'})
+    };
     if (!([idUsuario ?? false, placeID ?? false].includes(false))) {
       const res = await database.getEvaluation(idUsuario, placeID);
       if (typeof res === "object" && res != null) {

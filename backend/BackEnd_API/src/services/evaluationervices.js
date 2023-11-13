@@ -39,7 +39,6 @@ async function getEvaluation(idUsuario, placeID){
 
     try{
         const [rows] = await conn.query(sql, values);
-        console.log(rows);
         if(rows.length >= 1){
             return rows;
         }
