@@ -3,8 +3,9 @@ import 'dotenv/config';
 
 
 function verifyJWT(request, response, next) {
+   // return next();
    const secret = process.env.JWT_PASSWORD;
-
+   
    const authHeader = request.headers.authorization;
    if (!authHeader)
       return response.status(401).send({ error: 'Token não informado.' });
@@ -19,10 +20,14 @@ function verifyJWT(request, response, next) {
 
    jwt.verify(token, secret, (err, decoded) => {
       if (err) {
+         console.error(err);
          return response.status(401).send({ error: 'Usuário não autenticado.' });
       }
       request.infoUser = decoded.infoUser;
-      return next();
+      if(request.infoUser.id_usuario != undefined){
+         return next();
+      }
+      return response.status(401).send({ error: 'faltam informações no token' });
    });
 }
 export { verifyJWT };
