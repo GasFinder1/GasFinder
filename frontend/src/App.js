@@ -14,6 +14,7 @@ import CalcRendimento from './pages/CalcRendimento/CalcRendimento';
 import Sobre from './pages/Sobre/Sobre';
 import Suporte from './pages/Suporte/Suporte';
 import { SearchContextProvider } from './context/SearchContext';
+import InfoPosto from './pages/InfoPosto/InfoPosto.jsx';
 
 function App() {
   return (
@@ -31,6 +32,8 @@ function App() {
           <Route path="/calcRend" element={<CalcRendimento />} />
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/suporte" element={<Suporte />} />
+          <Route path="/infoPosto"element={<InfoPosto/>}/>
+          <Route path="/infoPosto/:postoId" component={<InfoPosto/>} />
         </Routes>
       </BrowserRouter>
     </div>

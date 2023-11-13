@@ -26,16 +26,16 @@ envio {name_user, email, password}
 resposta {message} em caso de erro {error}
 
 `put`.`JSON` atualizar informações do usuário
-envio {idUser, name_user, email, password}
+envio {name_user, email, password} - TokenJWT
 resposta {message} em caso de erro {error}
 
 `delete`.`Body` deletar usuario
-envio /idUser
+envio TokenJWT
 resposta {message} em caso de erro {error}
 
 
 ### /password
-`post`.`JSON` recuperar senha
+`post`.`JSON` esqueci minha senha senha
 envio {userEmail}
 resposta {message} em caso de erro {error}
 
@@ -44,6 +44,10 @@ resposta {message} em caso de erro {error}
 `get`.`JSON`<>`body` pegar o posto que corresponde a localização ou os postos que corresponderem a pesquisa por similaridade
 envio {lat, lon, cep, endereco, posto} ou ?lat=&lon=&cep=&endereco=&posto=
 resposta {posto(sem lat e lon)} <> {posto(com lat e lon)} em caso de erro {error}
+
+`post`.`JSON` pegar postos de uma área
+envio {latitude, longitude}
+resposta {[posto cadastrado, posto similar, posto sem nenhuma similaridade]}
 
 
 ### /confirmGasStation
