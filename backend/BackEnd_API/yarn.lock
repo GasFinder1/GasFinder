@@ -532,7 +532,6 @@ natural@^6.7.2:
   version "6.8.0"
   resolved "https://registry.npmjs.org/natural/-/natural-6.8.0.tgz"
   integrity sha512-lAPQ8Eupz0F64ERPxYDTxV2svF0Q5q/RywCn+CrDl45+1L7YzTe1ZSkOwABA18YfGz0fjyilnIjz2ajNbVpw/w==
-
   dependencies:
     afinn-165 "^1.0.2"
     afinn-165-financialmarketnews "^3.0.0"
