@@ -67,8 +67,8 @@ route.post('/', async (request, response) => {
             const compoundCode = item["plus_code"]["compound_code"] ?? false;
             const gsName = item["name"] ?? false;
             let matches = completeAdress.match(regexAddress1);
-            if(!(Array.isArray(matches))){
-                res.push({placeID, error: "os dados relacionados ao Google maps não possui um endereço"});
+            if (!(Array.isArray(matches))) {
+                res.push({ placeID, error: "os dados relacionados ao Google maps não possui um endereço" });
                 break;
             }
             const road = matches[1] ?? false;
@@ -76,8 +76,8 @@ route.post('/', async (request, response) => {
             const neighborhood = matches[3] ?? false;
             const town = matches[4] ?? false;
             matches = compoundCode.match(regexAddress2);
-            if(!(Array.isArray(matches))){
-                res.push({placeID, error: "os dados relacionados ao Google maps não possui um endereço"});
+            if (!(Array.isArray(matches))) {
+                res.push({ placeID, error: "os dados relacionados ao Google maps não possui um endereço" });
                 break;
             }
             const state = matches[1] ?? false;
