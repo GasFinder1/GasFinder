@@ -494,10 +494,10 @@ function MapContainer() {
             <Text>Tempo: {duration} </Text>
             <IconButton
               aria-label="center back"
-              icon={<FaLocationArrow />}
+              icon={<BiCurrentLocation/>}
               title="Voltar ao meu local atual"
               isRound
-              className="btnRedirectUser"
+              className="btnLocationUser"
               onClick={() => {
                 map.panTo(currentLocation);
                 map.setZoom(15);
@@ -508,9 +508,9 @@ function MapContainer() {
             <IconButton
               title="Minha localização atual"
               aria-label="center back"
-              icon={<BiCurrentLocation />}
+              icon={<FaLocationArrow />}
               isRound
-              className="btnLocationUser"
+              className="btnRedirectUser"
               onClick={() => {
                 actualLocation(currentLocation);
               }}
