@@ -1,5 +1,6 @@
 import express, { request, response } from "express";
 import database from "../services/userServices.js";
+import {verifyJWT} from "../middleswares/jwt.js";
 
 const route = express.Router();
 
@@ -32,11 +33,13 @@ route.post('/', async (request, response) => {
   }
 });
 
-route.put('/', async (request, response) => {
+route.put('/', verifyJWT, async (request, response) => {
   try {
-    const { name, email, password, idUser } = request.body;
+    const infoUser = request.infoUser;
+    const { name, email, password } = request.body;
+    const idUser = infoUser.id_usuario;
     if ([name ?? false, email ?? false, password ?? false, idUser ?? false].includes(false)) {
-      return response.status(400).json({ error: "todos os dados devem ser preênchidos" });
+      return response.status(400).json({ error: "todos os dados devem ser preênchidos, e você precisa estar logado" });
     }
     //PROCEDURE?
     await database.UpdateUser(name, email, password, idUser);
@@ -47,10 +50,11 @@ route.put('/', async (request, response) => {
   }
 });
 
-route.delete('/:idUser', async (request, response) => {
+route.delete('/:idUser', verifyJWT, async (request, response) => {
   try {
     //trocar por JSON
-    const { idUser } = request.params;
+    const idUser = request.infoUser.id_usuario;
+    // const { idUser } = request.params;
     await database.DeleteUser(idUser);
 
     return response.status(200).send({ message: 'Excluído com sucesso' });

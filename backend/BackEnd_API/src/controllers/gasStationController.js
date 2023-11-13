@@ -67,15 +67,22 @@ route.post('/', async (request, response) => {
             const compoundCode = item["plus_code"]["compound_code"] ?? false;
             const gsName = item["name"] ?? false;
             let matches = completeAdress.match(regexAddress1);
-            console.log(matches)
+            if(!(Array.isArray(matches))){
+                res.push({placeID, error: "os dados relacionados ao Google maps não possui um endereço"});
+                break;
+            }
             const road = matches[1] ?? false;
             const gsNumber = matches[2] ?? false;
             const neighborhood = matches[3] ?? false;
             const town = matches[4] ?? false;
             matches = compoundCode.match(regexAddress2);
+            if(!(Array.isArray(matches))){
+                res.push({placeID, error: "os dados relacionados ao Google maps não possui um endereço"});
+                break;
+            }
             const state = matches[1] ?? false;
             if ([placeID, gsName, road, gsNumber, neighborhood, town, state].includes(false)) {
-                response.status(400).json({ error: "os dados não foram enviados da forma correta" });
+                // response.status(400).json({ error: "os dados não foram enviados da forma correta" });
             }
             const rows = await gss.gasStationManager(placeID, gsName, gsNumber, road, neighborhood, town, state)
             res.push(rows)
