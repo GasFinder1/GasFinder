@@ -13,7 +13,7 @@
   width: 100vw;
   height: 100vh;
   background-position: center;
-  background-color: #0057a8; 
+  background: linear-gradient(0deg, #4BAFF8 2.54%, #1D5EA0 50.25%, #083161 98.48%);
   background-size: cover;
   font-family: "Inter", sans-serif;
 }
