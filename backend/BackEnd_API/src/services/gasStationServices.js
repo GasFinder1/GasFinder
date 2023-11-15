@@ -181,21 +181,21 @@ async function gasStationManager(placeID, gsName, gsNumber, road, neighborhood, 
             const searchText = ["nome_posto", "endereco", "municipio", "bairro"]
             //Rede Neural?
             let similarity = naturalLanguage.getSimilarity(comparator, gasData, searchText);
-            if(similarity[0].similarity_AVG > 0.8){
-                try{
+            if (similarity[0].similarity_AVG > 0.8) {
+                try {
                     await conn.query("INSERT INTO tbl_localizacao_posto (place_ID, fk_id_posto) VALUES(?, ?)", [placeID, similarity[0].id_posto]);
                     let [rows] = await conn.query("SELECT * FROM localizacao_dados_posto WHERE place_ID = ?;", placeID);
                     return infoFormatter.gsInfoOrganizer(rows);
                 }
-                catch(err){
+                catch (err) {
                     //LOG_HERE
                     console.error(err)
                 }
             }
-            return {placeID, possíveis_postos: similarity};
+            return { placeID, possíveis_postos: similarity };
         }
-        else{
-            return {placeID, error: "não foi possível encontrar um posto com nome similar"};
+        else {
+            return { placeID, error: "não foi possível encontrar um posto com nome similar" };
         }
     }
     catch (err) {
@@ -204,4 +204,82 @@ async function gasStationManager(placeID, gsName, gsNumber, road, neighborhood, 
     }
 }
 
-export default { getGasStation, gasStationManager };
+async function getGasStationByMunicipality(Municipality) {
+    const sql = "SELECT * FROM dados_posto WHERE municipio = ?";
+    let conn = await database.getConnection();
+    if (conn == null) {
+        console.log("banco de dados off-line");
+        return null;
+    }
+    try {
+        const [rows] = await conn.query(sql, Municipality);
+        if (rows.length < 1) {
+            return null;
+        }
+        else {
+            return infoFormatter.gsInfoOrganizer(rows);
+        }
+    }
+    catch (err) {
+        //LOG_HERE
+        console.error(err);
+        return null;
+    }
+    finally {
+        await conn.end();
+    }
+};
+
+async function getGasStationByNeighborhood(municipality, neighborhood) {
+    const sql = "SELECT * FROM dados_posto WHERE municipio = ? AND bairro = ?";
+    const values = [municipality, neighborhood];
+    let conn = await database.getConnection();
+    if (conn == null) {
+        console.log("banco de dados off-line");
+        return null;
+    }
+    try {
+        const [rows] = await conn.query(sql, values);
+        if (rows.length < 1) {
+            return null;
+        }
+        else {
+            return infoFormatter.gsInfoOrganizer(rows);
+        }
+    }
+    catch (err) {
+        //LOG_HERE
+        console.error(err);
+        return null;
+    }
+    finally {
+        await conn.end();
+    }
+};
+
+async function getGasStationByNeighborhoodAndMunicipaly(municipality, neighborhood) {
+    let results = [];
+    let rows = await getGasStationByNeighborhood(municipality, neighborhood);
+    if (rows == null) {
+        rows = await getGasStationByMunicipality(municipality);
+        if (rows != null && rows.length >= 1 && rows.length < 10) {
+            rows.map((row) => {
+                results.push(row);
+            })
+        }
+        return results;
+    }
+    if (rows.length < 5) {
+        rows.map((row) => {
+            results.push(row);
+        });
+        rows = await getGasStationByMunicipality(municipality);
+        if (rows != null && rows.length >= 1 && rows.length < 10) {
+            rows.map((row) => {
+                results.push(row);
+            });
+        }
+    }
+    return infoFormatter.gsInfoNoRepeat(results);
+};
+export default { getGasStation, gasStationManager, getGasStationByMunicipality, getGasStationByNeighborhood, getGasStationByNeighborhoodAndMunicipaly };

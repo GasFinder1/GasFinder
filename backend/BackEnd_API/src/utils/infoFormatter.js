@@ -142,7 +142,7 @@ function gsInfoOrganizer(data) {
                         {
                             valor: data[i].valor,
                             nome_combustivel: data[i].nome_combustivel.toLowerCase(),
-                            unid_medida: data[i].unid_medida.toLowerCase()
+                            unid_medida: data[i].unid_medida
                         }
                     ]
             })
@@ -157,5 +157,15 @@ function gsInfoOrganizer(data) {
     }
     return organizedData;
 }
+function gsInfoNoRepeat(data){
+    let organizedData = [];
+    for (let i = 0; i < data.length; i++) {
+        const indexOfGasStation = organizedData.findIndex(obj => obj.id_posto === data[i].id_posto);
+        if (indexOfGasStation === -1) {
+            organizedData.push(data[i]);
+        }
+    }
+    return organizedData;
+}
 
-export default { gasInfoFormat, removeDoubleSpaces, removeLetters, removeGasStationGenericWords, genericComparator1, gsInfoOrganizer }
+export default { gasInfoFormat, removeDoubleSpaces, removeLetters, removeGasStationGenericWords, genericComparator1, gsInfoOrganizer, gsInfoNoRepeat }

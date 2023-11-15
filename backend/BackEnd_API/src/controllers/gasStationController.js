@@ -96,4 +96,41 @@ route.post('/', async (request, response) => {
     }
 });
 
+route.post('/get/', async (request, response) => {
+    let {bairro, municipio, pesquisa} = request.body;
+    if(pesquisa == 1 || pesquisa != 2){
+        if(!(bairro || false) || !(typeof bairro === "string")){
+            return response.status(400).json({ error: "o dado de bairro deve ser preenchido" });
+        }
+        if(!(municipio || false) || !(typeof municipio === "string")){
+            return response.status(400).json({ error: "o dado de municipio deve ser preenchido" });
+        }
+        if(pesquisa == 1){
+            const rows = await gss.getGasStationByNeighborhood(municipio, bairro);
+            if(rows == null){
+                return response.status(400).json({ error: "não foi encontrada nenhum posto nesse bairro"});
+            }
+            return response.status(200).json({rows});
+        }
+        else{
+            const rows = await gss.getGasStationByNeighborhoodAndMunicipaly(municipio, bairro);
+            if(rows == null){
+                return response.status(400).json({ error: "não foi encontrada nenhum posto nesse bairro"});
+            }
+            return response.status(200).json(rows);
+        }
+    }
+    else if(pesquisa == 2){
+        if(!(municipio || false) || !(typeof municipio === "string")){
+            return response.status(400).json({ error: "o dado de municipio deve ser preenchido" });
+        }
+        const rows = await gss.getGasStationByMunicipality(municipio, bairro);
+        if(rows == null){
+            return response.status(400).json({ error: "não foi encontrada nenhum posto nesse bairro"});
+        }
+        return response.status(200).json(rows);
+    }
+    return response.status(400).json({error: "formato dos dados incorretos"})
+});
+
 export default route;
