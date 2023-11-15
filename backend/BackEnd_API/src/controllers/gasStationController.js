@@ -40,17 +40,17 @@ route.get('/', async (request, response) => {
 route.post('/', async (request, response) => {
     try {
         let obj = request.body
-        if (!(obj ?? false) || !(typeof obj === "object") || !("latitude" in obj) || !("longitude" in obj) || isNaN(obj.latitude) || isNaN(obj.longitude)){
-            return response.status(400).json({error: "objeto inválido, ou não contem latitude e longitude"});
+        if (!(obj ?? false) || !(typeof obj === "object") || !("latitude" in obj) || !("longitude" in obj) || isNaN(obj.latitude) || isNaN(obj.longitude)) {
+            return response.status(400).json({ error: "objeto inválido, ou não contem latitude e longitude" });
         }
-        const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${obj.latitude},${obj.longitude}&radius=5000&type=gas_station&keyword=cruise&key=${process.env.MAPS_API_KEY}`;
+        const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${obj.latitude},${obj.longitude}&radius=10000&type=gas_station&keyword=cruise&key=${process.env.MAPS_API_KEY}`;
         let data;
-        try{
+        try {
             data = await axios.get(apiUrl);
         }
-        catch(err){
+        catch (err) {
             console.log(err);
-            return response.status(500).json({error: "não foi possível pegar os postos proximos a sua região"});
+            return response.status(500).json({ error: "não foi possível pegar os postos proximos a sua região" });
         }
         obj = data.data;
         if (!(obj ?? false) || !(typeof obj === "object") || !("results" in obj) || !(Array.isArray(obj["results"]))) {
@@ -58,6 +58,7 @@ route.post('/', async (request, response) => {
         }
         let res = [];
         obj = obj["results"];
+        console.log(obj);
         for (let i = 0; i < obj.length; i++) {
             const regexAddress1 = /^(.*?),\s*([^,-]+(?:-[^,]+)?)\s*-\s*([^,]+),\s*([^,]+)/;
             const regexAddress2 = /State of ([^,]+)/;
@@ -67,8 +68,8 @@ route.post('/', async (request, response) => {
             const compoundCode = item["plus_code"]["compound_code"] ?? false;
             const gsName = item["name"] ?? false;
             let matches = completeAdress.match(regexAddress1);
-            if(!(Array.isArray(matches))){
-                res.push({placeID, error: "os dados relacionados ao Google maps não possui um endereço"});
+            if (!(Array.isArray(matches))) {
+                res.push({ placeID, error: "os dados relacionados ao Google maps não possui um endereço" });
                 break;
             }
             const road = matches[1] ?? false;
@@ -76,8 +77,8 @@ route.post('/', async (request, response) => {
             const neighborhood = matches[3] ?? false;
             const town = matches[4] ?? false;
             matches = compoundCode.match(regexAddress2);
-            if(!(Array.isArray(matches))){
-                res.push({placeID, error: "os dados relacionados ao Google maps não possui um endereço"});
+            if (!(Array.isArray(matches))) {
+                res.push({ placeID, error: "os dados relacionados ao Google maps não possui um endereço" });
                 break;
             }
             const state = matches[1] ?? false;
