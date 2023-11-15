@@ -170,7 +170,7 @@ function MapContainer() {
         )}&key=${apiKey}`
       );
       map.panTo(response.data.results[0].geometry.location);
-      map.setZoom(20);
+      map.setZoom(10);
       setSearchBox("")
 
     } catch (error) {
@@ -499,8 +499,8 @@ function MapContainer() {
               isRound
               className="btnLocationUser"
               onClick={() => {
-                map.panTo(currentLocation);
-                map.setZoom(15);
+                actualLocation(currentLocation);
+                map.setZoom(20);
               }}
             />
           </div>
@@ -512,7 +512,7 @@ function MapContainer() {
               isRound
               className="btnRedirectUser"
               onClick={() => {
-                actualLocation(currentLocation);
+                map.panTo(currentLocation);
               }}
             />
           </div>
