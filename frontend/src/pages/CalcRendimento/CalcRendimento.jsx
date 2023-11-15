@@ -3,6 +3,7 @@ import { toast } from 'react-toastify';
 import styles from './CalcRendimento.module.css';
 import NavBar from '../../components/NavBar/NavBar';
 import CurrencyInput from 'react-currency-input-field'; // Importando o componente CurrencyInput
+import FilterButton from '../../components/FilterButton/FilterButton';
 
 const CalcRendimento = () => {
   const [etanol, setEtanol] = useState('');
@@ -145,6 +146,7 @@ const CalcRendimento = () => {
           </div>
         </form>
       </section>
+      <FilterButton/>
     </div>
   );
 };

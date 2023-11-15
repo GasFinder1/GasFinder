@@ -1,5 +1,5 @@
 import './CardPosto.css'
-import { BiMapPin } from 'react-icons/bi';
+import { BiMapPin,BiSolidMap } from 'react-icons/bi';
 import { useNavigate} from "react-router-dom";
 import { useState } from 'react';
 import { AiOutlineInfoCircle,AiOutlineStar, AiFillStar } from 'react-icons/ai';
@@ -35,8 +35,12 @@ const CardPosto = (props) => {
                     </div>
                     
                     <div className='div-distancia'>
+                        <BiSolidMap size={28} color='#F8333C'/>
+                        <p >{props.endereco}</p>
+                    </div>
+                    <div className='div-distancia'>
                         <BiMapPin size={28} color='#467BEC'/>
-                        <p> A {props.distancia} metros</p>
+                        <p>A {props.distancia} metros</p>
                     </div>
                     <div className='div-favoritar-posto'>
                     <i onClick={handleIconToggle} className='icon-favoritar-posto'>{iconType === "outline" ? <AiOutlineStar /> : <AiFillStar />}</i>
@@ -59,7 +63,10 @@ const CardPosto = (props) => {
                 </div>
                 </div>
             </div>
-            <div className='maisInfo-container' onClick={() => navigate('/infoPosto')}><AiOutlineInfoCircle className='icon-info-posto'/>Mais Informações</div>
+            <div className='maisInfo-container' onClick={() => navigate('/infoPosto')}>
+            <AiOutlineInfoCircle className='icon-info-posto'/>
+            Mais Informações
+            </div>
         </div>
 
     )
@@ -71,6 +78,7 @@ export default CardPosto
 /*PropsUtilizaveis =
 props.nomePosto = Adiciona o nome do posto
 props.url = adicionar url da imagem da bandeira
+props.endereco = adicionar endereço
 props.distancia = adicionar valor da distancia do posto 
 props.precoGasolina / props.precoEtanol / props.precoDiesel  = adicionar valor do preço do tipo do combustivel 
 */
