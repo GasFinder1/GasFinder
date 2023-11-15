@@ -2,6 +2,8 @@ import './index.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify";
+import React from 'react';
+
 
 //Pages
 import Login from "./pages/Login/Login";
@@ -14,24 +16,27 @@ import CalcRendimento from './pages/CalcRendimento/CalcRendimento';
 import Sobre from './pages/Sobre/Sobre';
 import Suporte from './pages/Suporte/Suporte';
 import { SearchContextProvider } from './context/SearchContext';
+import FavoritesProvider from './context/Favorites.js';
 
 function App() {
   return (
     <div className="App">
-    <BrowserRouter>
-        <ToastContainer />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="*" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/cadastro" element={<Cadastro />} />
-          <Route path="/resetpassword" element={<RecuperarSenha />} />
-          <Route path="/perfil" element={<Perfil />} />
-          <Route path="/favoritos" element={<Favoritos />} />
-          <Route path="/calcRend" element={<CalcRendimento />} />
-          <Route path="/sobre" element={<Sobre />} />
-          <Route path="/suporte" element={<Suporte />} />
-        </Routes>
+      <BrowserRouter>
+        <FavoritesProvider>
+          <ToastContainer />
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="*" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/cadastro" element={<Cadastro />} />
+            <Route path="/resetpassword" element={<RecuperarSenha />} />
+            <Route path="/perfil" element={<Perfil />} />
+            <Route path="/favoritos" element={<Favoritos />} />
+            <Route path="/calcRend" element={<CalcRendimento />} />
+            <Route path="/sobre" element={<Sobre />} />
+            <Route path="/suporte" element={<Suporte />} />
+          </Routes>
+        </FavoritesProvider>
       </BrowserRouter>
     </div>
   );
