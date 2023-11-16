@@ -142,17 +142,19 @@ function gsInfoOrganizer(data) {
                         {
                             valor: data[i].valor,
                             nome_combustivel: data[i].nome_combustivel.toLowerCase(),
-                            unid_medida: data[i].unid_medida
+                            unid_medida: data[i].unid_medida,
+                            data_informacao: data[i].data_informacao
                         }
                     ]
-            })
+            });
         }
         else {
             organizedData[indexOfGasStation]["produtos"].push({
                 valor: data[i].valor,
                 nome_combustivel: data[i].nome_combustivel.toLowerCase(),
-                unid_medida: data[i].unid_medida
-            })
+                unid_medida: data[i].unid_medida,
+                data_informacao: data[i].data_informacao
+            });
         }
     }
     return organizedData;
