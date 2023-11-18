@@ -37,6 +37,10 @@
   background-image: radial-gradient(#2a7fef 35%, #FFF 40%);
 }
 
+.inputRadio:hover {
+  background-image: radial-gradient(#2a7fef3b 35%, #FFF 40%);
+}
+
 .inputRadio:focus {
   outline: none;
 }
