@@ -1,38 +1,105 @@
 .inputSugerirPreco {
     position: absolute;
     display: flex;
+    justify-content: center;
+    align-items: center;
     flex-direction: column;
-    background-color: red;
+    background-color: rgba(0, 0, 0, 0.90);;
     padding: 8px;
-    width: 330px;
-    height: 200px;
+    min-width: 330px;
+    width: 35%;
+    /* height: 300px; */
+    height: auto;
+    border-radius: 8px;
 }
 
-.inputItem{
-    background-color: blue;
+.inputsContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
 .iconFechar {
+    width: 100%;
     padding: 4px 8px;
     display: flex;
-    justify-content: space-between;
-   
+    justify-content:end;
 }
 
-.divSugerirPreco {
-    background-color: #3498db;
-    border-radius: 4px;
-    width: 200px;
-    height: 50px;
+.divTitulo {
+    width: 100%;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    column-gap: 5%;
+    user-select: none;
+}
+
+.icones {
+    font-size: 32px;
+    cursor: pointer;
+}
+
+.questionIcon {
+    font-size: 20px;
+}
+
+.inputItem{
     display: flex;
     justify-content: center;
     align-items: center;
-    column-gap: 4px;
-    cursor: pointer;
-    padding-left: 8px;
-    margin: 8px;
+    width: 100%;
+    padding: 8px;
+
 }
 
-.divSugerirPreco:hover {
-    background-color: #004EB6;
+.divLabel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 32px;
+    display: flex;
+    justify-content: center;
+    background-color: #2F7DC1;
+    border-radius: 4px 0px 0px 4px;
+    user-select: none;
+}
+
+.divInput {
+    width: 40%;
+}
+
+.divInput input {
+    outline: none;
+    color: #FFF;
+    width: 100%;
+    height: 32px;
+    background-color: #333;
+    border: none;
+    border-radius: 0px 4px 4px 0px;
+    text-indent: 10%;
+}
+
+.divInput input:focus {
+    border: 1px solid #007bff; 
+}
+
+.btnSalvar {
+    font-size: 16px;
+    width: 80%;
+    height: 42px;
+    color: #FFF;
+    border: none;
+    border-radius: 4px;
+    margin: 16px 0px 8px 0px ;
+    background-color: #2A7FEF;
+    cursor: pointer;
+    user-select: none;
+}
+
+.btnSalvar:hover {
+    background-color:#004EB6;
 }

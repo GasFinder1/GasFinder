@@ -111,18 +111,20 @@ const InputSugerirPreco = ({ userId }) => {
       {showModal && (
         <div className={styles.inputSugerirPreco}>
           <div className={styles.iconFechar} onClick={handleCloseModal}>
-            <i>
-              <FaRegQuestionCircle title="Insira um valor menor que R$15,00" />
-            </i>
-            <i>
-              <IoCloseCircleOutline />
-            </i>
+            <IoCloseCircleOutline className={styles.icones} />
           </div>
+          <div className={styles.divTitulo}>
+          <FaRegQuestionCircle className={`${styles.icones} ${styles.questionIcon}`} title="Insira um valor entre R$2,00 a R$15,00" />
           <h3>Sugerir Preço</h3>
+          </div>
+          
           <div className={styles.inputsContainer}>
             {Object.keys(sugestoes).map((combustivel) => (
               <div key={combustivel} className={styles.inputItem}>
-                <label>{combustivel}</label>
+                <div className={styles.divLabel}>
+                  <label>{combustivel}</label>
+                </div>
+                <div className={styles.divInput}>
                 <CurrencyInput
                   placeholder="0,00"
                   value={sugestoes[combustivel]}
@@ -131,10 +133,11 @@ const InputSugerirPreco = ({ userId }) => {
                   decimalScale={2}
                   prefix="R$ "
                 />
+                </div>
               </div>
             ))}
           </div>
-          <button onClick={handleSalvarAlteracoes}>Salvar Alterações</button>
+          <button className={styles.btnSalvar} onClick={handleSalvarAlteracoes}>Salvar Alterações</button>
         </div>
       )}
     </>
