@@ -2,9 +2,11 @@ import React, { useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import styles from "./InfoPosto.module.css";
 import { BiSolidMap, BiSolidPencil } from "react-icons/bi";
+import InputSugerirPreco from "../../components/InputSugerirPreco/InputSugerirPreco";
 
 function InfoPosto(props) {
   const [exibirPrecosANP, setExibirPrecosANP] = useState(true);
+  const [mostrarDivSecundaria, setMostrarDivSecundaria] = useState(false);
 
   const precos = {
     Etanol: 4.39,
@@ -28,6 +30,10 @@ function InfoPosto(props) {
 
   const handleSwitchChange = () => {
     setExibirPrecosANP(!exibirPrecosANP);
+  };
+
+  const handleSugerirPrecoClick = () => {
+    setMostrarDivSecundaria(!mostrarDivSecundaria);
   };
 
   const PrecoCard = ({ titulo, preco }) => (
@@ -99,10 +105,14 @@ function InfoPosto(props) {
               <PrecoCard titulo="GNV" preco={exibirPrecosANP ? precos.GNV : precosSugestao.GNV} />
             </div>
 
-            <div className={styles.divSugerirPreco}>
+            <div className={styles.divSugerirPreco} onClick={handleSugerirPrecoClick}>
               <h3>Sugerir Preço</h3>
               <BiSolidPencil className={styles.pencil} />
             </div>
+
+            {mostrarDivSecundaria && (
+                <InputSugerirPreco/>
+            )}
           </div>
         </div>
       </div>

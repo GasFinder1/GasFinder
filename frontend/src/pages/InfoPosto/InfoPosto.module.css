@@ -254,6 +254,19 @@ input:checked + .slider:before {
     color:#303030 ;
 }
 
+.divSecundaria {
+    position: absolute;
+    width: 80%;
+    height: 400px;
+    left: 70px;
+    background-color: #f0f0f0; /* Cor de fundo */
+    padding: 10px; /* Espaçamento interno */
+    margin-top: 10px; /* Espaçamento superior */
+    border: 1px solid #ccc; /* Borda */
+    border-radius: 5px; /* Borda arredondada */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra */
+  }
+
 
 
 

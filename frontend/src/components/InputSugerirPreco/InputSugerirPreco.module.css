@@ -1,0 +1,38 @@
+.inputSugerirPreco {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    background-color: red;
+    padding: 8px;
+    width: 330px;
+    height: 200px;
+}
+
+.inputItem{
+    background-color: blue;
+}
+
+.iconFechar {
+    padding: 4px 8px;
+    display: flex;
+    justify-content: space-between;
+   
+}
+
+.divSugerirPreco {
+    background-color: #3498db;
+    border-radius: 4px;
+    width: 200px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    column-gap: 4px;
+    cursor: pointer;
+    padding-left: 8px;
+    margin: 8px;
+}
+
+.divSugerirPreco:hover {
+    background-color: #004EB6;
+}
