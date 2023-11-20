@@ -24,10 +24,12 @@
 .div-bandeira {
     display: flex;   
     align-items: center;
-    justify-content: space-evenly;
+    justify-content:baseline;
+    column-gap: 7%;
     height: 30%;
     width: 100%;
     color: #222228;
+    margin-bottom: 8px;
 }
 .div-bandeira img {
     width: 20%;
@@ -37,16 +39,19 @@
 .container-bandeira-e-distancia {
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    row-gap: 2px;
     width: 100%;
     height: 100%;
-    padding: 8px;
+    padding: 6px;
 }
 
 .container-bandeira-e-distancia p {
+    /* width: 100%; */
     color:#222228;
-    font-size: 18px;
+    font-size: 16px;
+    flex-wrap: wrap;
 }
 
 /* .div-distancia {
@@ -71,7 +76,7 @@
     align-items: center;
     color: #fcab10;
     cursor: pointer;
-    font-size: 26px;
+    font-size: 28px;
 
 }
 
