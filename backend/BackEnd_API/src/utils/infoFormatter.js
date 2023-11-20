@@ -126,6 +126,8 @@ function gsInfoOrganizer(data) {
         if (indexOfGasStation === -1) {
             organizedData.push({
                 place_ID: data[i].place_ID,
+                latitude: data[i].latitude,
+                longitude: data[i].longitude,
                 id_posto: data[i].id_posto,
                 cnpj: data[i].cnpj,
                 nome_posto: data[i].nome_posto.toLowerCase(),
@@ -170,4 +172,8 @@ function gsInfoNoRepeat(data){
     return organizedData;
 }
 
-export default { gasInfoFormat, removeDoubleSpaces, removeLetters, removeGasStationGenericWords, genericComparator1, gsInfoOrganizer, gsInfoNoRepeat }
+function isFloat(value){
+    return Number.isFinite(value);
+}
+
+export default { gasInfoFormat, removeDoubleSpaces, removeLetters, removeGasStationGenericWords, genericComparator1, gsInfoOrganizer, gsInfoNoRepeat, isFloat }
