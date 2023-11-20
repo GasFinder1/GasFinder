@@ -83,64 +83,6 @@ const CardPosto = (props) => {
             Mais Informações
             </div>
         </div>
-
-  async function getPriceGas(req, res) {
-    try {
-        const response = await axios.post("/station", data);
-        console.log(response)
-    } catch(err) {
-        console.log(err)
-    }  }
-
-  useEffect(() => {
-    getPriceGas()
-  }, []);
-
-  return (
-    <div className="div-ajuste">
-      <div className="main-container-cardPosto">
-        <div className="container-dados-posto">
-          <div className="container-bandeira-e-distancia">
-            <div className="div-bandeira">
-              <img src={props.url} alt="Bandeira do posto" />
-              <h3>{props.nomePosto}</h3>
-            </div>
-
-            <div className="div-distancia">
-              <BiMapPin size={28} color="#467BEC" />
-              <p> A {props.distancia} metros</p>
-            </div>
-            <div className="div-favoritar-posto">
-              <i onClick={handleIconToggle} className="icon-favoritar-posto">
-                {iconType === "outline" ? <AiOutlineStar /> : <AiFillStar />}
-              </i>
-              <p>Favoritar posto</p>
-            </div>
-          </div>
-          <div className="container-valores-postos">
-            <div style={estiloGasolina} className="div-combustiveis">
-              <h3>G</h3>
-              <p>R$ {props.precoGasolina}</p>
-            </div>
-            <div style={estiloEtanol} className="div-combustiveis">
-              <h3>E</h3>
-              <p>R$ {props.precoEtanol}</p>
-            </div>
-            <div style={estiloDiesel} className="div-combustiveis">
-              <h3>D</h3>
-              <p>R$ {props.precoDiesel}</p>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="maisInfo-container"
-        onClick={() => navigate("/infoPosto")}
-      >
-        <AiOutlineInfoCircle className="icon-info-posto" />
-        Mais Informações
-      </div>
-    </div>
   );
 };
 
