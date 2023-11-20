@@ -3,6 +3,10 @@ import { BiMapPin,BiSolidMap } from 'react-icons/bi';
 import { useNavigate} from "react-router-dom";
 import { useState } from 'react';
 import { AiOutlineInfoCircle,AiOutlineStar, AiFillStar } from 'react-icons/ai';
+import { useFavoriteContext } from '../../context/Favorites';
+
+
+
 const CardPosto = (props) => {
 
     const estiloGasolina = {
@@ -24,6 +28,11 @@ const CardPosto = (props) => {
 
     const navigate = useNavigate();
 
+    const { favorite, addFavorite } = useFavoriteContext()
+    /*const isFavorite = favorite.some((fav) => fav.id === id)*/
+    /*const icone = !isFavorite ? AiOutlineStar : AiFillStar*/
+
+
     return (
         <div className='div-ajuste'>
             <div className='main-container-cardPosto'>
@@ -43,8 +52,9 @@ const CardPosto = (props) => {
                         <p>A {props.distancia} metros</p>
                     </div>
                     <div className='div-favoritar-posto'>
-                    <i onClick={handleIconToggle} className='icon-favoritar-posto'>{iconType === "outline" ? <AiOutlineStar /> : <AiFillStar />}</i>
-                    <p>Favoritar posto</p>
+                    <i onClick= {() => { handleIconToggle(); addFavorite({ id: props.id }); }} className='icon-favoritar-posto'>{iconType === "outline" ? <AiOutlineStar /> : <AiFillStar />}</i>   
+ 
+                    <p>Favoritar posto</p> 
                     </div>
                 </div>
                 <div className='container-valores-postos'>
@@ -82,3 +92,5 @@ props.endereco = adicionar endereço
 props.distancia = adicionar valor da distancia do posto 
 props.precoGasolina / props.precoEtanol / props.precoDiesel  = adicionar valor do preço do tipo do combustivel 
 */
+
+/*no id, precisa passar o id do posto para que o card add seja unico e não se repita*/
