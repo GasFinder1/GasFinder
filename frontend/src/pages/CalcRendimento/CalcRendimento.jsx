@@ -20,8 +20,8 @@ const CalcRendimento = () => {
   const calcPrice = (e) => {
     e.preventDefault();
     try {
-      const alc = parseFloat(etanol);
-      const gas = parseFloat(gasolina);
+      const alc = parseFloat(etanol.replace(',', '.'));
+      const gas = parseFloat(gasolina.replace(',', '.'));
 
       if ((gas <= 0) && (alc <= 0)) {
         toast.error('Valor da gasolina e etanol inválidos. Informe um valor maior que zero.', {
