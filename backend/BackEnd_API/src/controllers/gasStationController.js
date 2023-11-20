@@ -139,7 +139,10 @@ route.post('/get/', async (request, response) => {
 
 route.post('/all/', async (request, response) => {
     try {
-        let { latitude, longitude } = request.body;
+        let { latitude, longitude, distanceKm } = request.body;
+        if (!([1, 2, 5, 10, 15, 20, 25].includes(distanceKm))){
+            distanceKm = 5;
+        }
         if (!(infoFormatter.isFloat(latitude) && infoFormatter.isFloat(longitude))) {
             return response.status(404).json({ error: "é necessário enviar a latitude e longitude" });
         }
@@ -201,7 +204,7 @@ route.post('/all/', async (request, response) => {
         await Promise.all(queue).then((values) => {
             gs_data = values;
         }).catch(err => console.log(err));
-        const {latMax, latMin, longMax, longMin} = localizationFeatures.calcLimits(latitude, longitude, 5);
+        const {latMax, latMin, longMax, longMin} = localizationFeatures.calcLimits(latitude, longitude, distanceKm || 5);
         const gasStations = await gss.getStationByDistance(latMax, latMin, longMax, longMin);
         if (("error" in gasStations)){
             return response.status(404).json({ error: gasStations.error });
