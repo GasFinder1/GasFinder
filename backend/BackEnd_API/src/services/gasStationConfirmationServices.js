@@ -16,6 +16,7 @@ async function insertGasStationLocation(place_ID, id_posto) {
     }
     catch (err) {
         console.log(err);
+        //LOG_HERE
         return { error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções", error_code: 500 };
     }
     finally {

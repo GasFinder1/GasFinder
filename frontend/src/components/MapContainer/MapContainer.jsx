@@ -170,7 +170,7 @@ function MapContainer() {
         )}&key=${apiKey}`
       );
       map.panTo(response.data.results[0].geometry.location);
-      map.setZoom(20);
+      map.setZoom(10);
       setSearchBox("")
 
     } catch (error) {
@@ -494,13 +494,13 @@ function MapContainer() {
             <Text>Tempo: {duration} </Text>
             <IconButton
               aria-label="center back"
-              icon={<FaLocationArrow />}
+              icon={<BiCurrentLocation/>}
               title="Voltar ao meu local atual"
               isRound
-              className="btnRedirectUser"
+              className="btnLocationUser"
               onClick={() => {
-                map.panTo(currentLocation);
-                map.setZoom(15);
+                actualLocation(currentLocation);
+                map.setZoom(20);
               }}
             />
           </div>
@@ -508,11 +508,11 @@ function MapContainer() {
             <IconButton
               title="Minha localização atual"
               aria-label="center back"
-              icon={<BiCurrentLocation />}
+              icon={<FaLocationArrow />}
               isRound
-              className="btnLocationUser"
+              className="btnRedirectUser"
               onClick={() => {
-                actualLocation(currentLocation);
+                map.panTo(currentLocation);
               }}
             />
           </div>

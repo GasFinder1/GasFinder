@@ -17,26 +17,27 @@ import Sobre from './pages/Sobre/Sobre';
 import Suporte from './pages/Suporte/Suporte';
 import { SearchContextProvider } from './context/SearchContext';
 import FavoritesProvider from './context/Favorites.js';
+import InfoPosto from './pages/InfoPosto/InfoPosto.jsx';
 
 function App() {
   return (
     <div className="App">
-      <BrowserRouter>
-        <FavoritesProvider>
-          <ToastContainer />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="*" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/cadastro" element={<Cadastro />} />
-            <Route path="/resetpassword" element={<RecuperarSenha />} />
-            <Route path="/perfil" element={<Perfil />} />
-            <Route path="/favoritos" element={<Favoritos />} />
-            <Route path="/calcRend" element={<CalcRendimento />} />
-            <Route path="/sobre" element={<Sobre />} />
-            <Route path="/suporte" element={<Suporte />} />
-          </Routes>
-        </FavoritesProvider>
+    <BrowserRouter>
+        <ToastContainer />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<Home />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/cadastro" element={<Cadastro />} />
+          <Route path="/resetpassword" element={<RecuperarSenha />} />
+          <Route path="/perfil" element={<Perfil />} />
+          <Route path="/favoritos" element={<Favoritos />} />
+          <Route path="/calcRend" element={<CalcRendimento />} />
+          <Route path="/sobre" element={<Sobre />} />
+          <Route path="/suporte" element={<Suporte />} />
+          <Route path="/infoPosto"element={<InfoPosto/>}/>
+          <Route path="/infoPosto/:postoId" component={<InfoPosto/>} />
+        </Routes>
       </BrowserRouter>
     </div>
   );
