@@ -1,14 +1,10 @@
 import "./CardPosto.css";
-import { BiMapPin } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { AiOutlineInfoCircle, AiOutlineStar, AiFillStar } from "react-icons/ai";
 import axios from 'axios'
 import './CardPosto.css'
 import { BiMapPin,BiSolidMap } from 'react-icons/bi';
-import { useNavigate} from "react-router-dom";
-import { useState } from 'react';
-import { AiOutlineInfoCircle,AiOutlineStar, AiFillStar } from 'react-icons/ai';
 import { useFavoriteContext } from '../../context/Favorites';
 
 
