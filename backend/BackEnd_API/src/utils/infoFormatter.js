@@ -126,6 +126,8 @@ function gsInfoOrganizer(data) {
         if (indexOfGasStation === -1) {
             organizedData.push({
                 place_ID: data[i].place_ID,
+                latitude: data[i].latitude,
+                longitude: data[i].longitude,
                 id_posto: data[i].id_posto,
                 cnpj: data[i].cnpj,
                 nome_posto: data[i].nome_posto.toLowerCase(),
@@ -142,20 +144,36 @@ function gsInfoOrganizer(data) {
                         {
                             valor: data[i].valor,
                             nome_combustivel: data[i].nome_combustivel.toLowerCase(),
-                            unid_medida: data[i].unid_medida.toLowerCase()
+                            unid_medida: data[i].unid_medida,
+                            data_informacao: data[i].data_informacao
                         }
                     ]
-            })
+            });
         }
         else {
             organizedData[indexOfGasStation]["produtos"].push({
                 valor: data[i].valor,
                 nome_combustivel: data[i].nome_combustivel.toLowerCase(),
-                unid_medida: data[i].unid_medida
-            })
+                unid_medida: data[i].unid_medida,
+                data_informacao: data[i].data_informacao
+            });
+        }
+    }
+    return organizedData;
+}
+function gsInfoNoRepeat(data){
+    let organizedData = [];
+    for (let i = 0; i < data.length; i++) {
+        const indexOfGasStation = organizedData.findIndex(obj => obj.id_posto === data[i].id_posto);
+        if (indexOfGasStation === -1) {
+            organizedData.push(data[i]);
         }
     }
     return organizedData;
 }
 
-export default { gasInfoFormat, removeDoubleSpaces, removeLetters, removeGasStationGenericWords, genericComparator1, gsInfoOrganizer }
+function isFloat(value){
+    return Number.isFinite(value);
+}
+
+export default { gasInfoFormat, removeDoubleSpaces, removeLetters, removeGasStationGenericWords, genericComparator1, gsInfoOrganizer, gsInfoNoRepeat, isFloat }
