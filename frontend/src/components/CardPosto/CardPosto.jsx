@@ -5,7 +5,7 @@ import { AiOutlineInfoCircle, AiOutlineStar, AiFillStar } from "react-icons/ai";
 import axios from 'axios'
 import './CardPosto.css'
 import { BiMapPin,BiSolidMap } from 'react-icons/bi';
-import { useFavoriteContext } from '../../context/Favorites';
+// import { useFavoriteContext } from '../../context/Favorites';
 
 
 const CardPosto = (props) => {
@@ -33,7 +33,7 @@ const CardPosto = (props) => {
     longitude: -46.89789512355279,
   };
   
-    const { favorite, addFavorite } = useFavoriteContext()
+    // const { favorite, addFavorite } = useFavoriteContext()
     /*const isFavorite = favorite.some((fav) => fav.id === id)*/
     /*const icone = !isFavorite ? AiOutlineStar : AiFillStar*/
 
@@ -57,7 +57,7 @@ const CardPosto = (props) => {
                         <p>A {props.distancia} metros</p>
                     </div>
                     <div className='div-favoritar-posto'>
-                    <i onClick= {() => { handleIconToggle(); addFavorite({ id: props.id }); }} className='icon-favoritar-posto'>{iconType === "outline" ? <AiOutlineStar /> : <AiFillStar />}</i>   
+                    {/* <i onClick= {() => { handleIconToggle(); addFavorite({ id: props.id }); }} className='icon-favoritar-posto'>{iconType === "outline" ? <AiOutlineStar /> : <AiFillStar />}</i>    */}
  
                     <p>Favoritar posto</p> 
                     </div>
