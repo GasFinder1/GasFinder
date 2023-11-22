@@ -154,13 +154,14 @@ route.post('/all/', async (request, response) => {
         const city = data.data.results[0].address_components[3].long_name;
 
         data = await gss.getAllGasStationByNeighborhoodAndMunicipaly(city, neighborhood);
+        
         if (data.length == 0) {
             return response.status(404).send("Nenhuma posto encontrado por perto");
         }
         let gs_data = [];
         let queue = [];
         data.map((value) => {
-            queue.push(gss.getLocalizationById_posto(value.id_posto));
+            if(value) queue.push(gss.getLocalizationById_posto(value.id_posto));
         })
         await Promise.all(queue).then((values) => {
             gs_data = values;
