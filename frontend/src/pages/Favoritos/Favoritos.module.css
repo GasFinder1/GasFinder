@@ -39,3 +39,10 @@
     font-size: 40px;
     color: #FFB800;
 }
+
+.cardsContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px; /* Espaçamento entre os cards */
+  }

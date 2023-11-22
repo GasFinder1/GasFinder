@@ -2,6 +2,8 @@ import './index.css';
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer, toast } from "react-toastify";
+import React from 'react';
+
 
 //Pages
 import Login from "./pages/Login/Login";
@@ -14,12 +16,14 @@ import CalcRendimento from './pages/CalcRendimento/CalcRendimento';
 import Sobre from './pages/Sobre/Sobre';
 import Suporte from './pages/Suporte/Suporte';
 import { SearchContextProvider } from './context/SearchContext';
+import FavoritesProvider from './context/Favorites.js';
 import InfoPosto from './pages/InfoPosto/InfoPosto.jsx';
 
 function App() {
   return (
     <div className="App">
     <BrowserRouter>
+      <FavoritesProvider>
         <ToastContainer />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -35,7 +39,9 @@ function App() {
           <Route path="/infoPosto"element={<InfoPosto/>}/>
           <Route path="/infoPosto/:postoId" component={<InfoPosto/>} />
         </Routes>
+        </FavoritesProvider>
       </BrowserRouter>
+      
     </div>
   );
 }

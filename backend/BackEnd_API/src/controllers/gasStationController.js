@@ -52,7 +52,6 @@ route.post('/', async (request, response) => {
             data = await axios.get(apiUrl);
         }
         catch (err) {
-            //LOG_HERE
             console.log(err);
             return response.status(500).json({ error: "não foi possível pegar os postos proximos a sua região" });
         }
@@ -62,6 +61,7 @@ route.post('/', async (request, response) => {
         }
         let res = [];
         obj = obj["results"];
+        console.log(obj);
         for (let i = 0; i < obj.length; i++) {
             const regexAddress1 = /^(.*?),\s*([^,-]+(?:-[^,]+)?)\s*-\s*([^,]+),\s*([^,]+)/;
             const regexAddress2 = /State of ([^,]+)/;
