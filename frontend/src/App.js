@@ -23,6 +23,7 @@ function App() {
   return (
     <div className="App">
     <BrowserRouter>
+      <FavoritesProvider>
         <ToastContainer />
         <Routes>
           <Route path="/" element={<Home />} />
@@ -38,7 +39,9 @@ function App() {
           <Route path="/infoPosto"element={<InfoPosto/>}/>
           <Route path="/infoPosto/:postoId" component={<InfoPosto/>} />
         </Routes>
+        </FavoritesProvider>
       </BrowserRouter>
+      
     </div>
   );
 }

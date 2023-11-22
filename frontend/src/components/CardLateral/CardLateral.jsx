@@ -24,6 +24,7 @@ const CardLateral = () => {
           precoGasolina="5,19"
           precoEtanol="4,05"
           precoDiesel="5,40"
+          id="1"
         />
       </div>
     </section>
