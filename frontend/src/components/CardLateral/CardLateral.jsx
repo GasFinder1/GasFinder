@@ -26,13 +26,10 @@ const CardLateral = () => {
     try {
       setLoader(true);
       const response = await api.post("/station/all/", data);
-      console.log("response", response.data[0].nome_posto);
       setPrice(response.data);
       setLoader(false);
     } catch (err) {
       setLoader(false);
-      console.log("false")
-      console.log(err);
     }
   }
 
@@ -63,14 +60,14 @@ const CardLateral = () => {
           </div>
         ) : (
           <ul>
-            {price.map((item, i) => (
+            {price && price.map((item, i) => (
               <CardPosto
                 key={"cardlateralpost"+i}
                 nomePosto={price[i].nome_posto}
                 endereco={`${price[i].endereco}, ${price[i].numero}.`}
                 url="https://logodownload.org/wp-content/uploads/2014/07/shell-logo-0.png"
                 distancia="100"
-                idPosto={price[i].id_posto}
+                idPosto={price[i].place_ID}
                 precoGasolina={price[i].produtos[0].valor}
                 precoEtanol={price[i].produtos[1].valor}
                 precoDiesel={price[i].produtos[2].valor}

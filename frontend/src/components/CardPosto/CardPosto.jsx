@@ -5,13 +5,12 @@ import { AiOutlineInfoCircle, AiOutlineStar, AiFillStar } from "react-icons/ai";
 import axios from "axios";
 import api from "../../api";
 import { BiMapPin, BiSolidMap } from "react-icons/bi";
-import './CardPosto.css'
-import { useFavoriteContext } from '../../context/Favorites';
-
+import "./CardPosto.css";
+import { useFavoriteContext } from "../../context/Favorites";
 
 const CardPosto = (props) => {
-
-  const {idPosto} = props;
+  console.log('props', props)
+  const { idPosto } = props;
   const estiloGasolina = {
     backgroundColor: "#F8333C",
     borderTopRightRadius: "12px",
@@ -31,76 +30,75 @@ const CardPosto = (props) => {
 
   const navigate = useNavigate();
 
-
   const data = {
     latitude: -23.644313612253786,
     longitude: -46.89789512355279,
   };
-  
-const { favorite, addFavorite } = useFavoriteContext()
-console.log (favorite)
-const isFavorite = favorite.some((fav) => fav.id === props.id)
-const icone = !isFavorite ? AiOutlineStar : AiFillStar
+
+  const { favorite, addFavorite } = useFavoriteContext();
+  const isFavorite = favorite.some((fav) => fav.id === props.id);
+  const icone = !isFavorite ? AiOutlineStar : AiFillStar;
 
   // const { favorite, addFavorite } = useFavoriteContext()
   /*const isFavorite = favorite.some((fav) => fav.id === id)*/
   /*const icone = !isFavorite ? AiOutlineStar : AiFillStar*/
 
-    return (
-        <div className='div-ajuste'>
-            <div className='main-container-cardPosto'>
-                <div className='container-dados-posto'>
-                <div className='container-bandeira-e-distancia'>
-                    <div className='div-bandeira'>
-                        <img src={props.url} alt="Bandeira do posto" />
-                        <h3>{props.nomePosto}</h3>
-                    </div>
-                    
-                    <div className='div-distancia'>
-                        <BiSolidMap size={28} color='#F8333C'/>
-                        <p >{props.endereco}</p>
-                    </div>
-                    <div className='div-distancia'>
-                        <BiMapPin size={28} color='#467BEC'/>
-                        <p>A {props.distancia} metros</p>
-                    </div>
-                    <div className='div-favoritar-posto'>
-                    {<i onClick= {() => { handleIconToggle(); addFavorite({ id: props.id }); }} className='icon-favoritar-posto'>{iconType === "outline" ? <AiOutlineStar /> : <AiFillStar />}</i>   }
- 
-                    <p>Favoritar posto</p> 
-                    </div>
-                </div>
-                <div className='container-valores-postos'>
-                    <div style={estiloGasolina} className='div-combustiveis'>
-                        <h3>G</h3>
-                        <p>R$ {props.precoGasolina}</p>
-                    </div>
-                    <div style={estiloEtanol} className='div-combustiveis'>
-                        <h3>E</h3>
-                        <p>R$ {props.precoEtanol}</p>
-                    </div>
-                    <div style={estiloDiesel} className='div-combustiveis'>
-                        <h3>D</h3>
-                        <p>R$ {props.precoDiesel}</p>
-                    </div>
-                </div>
-                </div>
+  return (
+    <>
+      <div className="div-ajuste">
+        <div className="main-container-cardPosto">
+          <div className="container-dados-posto">
+            <div className="container-bandeira-e-distancia">
+              <div className="div-bandeira">
+                <img src={props.url} alt="Bandeira do posto" />
+                <h3>{props.nomePosto}</h3>
+              </div>
+              <div className="div-distancia">
+                <BiSolidMap size={28} color="#F8333C" />
+                <p>{props.endereco}</p>
+              </div>
+              <div className="div-distancia">
+                <BiMapPin size={28} color="#467BEC" />
+                <p>A {props.distancia} metros</p>
+              </div>
+              <div className="div-favoritar-posto">
+                <i
+                  onClick={() => {
+                    handleIconToggle();
+                    addFavorite({ id: props.id });
+                  }}
+                  className="icon-favoritar-posto"
+                >
+                  {iconType === "outline" ? <AiOutlineStar /> : <AiFillStar />}
+                </i>
+                <p>Favoritar posto</p>
+              </div>
             </div>
-            <div style={estiloDiesel} className="div-combustiveis">
-              <h3>D</h3>
-              <p>R$ {props.precoDiesel}</p>
+            <div className="container-valores-postos">
+              <div style={estiloGasolina} className="div-combustiveis">
+                <h3>G</h3>
+                <p>R$ {props.precoGasolina}</p>
+              </div>
+              <div style={estiloEtanol} className="div-combustiveis">
+                <h3>E</h3>
+                <p>R$ {props.precoEtanol}</p>
+              </div>
+              <div style={estiloDiesel} className="div-combustiveis">
+                <h3>D</h3>
+                <p>R$ {props.precoDiesel}</p>
+              </div>
             </div>
           </div>
         </div>
+        <div
+          className="maisInfo-container"
+          onClick={() => navigate("/infoPosto/" + idPosto)}
+        >
+          <AiOutlineInfoCircle className="icon-info-posto" />
+          Mais Informações
+        </div>
       </div>
-      <div
-        className="maisInfo-container"
-        onClick={() => navigate("/infoPosto/"+idPosto)}
-      >
-        <AiOutlineInfoCircle className="icon-info-posto" />
-        Mais Informações
-      </div>
-    </div>
+    </>
   );
 };
 
