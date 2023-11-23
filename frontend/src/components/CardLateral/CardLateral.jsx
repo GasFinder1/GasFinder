@@ -89,16 +89,6 @@ const CardLateral = () => {
           precoEtanol="4,05"
           precoDiesel="5,40"
         /> */}
-
-        {/* <CardPosto
-          nomePosto={price[1].nome_posto}
-          endereco={`${price[1].endereco}, ${price[1].numero}`}
-          url="https://logodownload.org/wp-content/uploads/2014/07/shell-logo-0.png"
-          distancia="100"
-          precoGasolina={price[1].produtos[0].valor}
-          precoEtanol={price[1].produtos[1].valor}
-          precoDiesel={price[1].produtos[2].valor}
-        /> */}
       </div>
     </section>
   );
