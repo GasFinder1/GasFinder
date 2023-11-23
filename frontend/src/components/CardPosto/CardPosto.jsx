@@ -2,9 +2,10 @@ import "./CardPosto.css";
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { AiOutlineInfoCircle, AiOutlineStar, AiFillStar } from "react-icons/ai";
-import axios from 'axios'
+import axios from "axios";
+import api from "../../api";
+import { BiMapPin, BiSolidMap } from "react-icons/bi";
 import './CardPosto.css'
-import { BiMapPin,BiSolidMap } from 'react-icons/bi';
 import { useFavoriteContext } from '../../context/Favorites';
 
 
@@ -28,6 +29,7 @@ const CardPosto = (props) => {
 
   const navigate = useNavigate();
 
+
   const data = {
     latitude: -23.644313612253786,
     longitude: -46.89789512355279,
@@ -38,6 +40,9 @@ console.log (favorite)
 const isFavorite = favorite.some((fav) => fav.id === props.id)
 const icone = !isFavorite ? AiOutlineStar : AiFillStar
 
+  // const { favorite, addFavorite } = useFavoriteContext()
+  /*const isFavorite = favorite.some((fav) => fav.id === id)*/
+  /*const icone = !isFavorite ? AiOutlineStar : AiFillStar*/
 
     return (
         <div className='div-ajuste'>
@@ -79,11 +84,21 @@ const icone = !isFavorite ? AiOutlineStar : AiFillStar
                 </div>
                 </div>
             </div>
-            <div className='maisInfo-container' onClick={() => navigate('/infoPosto')}>
-            <AiOutlineInfoCircle className='icon-info-posto'/>
-            Mais Informações
+            <div style={estiloDiesel} className="div-combustiveis">
+              <h3>D</h3>
+              <p>R$ {props.precoDiesel}</p>
             </div>
+          </div>
         </div>
+      </div>
+      <div
+        className="maisInfo-container"
+        onClick={() => navigate("/infoPosto")}
+      >
+        <AiOutlineInfoCircle className="icon-info-posto" />
+        Mais Informações
+      </div>
+    </div>
   );
 };
 

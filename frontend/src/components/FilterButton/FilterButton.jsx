@@ -16,13 +16,14 @@ const FilterButton = () => {
       </div>
       {showOptions && (
         <div className={styles.filterOptions}>
+            <p>Distância</p>
           <label>
             <input className={styles.inputRadio} type="radio" name="filter" value="option1" />
-            Bairro
+            5
           </label>
           <label>
             <input className={styles.inputRadio} type="radio" name="filter" value="option2" />
-            Município
+            10
           </label>
           {/* Adicione mais opções conforme necessário */}
         </div>
