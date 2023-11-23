@@ -1,12 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import styles from "./InfoPosto.module.css";
 import { BiSolidMap, BiSolidPencil } from "react-icons/bi";
 import InputSugerirPreco from "../../components/InputSugerirPreco/InputSugerirPreco";
+import { useParams } from "react-router-dom";
 
 function InfoPosto(props) {
+
+  const params = useParams();
+  
+  const { postId } = params;
   const [exibirPrecosANP, setExibirPrecosANP] = useState(true);
   const [mostrarDivSecundaria, setMostrarDivSecundaria] = useState(false);
+
+  useEffect(()=>{
+    
+  },[postId]);
 
   const precos = {
     Etanol: 4.39,
