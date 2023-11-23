@@ -65,11 +65,12 @@ const CardLateral = () => {
           <ul>
             {price.map((item, i) => (
               <CardPosto
-                key={i}
+                key={"cardlateralpost"+i}
                 nomePosto={price[i].nome_posto}
                 endereco={`${price[i].endereco}, ${price[i].numero}.`}
                 url="https://logodownload.org/wp-content/uploads/2014/07/shell-logo-0.png"
                 distancia="100"
+                idPosto={price[i].id_posto}
                 precoGasolina={price[i].produtos[0].valor}
                 precoEtanol={price[i].produtos[1].valor}
                 precoDiesel={price[i].produtos[2].valor}

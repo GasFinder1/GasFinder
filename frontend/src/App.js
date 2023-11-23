@@ -26,7 +26,6 @@ function App() {
           <ToastContainer />
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="*" element={<Home />} />
             <Route path="/login" element={<Login />} />
             <Route path="/cadastro" element={<Cadastro />} />
             <Route path="/resetpassword" element={<RecuperarSenha />} />
@@ -35,8 +34,11 @@ function App() {
             <Route path="/calcRend" element={<CalcRendimento />} />
             <Route path="/sobre" element={<Sobre />} />
             <Route path="/suporte" element={<Suporte />} />
+            <Route path="/infoPosto/:postoId" element={<InfoPosto />} />
+
             <Route path="/infoPosto" element={<InfoPosto />} />
-            <Route path="/infoPosto/:postoId" component={<InfoPosto />} />
+            <Route path="*" element={<Home />} />
+
           </Routes>
       </BrowserRouter>
     </div>

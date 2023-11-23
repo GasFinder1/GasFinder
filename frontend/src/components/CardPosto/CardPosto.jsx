@@ -9,6 +9,8 @@ import { BiMapPin, BiSolidMap } from "react-icons/bi";
 // import { useFavoriteContext } from '../../context/Favorites';
 
 const CardPosto = (props) => {
+
+  const {idPosto} = props;
   const estiloGasolina = {
     backgroundColor: "#F8333C",
     borderTopRightRadius: "12px",
@@ -76,7 +78,7 @@ const CardPosto = (props) => {
       </div>
       <div
         className="maisInfo-container"
-        onClick={() => navigate("/infoPosto")}
+        onClick={() => navigate("/infoPosto/"+idPosto)}
       >
         <AiOutlineInfoCircle className="icon-info-posto" />
         Mais Informações
