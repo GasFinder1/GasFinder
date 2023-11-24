@@ -26,6 +26,8 @@ function InfoPosto(props) {
       setDetails(response.data[0])
     } catch (err) {
       console.log(err)
+      alert("Não foi possivel obter mais detalhes do posto: ",  err)
+      navigate('/')
     }
   }
 

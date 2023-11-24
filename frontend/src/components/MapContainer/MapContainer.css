@@ -14,6 +14,7 @@
 }
 
 .containerCardRoutes {
+  transition: all 1s;
   background-color: #00000097 !important;
   display: flex !important;
   flex-direction: column !important;
@@ -51,22 +52,20 @@
   text-indent: 8%;
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
-  border: 1px solid #2a7fef; 
-  color: #FFF;
+  border: 1px solid #2a7fef;
+  color: #fff;
   outline: none;
 }
 
 .inputSearchBox input:focus {
   border-top-left-radius: 20px;
   border-bottom-left-radius: 20px;
-  border: 1px solid #ffffff; 
+  border: 1px solid #ffffff;
 }
-
 
 .inputSearchBox .divAutocomplete {
   width: 100%;
 }
-
 
 /* .inputSearch input {
   width: 100%;
@@ -129,8 +128,29 @@
   outline: 1px solid #000;
 }
 
+.btnCloseInputRoutes {
+  width: 35px;
+  border-radius: 50%;
+  color: #000;
+  background-color: #2a7fef;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  height: 35px;
+  position: absolute;
+  top: 50%;
+  right: -15px;
+  transition: all 0.5s;
+  cursor: pointer;
+}
 
+.btnCloseInputRoutes:hover {
+  color: #ff0000;
+}
 
+.closeClassBtnInput {
+  transform: translateX(-100%);
+}
 
 .infoRoutes {
   margin-top: 5%;
@@ -139,7 +159,7 @@
 
 .btnCalcRoute {
   position: absolute !important;
-  right: 8px;
+  right: 20px;
   top: 50px;
   background-color: #2a7fef;
   color: #fff;
@@ -160,7 +180,7 @@
   width: 40px;
   border-radius: 50%;
   position: absolute !important;
-  right: 8px;
+  right: 20px;
   top: 110px;
   cursor: pointer;
   transition: all 0.5s;
@@ -173,7 +193,7 @@
   width: 40px;
   border-radius: 50%;
   position: absolute !important;
-  right: 8px;
+  right: 20px;
   top: 220px;
   cursor: pointer;
   transition: all 0.5s;
@@ -186,7 +206,7 @@
   width: 40px;
   border-radius: 50%;
   position: absolute !important;
-  right: 8px;
+  right: 20px;
   top: 165px;
   cursor: pointer;
   font-size: 25px;
@@ -208,7 +228,6 @@
 .btnClearRoute:hover {
   color: red;
 }
-
 
 @media (min-width: 0px) and (max-width: 499px) {
   .inputSearchBox {

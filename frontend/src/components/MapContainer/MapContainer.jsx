@@ -5,6 +5,7 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 import { Autocomplete } from "@react-google-maps/api";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import axios from "axios";
 import "./MapContainer.css";
@@ -36,6 +37,7 @@ function MapContainer() {
   // const {location} = useContext(LocationContext)
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   const mapsId = process.env.REACT_APP_MAP_ID;
+  const [btnClassInput, setBtnClassInput] = useState(false);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -458,7 +460,7 @@ function MapContainer() {
         </Box>
         <Box
           p={4}
-          className="containerCardRoutes"
+          className={`containerCardRoutes ${!btnClassInput ? '' : 'closeClassBtnInput'}`}
           borderRadius="lg"
           m={4}
           bgColor="white"
@@ -469,7 +471,8 @@ function MapContainer() {
           minW="container.md"
           zIndex="1"
         >
-          <div className="inputsRoutes">
+          <div className='inputsRoutes'>
+            <button className="btnCloseInputRoutes" onClick={() => setBtnClassInput(!btnClassInput)}>{!btnClassInput ? <FaArrowLeft /> : <FaArrowRight/> }</button>
             <div>
               <Autocomplete>
                 <Input type="text" placeholder="Partida" ref={originRef} />
