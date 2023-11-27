@@ -20,7 +20,7 @@ async function setEvaluation(idUsuario, placeID, eGasStation, eProduct, eService
     }
     finally{
         try{
-            await conn.end();
+            await conn.release();
         }
         catch(err){
             //LOG_HERE
@@ -56,7 +56,7 @@ async function getEvaluation(idUsuario, placeID){
     }
     finally{
         try{
-            await conn.end();
+            await conn.release();
         }
         catch(err){
             //LOG_HERE

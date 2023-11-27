@@ -4,6 +4,8 @@ import gscs from "../services/gasStationConfirmationServices.js"
 import axios from "axios";
 import infoFormatter from "../utils/infoFormatter.js";
 import localizationFeatures from "../utils/localizationFeatures.js";
+import geocodeAPI from "../test/geocodeAPI.js";
+import placesAPI from "../test/placesAPI.js";
 const route = express.Router();
 
 route.get('/', async (request, response) => {
@@ -47,6 +49,7 @@ route.post('/', async (request, response) => {
             return response.status(400).json({ error: "objeto inválido, ou não contem latitude e longitude" });
         }
         const apiUrl = `https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=${obj.latitude},${obj.longitude}&radius=10000&type=gas_station&keyword=cruise&key=${process.env.MAPS_API_KEY}`;
+
         let data;
         try {
             data = await axios.get(apiUrl);
@@ -140,18 +143,97 @@ route.post('/get/', async (request, response) => {
 route.post('/all/', async (request, response) => {
     try {
         let { latitude, longitude, distanceKm } = request.body;
-        if (!([1, 2, 5, 10, 15, 20, 25].includes(distanceKm))){
+        if (!([1, 2, 5, 10, 15, 20, 25].includes(distanceKm))) {
             distanceKm = 5;
         }
         if (!(infoFormatter.isFloat(latitude) && infoFormatter.isFloat(longitude))) {
             return response.status(404).json({ error: "é necessário enviar a latitude e longitude" });
         }
+        let mapsApiUses = 0;
+        //pegar o endereço com base na latitude e longitude
         let data = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.MAPS_API_KEY}`);
-        if ("error_message" in data) {
-            return response.status(500).json({ error: "não foi possível descobrir o endereço com base nessas coordenadas" });
-        }
-        const neighborhood = data.data.results[0].address_components[2].long_name;
-        const city = data.data.results[0].address_components[3].long_name;
+        //---------------------------------------------------------------------
+        // let data = geocodeAPI;
+        mapsApiUses += 1;
+        if (!("error_message" in data)) {
+            // return response.json(data.data);
+            const neighborhood = data.data.results[0].address_components[2].long_name;
+            const city = data.data.results[0].address_components[3].long_name;
+            if ((!(neighborhood || false) && !(city || false))) throw new Error("não foi possível pegar o endereço");
+            //pegar todos os postos da tbl_posto com base na cidade e bairro
+            data = await gss.getAllGasStationByNeighborhoodAndMunicipaly(city, neighborhood);
+            if (data.length >= 1) {
+                let gs_data = [];
+                let queue = [];
+                //verificar se existe algum posto linkado á uma place_ID
+                data.map((value) => {
+                    queue.push(gss.getLocalizationById_posto(value.id_posto));
+                })
+                await Promise.all(queue).then((values) => {
+                    gs_data = values;
+                }).catch(err => console.log(err));
+                //remoção de postos que já estão linkados a uma place_ID
+                gs_data.map(value => {
+                    //pega o indice da array data onde o valor for igual ao de value.id_posto do Array.map, e o remove, precisa ser corrigido
+                    const index = data.findIndex(objeto => objeto.id_posto === value.fk_id_posto);
+                    if (index !== -1) {
+                        data.splice(index, 1);
+                    }
+                });
+                //remover os postos que estão na tabela de remoção
+                const removedData = await gscs.getRemovedGS();
+                if (removedData != null) {
+                    for (let i = 0; i < removedData.length; i++) {
+                        const index = data.findIndex(objeto => objeto.id_posto === removedData[i].fk_id_posto);
+                        if (index !== -1) {
+                            data.splice(index, 1);
+                        }
+                    }
+                }
+                console.log("data.length: " + data.length);
+                for(let i = 0; i < data.length; i++){
+                    gscs.removeGS(data[i].id_posto);
+                }
+                // return response.json(data);
+                gs_data = [];
+                queue = [];
+                for (let i = 0; i < data.length; i++) {
+                    const gs_id = data[i].id_posto;
+                    queue.push(new Promise((resolve, reject) => {
+                        //número do estabelecimento se tiver?
+                        axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${data[i].nome_posto}, ${neighborhood}, ${city}&key=${process.env.MAPS_API_KEY}`)
+                            .then(response => {
+                                resolve({ id_posto: gs_id, data: response.data.results });
+                                mapsApiUses += 1;
+                            })
+                            .catch(err => {
+                                gscs.removeGS(gs_id);
+                                mapsApiUses += 1;
+                                console.log(err);
+                                reject({id_posto: gs_id, error: err});
+                            });
+                    }));
+                }
+                await Promise.all(queue).then((values) => {
+                    gs_data = values;
+                }).catch(err => console.log(err));
+
+                // gs_data = placesAPI;
+                // return response.json(gs_data);
+                gs_data = infoFormatter.mapsToObj(gs_data);
+                //---------------------------------------
+                // return response.status(200).send(gs_data);
+                queue = [];
+                gs_data.data.map((value) => {
+                    queue.push(new Promise((resolve, reject) => {
+                        gscs.insertBySimilarity(value)
+                            .then(response => resolve(response))
+                            .catch(err => reject(err))
+                    }));
+                });
+                await Promise.all(queue).then((values) => {
+                    gs_data = values
+                }).catch(err => reject(err));
 
         data = await gss.getAllGasStationByNeighborhoodAndMunicipaly(city, neighborhood);
         
@@ -172,42 +254,12 @@ route.post('/all/', async (request, response) => {
             if (index !== -1) {
                 data.splice(index, 1);
             }
-        })
-        console.log("o tamanho do data é de: " + data.length);
-        gs_data = [];
-        queue = [];
-        for (let i = 0; i < data.length; i++) {
-            const gs_id = data[i].id_posto;
-            queue.push(new Promise((resolve, reject) => {
-                //número do estabelecimento se tiver?
-                axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${data[i].nome_posto}, ${neighborhood}, ${city}&key=${process.env.MAPS_API_KEY}`)
-                    .then(response => {
-                        resolve({id_posto: gs_id, data: response.data.results});
-                    })
-                    .catch(err => {
-                        console.log(err);
-                        reject(err);
-                    });
-            }));
         }
-        await Promise.all(queue).then((values) => {
-            gs_data = values;
-        }).catch(err => console.log(err));
-        queue = []
-        gs_data.map((value) => {
-            queue.push(new Promise((resolve, reject) => {
-                gscs.insertGasStationLocationWithLatAndLon(value.data[0].place_id, value.id_posto, value.data[0].geometry.location.lat, value.data[0].geometry.location.lng)
-                .then(response => {
-                    resolve(response);
-                }).catch(err => console.log(err))
-            }));
-        });
-        await Promise.all(queue).then((values) => {
-            gs_data = values;
-        }).catch(err => console.log(err));
-        const {latMax, latMin, longMax, longMin} = localizationFeatures.calcLimits(latitude, longitude, distanceKm || 5);
+        console.log("usos da api do google: " + mapsApiUses);
+
+        const { latMax, latMin, longMax, longMin } = localizationFeatures.calcLimits(latitude, longitude, distanceKm || 5);
         const gasStations = await gss.getStationByDistance(latMax, latMin, longMax, longMin);
-        if (("error" in gasStations)){
+        if (("error" in gasStations)) {
             return response.status(404).json({ error: gasStations.error });
         }
         return response.status(201).json(infoFormatter.gsInfoOrganizer(gasStations));
@@ -217,7 +269,8 @@ route.post('/all/', async (request, response) => {
     catch (err) {
         //LOG_HERE
         console.log(err);
-        return response.status(500).json({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
+        // return response.status(500).json({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
+        response.send(err);
     }
 });
 export default route;

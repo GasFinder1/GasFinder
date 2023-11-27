@@ -24,7 +24,7 @@ async function checkEmail(email) {
   }
   finally {
     try {
-      await conn.end();
+      await conn.release();
     }
     catch (err) {
       //LOG_HERE
@@ -54,7 +54,7 @@ async function checkCode(email, codigo) {
   }
   finally {
     try {
-      await conn.end();
+      await conn.release();
     }
     catch (err) {
       //LOG_HERE
@@ -77,7 +77,7 @@ async function changePassword(email, newPassword) {
   }
   finally {
     try {
-      conn.end();
+      conn.release();
     }
     catch (err) {
       //LOG_HERE
@@ -107,7 +107,7 @@ export async function checkName(userName) {
   }
   finally {
     try {
-      await conn.end();
+      await conn.release();
     }
     catch (err) {
       //LOG_HERE

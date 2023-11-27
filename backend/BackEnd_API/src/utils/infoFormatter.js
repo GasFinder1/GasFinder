@@ -161,7 +161,7 @@ function gsInfoOrganizer(data) {
     }
     return organizedData;
 }
-function gsInfoNoRepeat(data){
+function gsInfoNoRepeat(data) {
     let organizedData = [];
     for (let i = 0; i < data.length; i++) {
         const indexOfGasStation = organizedData.findIndex(obj => obj.id_posto === data[i].id_posto);
@@ -172,8 +172,58 @@ function gsInfoNoRepeat(data){
     return organizedData;
 }
 
-function isFloat(value){
+function isFloat(value) {
     return Number.isFinite(value);
 }
 
-export default { gasInfoFormat, removeDoubleSpaces, removeLetters, removeGasStationGenericWords, genericComparator1, gsInfoOrganizer, gsInfoNoRepeat, isFloat }
+function mapsToObj(maps) {
+    // return maps
+    const regexAddress1 = /^(.*?),\s*([^,-]+(?:-[^,]+)?)\s*-\s*([^,]+),\s*([^,]+)/;
+    const regexAddress2 = /State of ([^,]+)/;
+    let valuesToReturn = { data: [], gsInvalidator: [] };
+    maps.map(item => {
+        // console.log(item);
+        // return item
+        let id_posto = false;
+        try {
+            id_posto = item.id_posto ?? false;
+            if (id_posto == false) throw new Error("id_posto invalido");
+            if ("error" in item) throw new Error("não foi possível encontrar os dados do posto na api");
+            let data = [];
+            for (let i = 0; i < item.data.length; i++) {
+                try {
+                    const place_ID = item.data[i].place_id ?? false;
+                    const latitude = item.data[i].geometry.location.lat ?? false;
+                    const longitude = item.data[i].geometry.location.lng ?? false;
+                    const completeAdress = item.data[i]["formatted_address"] ?? false;
+                    const compoundCode = item.data[i]["plus_code"]["compound_code"] ?? false;
+                    const nome_posto = item.data[i]["name"] ?? false;
+                    let matches = completeAdress.match(regexAddress1);
+                    const endereco = matches[1] ?? false;
+                    const bairro = matches[3] ?? false;
+                    const municipio = matches[4] ?? false;
+                    matches = compoundCode.match(regexAddress2);
+                    const estado = matches[1] ?? false;
+                    if (!([place_ID, latitude, longitude, nome_posto, endereco, bairro, municipio, estado].includes(false)))
+                        data.push({ place_ID, latitude, longitude, nome_posto, endereco, bairro, municipio, estado });
+                }
+                catch (err) {
+                    //LOG_HERE
+                }
+            }
+            if (data.length > 0)
+                valuesToReturn.data.push({ id_posto, data });
+        }
+        catch (err) {
+            //LOG_HERE
+            if (err == "alguma informação não foi pega" && id_posto != false) valuesToReturn.gsInvalidator.push({ id_posto, err });
+            if (err == "id_posto invalido") console.log(`o seguinte posto está com a id_posto invalida:
+            ${item}`);
+            if (err == "não foi possível encontrar os dados do posto na api" && id_posto != false) valuesToReturn.gsInvalidator.push({ id_posto, err });
+            console.log(err);
+        }
+    });
+    return valuesToReturn;
+}
+
+export default { gasInfoFormat, removeDoubleSpaces, removeLetters, removeGasStationGenericWords, genericComparator1, gsInfoOrganizer, gsInfoNoRepeat, isFloat, mapsToObj }

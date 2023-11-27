@@ -18,7 +18,7 @@ async function login(email, password) {
   }
   finally{
     try{
-      await conn.end();
+      await conn.release();
     }
     catch(err){
       console.log("erro ao fechar o banco de dados");
