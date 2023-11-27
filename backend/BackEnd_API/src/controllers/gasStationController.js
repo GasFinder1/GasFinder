@@ -191,7 +191,7 @@ route.post('/all/', async (request, response) => {
                     }
                 }
                 console.log("data.length: " + data.length);
-                for(let i = 0; i < data.length; i++){
+                for (let i = 0; i < data.length; i++) {
                     gscs.removeGS(data[i].id_posto);
                 }
                 // return response.json(data);
@@ -210,7 +210,7 @@ route.post('/all/', async (request, response) => {
                                 gscs.removeGS(gs_id);
                                 mapsApiUses += 1;
                                 console.log(err);
-                                reject({id_posto: gs_id, error: err});
+                                reject({ id_posto: gs_id, error: err });
                             });
                     }));
                 }
@@ -234,25 +234,6 @@ route.post('/all/', async (request, response) => {
                 await Promise.all(queue).then((values) => {
                     gs_data = values
                 }).catch(err => reject(err));
-
-        data = await gss.getAllGasStationByNeighborhoodAndMunicipaly(city, neighborhood);
-        
-        if (data.length == 0) {
-            return response.status(404).send("Nenhuma posto encontrado por perto");
-        }
-        let gs_data = [];
-        let queue = [];
-        data.map((value) => {
-            if(value) queue.push(gss.getLocalizationById_posto(value.id_posto));
-        })
-        await Promise.all(queue).then((values) => {
-            gs_data = values;
-        }).catch(err => console.log(err));
-        // return response.json({data, gs_data});
-        gs_data.map(value => {
-            const index = data.findIndex(objeto => objeto.id_posto === value.fk_id_posto);
-            if (index !== -1) {
-                data.splice(index, 1);
             }
         }
         console.log("usos da api do google: " + mapsApiUses);
