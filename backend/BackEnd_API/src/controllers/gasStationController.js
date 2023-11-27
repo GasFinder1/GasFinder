@@ -151,9 +151,9 @@ route.post('/all/', async (request, response) => {
         }
         let mapsApiUses = 0;
         //pegar o endereço com base na latitude e longitude
-        // let data = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.MAPS_API_KEY}`);
+        let data = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.MAPS_API_KEY}`);
         //---------------------------------------------------------------------
-        let data = geocodeAPI;
+        // let data = geocodeAPI;
         mapsApiUses += 1;
         if (!("error_message" in data)) {
             // return response.json(data.data);
@@ -195,30 +195,30 @@ route.post('/all/', async (request, response) => {
                     gscs.removeGS(data[i].id_posto);
                 }
                 // return response.json(data);
-                // gs_data = [];
-                // queue = [];
-                // for (let i = 0; i < data.length; i++) {
-                //     const gs_id = data[i].id_posto;
-                //     queue.push(new Promise((resolve, reject) => {
-                //         //número do estabelecimento se tiver?
-                //         axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${data[i].nome_posto}, ${neighborhood}, ${city}&key=${process.env.MAPS_API_KEY}`)
-                //             .then(response => {
-                //                 resolve({ id_posto: gs_id, data: response.data.results });
-                //                 mapsApiUses += 1;
-                //             })
-                //             .catch(err => {
-                //                 gscs.removeGS(gs_id);
-                //                 mapsApiUses += 1;
-                //                 console.log(err);
-                //                 reject({id_posto: gs_id, error: err});
-                //             });
-                //     }));
-                // }
-                // await Promise.all(queue).then((values) => {
-                //     gs_data = values;
-                // }).catch(err => console.log(err));
+                gs_data = [];
+                queue = [];
+                for (let i = 0; i < data.length; i++) {
+                    const gs_id = data[i].id_posto;
+                    queue.push(new Promise((resolve, reject) => {
+                        //número do estabelecimento se tiver?
+                        axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${data[i].nome_posto}, ${neighborhood}, ${city}&key=${process.env.MAPS_API_KEY}`)
+                            .then(response => {
+                                resolve({ id_posto: gs_id, data: response.data.results });
+                                mapsApiUses += 1;
+                            })
+                            .catch(err => {
+                                gscs.removeGS(gs_id);
+                                mapsApiUses += 1;
+                                console.log(err);
+                                reject({id_posto: gs_id, error: err});
+                            });
+                    }));
+                }
+                await Promise.all(queue).then((values) => {
+                    gs_data = values;
+                }).catch(err => console.log(err));
 
-                gs_data = placesAPI;
+                // gs_data = placesAPI;
                 // return response.json(gs_data);
                 gs_data = infoFormatter.mapsToObj(gs_data);
                 //---------------------------------------

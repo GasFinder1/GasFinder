@@ -77,6 +77,7 @@ async function insertBySimilarity(mapsGS) {
         const id_posto = mapsGS.id_posto;
         let sql = "SELECT * FROM tbl_posto WHERE id_posto = ?";
         let values = [id_posto];
+        await removeGS(id_posto);
         let [rows] = await conn.execute(sql, values);
         const rowGS = rows[0];
         if (rows.length > 0) {
@@ -118,6 +119,7 @@ async function insertBySimilarity(mapsGS) {
                         await conn.execute(sql, values);
                     }
                     else {
+                        console.log(5);
                         try {
                             await conn.execute("INSERT INTO tbl_postos_removidos(fk_id_posto) values(?)", [rowGS.id_posto]);
                         }
@@ -143,6 +145,12 @@ async function insertBySimilarity(mapsGS) {
             else {
                     sql = "INSERT INTO tbl_localizacao_posto(place_ID, latitude, longitude, fk_id_posto) VALUES(?,?,?,?)";
                     values = [gs[0].place_ID, gs[0].latitude, gs[0].longitude, id_posto];
+                    try{
+                        await conn.execute(sql, values)
+                    }
+                    catch(err){
+                        console.log(err)
+                    }
             }
         }
         else{
@@ -211,13 +219,19 @@ async function removeGS(id_posto) {
         return null;
     }
     try {
-        console.log("removendo posto: " + id_posto)
+        // console.log("removendo posto: " + id_posto)
         await conn.execute("INSERT INTO tbl_postos_removidos(fk_id_posto) VALUES(?);", [id_posto]);
         return null;
     }
     catch (err) {
-        console.log(err);
-        return null;
+        try{
+            if (err.sqlState != '23000'){
+                console.log(err);
+                return null;
+            }
+        }
+        catch{}
+        
     }
     finally{
         conn.release();
