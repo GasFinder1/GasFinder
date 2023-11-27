@@ -1,6 +1,7 @@
 import database from "../repository/connection.js";
 import infoFormatter from "../utils/infoFormatter.js";
 import naturalLanguage from "../utils/naturalLanguageComparator.js";
+import mysql2 from "mysql2";
 
 async function requestData(sql, values) {
     let conn = await database.getConnection();
@@ -56,7 +57,8 @@ async function requestData(sql, values) {
     }
     finally {
         try {
-            await conn.end();
+            // await conn.release();
+            conn.release();
         }
         catch (err) {
             //LOG_HERE
@@ -226,7 +228,8 @@ async function getGasStationByMunicipality(Municipality) {
         return null;
     }
     finally {
-        await conn.end();
+        // conn.release();
+        conn.release();
     }
 };
 
@@ -239,7 +242,7 @@ async function getGasStationByNeighborhood(municipality, neighborhood) {
         return null;
     }
     try {
-        const [rows] = await conn.query(sql, values);
+        const [rows] = await conn.execute(sql, values);
         if (rows.length < 1) {
             return null;
         }
@@ -253,7 +256,8 @@ async function getGasStationByNeighborhood(municipality, neighborhood) {
         return null;
     }
     finally {
-        await conn.end();
+        // conn.release();
+        await conn.release();
     }
 };
 
@@ -284,32 +288,41 @@ async function getGasStationByNeighborhoodAndMunicipaly(municipality, neighborho
 };
 
 async function getAllGasStationByNeighborhoodAndMunicipaly(municipality, neighborhood) {
-    let results = [];
-    let rows = await getGasStationByNeighborhood(municipality, neighborhood);
-    if (rows == null) {
-        rows = await getGasStationByMunicipality(municipality);
-        if (rows != null && rows.length >= 1) {
-            rows.map((row) => {
-                results.push(row);
-            })
+    try {
+        let results = [];
+        let rows = await getGasStationByNeighborhood(municipality, neighborhood);
+        if (rows == null) {
+            rows = await getGasStationByMunicipality(municipality);
+            if (rows != null && rows.length >= 1) {
+                rows.map((row) => {
+                    results.push(row);
+                })
+            }
+            return results;
         }
-        return results;
-    }
-    if (rows.length >= 1) {
-        rows.map((row) => {
-            results.push(row);
-        });
-        rows = await getGasStationByMunicipality(municipality);
-        if (rows != null && rows.length >= 1) {
+        if (rows.length >= 1) {
             rows.map((row) => {
                 results.push(row);
             });
+            rows = await getGasStationByMunicipality(municipality);
+            if (rows != null && rows.length >= 1) {
+                rows.map((row) => {
+                    results.push(row);
+                });
+            }
         }
+        return infoFormatter.gsInfoNoRepeat(results);
     }
-    return infoFormatter.gsInfoNoRepeat(results);
+    catch (err) {
+        console.log(err);
+        //LOG_HERE
+    }
+    finally {
+        // mysql2.pool.release(conn);
+    }
 };
 
-async function getStationByDistance(maxLat, minLat, maxLng, minLng){
+async function getStationByDistance(maxLat, minLat, maxLng, minLng) {
     let conn = await database.getConnection();
     if (conn == null) {
         console.log("banco de dados off-line");
@@ -317,57 +330,61 @@ async function getStationByDistance(maxLat, minLat, maxLng, minLng){
     }
     const sql = "SELECT * FROM localizacao_dados_posto WHERE (latitude BETWEEN ? AND ? OR latitude BETWEEN ? AND ?) AND (longitude BETWEEN ? AND ? OR longitude BETWEEN ? AND ?);";
     const values = [maxLat, minLat, minLat, maxLat, maxLng, minLng, minLng, maxLng];
-    try{
-        const [rows] = await conn.query(sql, values);
-        if(rows.length >= 1){
+    try {
+        const [rows] = await conn.execute(sql, values);
+        if (rows.length >= 1) {
             return rows
         }
         else {
-            throw new Error({error: "não foi possível pegar postos nessa área"});
+            throw new Error({ error: "não foi possível pegar postos nessa área" });
         }
     }
-    catch(err){
+    catch (err) {
         //LOG_HERE
         console.log(err);
-        return {error: "não foi possível pegar postos nessa área"};
+        return { error: "não foi possível pegar postos nessa área" };
     }
-    finally{
-        try{
-            await conn.end();
+    finally {
+        try {
+            conn.release();
+            // conn.release();
+            // await conn.release();
         }
-        catch(err){
+        catch (err) {
             console.log("não foi possível fechar a conexão");
         }
     }
 }
 
-async function getLocalizationById_posto(id_posto){
+async function getLocalizationById_posto(id_posto) {
     let conn = await database.getConnection();
     if (conn == null) {
         console.log("banco de dados off-line");
         return null;
     }
     const sql = "SELECT * FROM tbl_localizacao_posto WHERE fk_id_posto = ?;";
-    try{
+    try {
         const [rows] = await conn.query(sql, id_posto);
-        if(rows.length >= 1){
+        if (rows.length >= 1) {
             return rows[0];
         }
         else {
-            throw new Error(`não foi possível pegar o posto, valor: ${id_posto}`);
+            return { error: "não foi possível pegar o posto" };
         }
     }
-    catch(err){
+    catch (err) {
         //LOG_HERE
         console.log(err);
-        return {error: "não foi possível pegar o posto"};
+        return { error: "não foi possível pegar o posto" };
     }
-    finally{
-        try{
-            await conn.end();
+    finally {
+        try {
+            conn.release();
+            // mysql2.pool.release(conn);
+            // await conn.release();
         }
-        catch(err){
-            console.log("não foi possível fechar a conexão");
+        catch (err) {
+            console.log(err);
         }
     }
 }

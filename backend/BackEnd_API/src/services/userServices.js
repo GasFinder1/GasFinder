@@ -18,7 +18,7 @@ async function CreateUser(name_user, email, password) {
     console.log(err);
   }
   finally{
-    await conn.end();
+    await conn.release();
   }
 }
 async function UpdateUser(name_user, email, password, idUser) {
@@ -36,7 +36,7 @@ async function UpdateUser(name_user, email, password, idUser) {
     console.log(err);
   }
   finally{
-    await conn.end();
+    await conn.release();
   }
 }
 async function DeleteUser(idUser) {
@@ -53,7 +53,7 @@ async function DeleteUser(idUser) {
     console.log(err);
   }
   finally{
-    await conn.end();
+    await conn.release();
   }
 }
 export default { CreateUser, UpdateUser, DeleteUser };

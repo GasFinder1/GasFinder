@@ -1,28 +1,31 @@
 import database from "../repository/connection.js"
 
 async function setFuelPrice(idUser, place_ID, value, fuelType) {
+    const conn = await database.getConnection();
+    if (conn === null) return { error: "não foi possível se comunicar com o banco de dados" }
     try {
-        const conn = await database.getConnection();
-        if(conn === null) return {error: "não foi possível se comunicar com o banco de dados"}
         let sql = "SELECT * FROM tbl_localizacao_posto WHERE place_ID = ?"
         let [rows] = await conn.execute(sql, [place_ID]);
         if (rows.length === 0) throw new Error("não foi possível pegar um posto na seguinte place_ID: " + place_ID);
         sql = "INSERT INTO tbl_colaborativa (valor_inserido, fk_id_combustivel, fk_id_tlp, fk_id_usuario) VALUES (?, ?, ?, ?)";
         const values = [value, fuelType, rows[0].id_tlp, idUser];
         await conn.execute(sql, values);
-        return {message: "inserido com sucesso!"};
+        return { message: "inserido com sucesso!" };
     }
     catch (err) {
         //LOG_HERE
         console.log(err);
         return { error: "houve algum erro ao preocessar as informações" };
     }
+    finally {
+        await conn.release();
+    }
 }
 
 async function updateFuelPrice(idUser, place_ID, value, fuelType) {
+    const conn = await database.getConnection();
+    if (conn === null) return { error: "não foi possível se comunicar com o banco de dados" }
     try {
-        const conn = await database.getConnection();
-        if(conn === null) return {error: "não foi possível se comunicar com o banco de dados"}
         let sql = "SELECT * FROM tbl_localizacao_posto WHERE place_ID = ?"
         let [rows] = await conn.execute(sql, [place_ID],);
         if (rows.length === 0) throw new Error("não foi possível pegar um posto na seguinte place_ID: " + place_ID);
@@ -37,12 +40,15 @@ async function updateFuelPrice(idUser, place_ID, value, fuelType) {
         console.log(err);
         return { error: "houve algum erro ao atualizar as informações" }
     }
+    finally {
+        await conn.release();
+    }
 }
 
 async function deleteFuelPrice(idUser, place_ID) {
+    const conn = await database.getConnection();
+    if (conn === null) return { error: "não foi possível se comunicar com o banco de dados" }
     try {
-        const conn = await database.getConnection();
-        if(conn === null) return {error: "não foi possível se comunicar com o banco de dados"}
         let sql = "SELECT * FROM tbl_localizacao_posto WHERE place_ID = ?"
         let [rows] = await conn.execute(sql, [place_ID],);
         if (rows.length === 0) throw new Error("não foi possível pegar um posto na seguinte place_ID: " + place_ID);
@@ -57,12 +63,15 @@ async function deleteFuelPrice(idUser, place_ID) {
         console.log(err);
         return { error: "nenhum dado foi deletado" }
     }
+    finally {
+        await conn.release();
+    }
 }
 
 async function getFuelInsertedByUser(idUser, place_ID) {
+    const conn = await database.getConnection();
+    if (conn === null) return { error: "não foi possível se comunicar com o banco de dados" }
     try {
-        const conn = await database.getConnection();
-        if(conn === null) return {error: "não foi possível se comunicar com o banco de dados"}
         let sql = "SELECT * FROM tbl_localizacao_posto WHERE place_ID = ?"
         let [rows] = await conn.execute(sql, [place_ID],);
         if (rows.length === 0) throw new Error("não foi possível pegar um posto na seguinte place_ID: " + place_ID);
@@ -77,12 +86,15 @@ async function getFuelInsertedByUser(idUser, place_ID) {
         console.error(err);
         return { error: "não foi possível pegar os dados" };
     }
+    finally {
+        await conn.release();
+    }
 }
 
 async function getFuelValuesByPlaceID(place_ID) {
+    const conn = await database.getConnection();
+    if (conn === null) return { error: "não foi possível se comunicar com o banco de dados" }
     try {
-        const conn = await database.getConnection();
-        if(conn === null) return {error: "não foi possível se comunicar com o banco de dados"}
         let sql = "SELECT * FROM tbl_localizacao_posto WHERE place_ID = ?"
         let [rows] = await conn.execute(sql, [place_ID],);
         if (rows.length === 0) throw new Error("não foi possível pegar um posto na seguinte place_ID: " + place_ID);
@@ -95,6 +107,9 @@ async function getFuelValuesByPlaceID(place_ID) {
         //LOG_HERE
         console.error(err);
         return { error: "não foi possível pegar os dados" };
+    }
+    finally {
+        await conn.release();
     }
 }
 

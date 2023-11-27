@@ -30,12 +30,18 @@ function similaritySort(a, b) {
 }
 //obj_comparação, obj_posto, array_pesquisa
 function getSimilarity(searchString, toComparate, searchText) {
+    // console.log(toComparate);
     const tokenizer = new natural.WordTokenizer();
     const metaphone = natural.Metaphone;
 
     for (let i = 0; i < searchText.length; i++) {
         const st = searchText[i];
         for (let j = 0; j < toComparate.length; j++) {
+            if(i == 0){
+                toComparate[j]["similarity_total"] = 0
+                toComparate[j]["similarity_amount"] = 0
+                toComparate[j]["similarity_AVG"] = 0
+            }
             const similarity = calculateJaccardSimilarity(searchString[st].toLowerCase(), toComparate[j][st].toLowerCase()) + calculateMetaphoneSimilarity(searchString[st].toLowerCase(), toComparate[j][st].toLowerCase());
             toComparate[j]["similarity_total"] = toComparate[j]["similarity_total"] == undefined ? similarity : toComparate[j]["similarity_total"] + similarity;
             toComparate[j]["similarity_amount"] = (toComparate[j]["similarity_amount"] ?? 0) + 1;
@@ -43,6 +49,7 @@ function getSimilarity(searchString, toComparate, searchText) {
         }
     }
     //pegar a melhorresposta
+    // console.log(toComparate);
     toComparate.sort(similaritySort);
     return (toComparate);
 }
