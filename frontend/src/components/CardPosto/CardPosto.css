@@ -1,57 +1,96 @@
-.div-ajuste{
-    padding: 12px 0px;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: auto;
+.div-ajuste {
+  padding: 12px 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: auto;
+  animation: rightToLeft 1s linear;
+}
+
+.div-ajuste:nth-child(2) {
+  animation: rightToLeft 1.5s linear;
+}
+
+.div-ajuste:nth-child(3) {
+  animation: rightToLeft 2s linear;
+}
+
+.div-ajuste:nth-child(4) {
+  animation: rightToLeft 2.5s linear;
+}
+
+.div-ajuste:nth-child(5) {
+  animation: rightToLeft 3s linear;
 }
 
 .main-container-cardPosto {
-    width: 100%;
-    max-width: 450px;
-    background-color: #FFF;
-    border-radius: 12px 12px 0px 0px;
+  width: 100%;
+  max-width: 450px;
+  background-color: #fff;
+  border-radius: 12px 12px 0px 0px;
+}
+
+@keyframes rightToLeft {
+  0% {
+    transform: translateX(100%);
+  }
+
+  25% {
+    transform: translateX(75%);
+  }
+
+  50% {
+  }
+
+  75% {
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
 }
 
 .container-dados-posto {
-    display: flex;
-    height: 160px;
-    width: 100%;
+  display: flex;
+  height: 160px;
+  width: 100%;
 }
 
 .div-bandeira {
-    display: flex;   
-    align-items: center;
-    justify-content:baseline;
-    column-gap: 7%;
-    height: 30%;
-    width: 100%;
-    color: #222228;
-    margin-bottom: 8px;
+  text-transform: capitalize;
+  display: flex;
+  align-items: center;
+  justify-content: baseline;
+  column-gap: 7%;
+  height: 30%;
+  width: 100%;
+  color: #222228;
+  margin-bottom: 8px;
 }
 .div-bandeira img {
-    width: 20%;
-    max-width: 50px;
+  width: 20%;
+  max-width: 50px;
 }
 
 .container-bandeira-e-distancia {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    row-gap: 2px;
-    width: 100%;
-    height: 100%;
-    padding: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2px;
+  width: 100%;
+  height: 100%;
+  padding: 6px;
+  text-transform: capitalize;
 }
 
 .container-bandeira-e-distancia p {
-    /* width: 100%; */
-    color:#222228;
-    font-size: 16px;
-    flex-wrap: wrap;
+  /* width: 100%; */
+  color: #222228;
+  font-size: 16px;
+  flex-wrap: wrap;
 }
 
 /* .div-distancia {
@@ -61,69 +100,67 @@
     justify-content: space-evenly;
 } */
 
-.div-favoritar-posto, .div-distancia {
-    font-size: 14px;
-    width: 100%;
-    display: flex;
-    align-items: center;
-    column-gap: 5%;
-    color: #003CA0;
+.div-favoritar-posto,
+.div-distancia {
+  font-size: 14px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  column-gap: 5%;
+  color: #003ca0;
 }
 
 .div-favoritar-posto i {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #fcab10;
-    cursor: pointer;
-    font-size: 28px;
-
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #fcab10;
+  cursor: pointer;
+  font-size: 28px;
 }
 
 .container-valores-postos {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 45%;
-    height: 100%;
-    border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 45%;
+  height: 100%;
+  border-radius: 12px;
 }
 
-.div-combustiveis{
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    height: 64px;
-    color: #FFF;
+.div-combustiveis {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 64px;
+  color: #fff;
 }
 
 .maisInfo-container {
-    display: flex;
-    padding-top: 6px;
-    background-color: #2a7fef;
-    width: 100%;
-    height: 32px;
-    border-radius: 0px 0px 12px 12px;
-    text-align: center;
-    justify-content: center;
-    column-gap: 5%;
-    color: #FFF;
-    cursor: pointer;
-    font-size: 16px;
-    max-width: 450px;
+  display: flex;
+  padding-top: 6px;
+  background-color: #2a7fef;
+  width: 100%;
+  height: 32px;
+  border-radius: 0px 0px 12px 12px;
+  text-align: center;
+  justify-content: center;
+  column-gap: 5%;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  max-width: 450px;
 }
 
 .maisInfo-container:hover {
-    background-color: #004EB6;
+  background-color: #004eb6;
 }
 
 .icon-info-posto {
   font-size: 22px;
 }
 
-
 /* @media (min-width: 300px) and (max-width: 767px) {
     
 
 } */
-

@@ -37,7 +37,7 @@ function App() {
           <Route path="/sobre" element={<Sobre />} />
           <Route path="/suporte" element={<Suporte />} />
           <Route path="/infoPosto"element={<InfoPosto/>}/>
-          <Route path="/infoPosto/:postoId" component={<InfoPosto/>} />
+          <Route path="/infoPosto/:postoId" element={<InfoPosto/>} />
         </Routes>
         </FavoritesProvider>
       </BrowserRouter>

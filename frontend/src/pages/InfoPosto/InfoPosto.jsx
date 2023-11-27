@@ -1,12 +1,41 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import styles from "./InfoPosto.module.css";
 import { BiSolidMap, BiSolidPencil } from "react-icons/bi";
 import InputSugerirPreco from "../../components/InputSugerirPreco/InputSugerirPreco";
+import { useParams } from "react-router-dom";
+import {BsArrowLeftShort} from 'react-icons/bs'
+import {useNavigate} from 'react-router-dom'
+import api from "../../api";
 
 function InfoPosto(props) {
-  const [exibirPrecosANP, setExibirPrecosANP] = useState(true);
+  const navigate = useNavigate();
+  const params = useParams();
+
+  const { postoId } = params;
+  const [exibirPrecosANP, setExibirPrecosANP] = useState(false);
   const [mostrarDivSecundaria, setMostrarDivSecundaria] = useState(false);
+  const [details, setDetails] = useState([])
+
+  async function getGssDetails(postoId) {
+    const data = {
+      placeID: postoId
+    }
+    try {
+      const response = await api.get("/station", {params: data});
+      setDetails(response.data[0])
+    } catch (err) {
+      console.log(err)
+      alert("Não foi possivel obter mais detalhes do posto: ",  err)
+      navigate('/')
+    }
+  }
+
+  console.log('aqui', details)
+
+  useEffect(() => {
+    getGssDetails(postoId);
+  }, [postoId]);
 
   const precos = {
     Etanol: 4.39,
@@ -18,15 +47,16 @@ function InfoPosto(props) {
   };
 
   const precosSugestao = {
-    Etanol: 3.50,
+    Etanol: 3.5,
     GasolinaC: 3.55,
-    GasolinaADT: 3.60,
+    GasolinaADT: 3.6,
     DieselS10: 3.45,
-    DieselS5: 3.40,
-    GNV: 3.30,
+    DieselS5: 3.4,
+    GNV: 3.3,
   };
 
-  const enderecoPosto = "Rod. Régis Bittencourt, 59 - Jardim Sadie, Embu das Artes - SP, 06803-000";
+  // const enderecoPosto =
+  //   "Rod. Régis Bittencourt, 59 - Jardim Sadie, Embu das Artes - SP, 06803-000";
 
   const handleSwitchChange = () => {
     setExibirPrecosANP(!exibirPrecosANP);
@@ -49,8 +79,8 @@ function InfoPosto(props) {
 
   const titleToStyleMap = {
     Etanol: "titleEtanol",
-    GasolinaC: "titleGasolinaC",
-    GasolinaADT: "titleGasolinaADT",
+    Gasolina: "titleGasolinaC",
+    "Gasolina Aditivada": "titleGasolinaADT",
     DieselS10: "titleDieselS10",
     DieselS5: "titleDieselS5",
     GNV: "titleGNV",
@@ -60,16 +90,19 @@ function InfoPosto(props) {
     <div className={styles.mainContainer}>
       <NavBar />
       <div className={styles.infoContainer}>
+        <BsArrowLeftShort className={styles.arrowClose} onClick={() => navigate('/')}/>
         <div className={styles.DadosPosto}>
-          <h2>{props.nomePosto}Posto Cancun</h2>
+          <h2>{details.nome_posto}</h2>
           <div className={styles.endereco}>
             <BiSolidMap className={styles.iconePonteiro} />
-            <h3>{props.enderecoPosto}Rod. Régis Bittencourt, 59 - Jardim Sadie, Embu das Artes - SP, 06803-000</h3>
+            <h3>
+              {`${details.endereco}, ${details.numero}`}
+            </h3>
           </div>
         </div>
         <div className={styles.containerSecundario}>
           <div className={styles.avaliacaoContainer}>
-            <h2>{props.avaliacaoGeral}4.3</h2>
+            <h2>{details.avaliacaoGeral}4.3</h2>
             <div className={styles.estrelas}>☆☆☆☆☆</div>
             <div className={styles.cardAvaliacao}>
               <h4>Atendimento</h4>
@@ -91,28 +124,64 @@ function InfoPosto(props) {
                 <h3>Tabela ANP</h3>
                 <div className={styles.boxSwitch}>
                   <label className={styles.switch}>
-                    <input type="checkbox" onChange={handleSwitchChange} checked={exibirPrecosANP} />
+                    <input
+                      type="checkbox"
+                      onChange={handleSwitchChange}
+                      checked={exibirPrecosANP}
+                    />
                     <span className={styles.slider}></span>
                   </label>
                 </div>
                 <h3>Média de sugestões</h3>
               </div>
-              <PrecoCard titulo="Etanol" preco={exibirPrecosANP ? precos.Etanol : precosSugestao.Etanol} />
-              <PrecoCard titulo="GasolinaC" preco={exibirPrecosANP ? precos.GasolinaC : precosSugestao.GasolinaC} />
-              <PrecoCard titulo="GasolinaADT" preco={exibirPrecosANP ? precos.GasolinaADT : precosSugestao.GasolinaADT} />
-              <PrecoCard titulo="DieselS10" preco={exibirPrecosANP ? precos.DieselS10 : precosSugestao.DieselS10} />
-              <PrecoCard titulo="DieselS5" preco={exibirPrecosANP ? precos.DieselS5 : precosSugestao.DieselS5} />
-              <PrecoCard titulo="GNV" preco={exibirPrecosANP ? precos.GNV : precosSugestao.GNV} />
+             {!exibirPrecosANP ? (
+               details.produtos && details.produtos.map((item, i) => (
+                <PrecoCard
+                key={i}
+                titulo={details.produtos[i].nome_combustivel}
+                preco={details.produtos[i].valor}
+                />
+              ))
+             ) : (
+               <>
+              <PrecoCard
+                titulo="GasolinaADT"
+                preco={
+                  exibirPrecosANP
+                    ? precos.GasolinaADT
+                    : precosSugestao.GasolinaADT
+                }
+              />
+              <PrecoCard
+                titulo="DieselS10"
+                preco={
+                  exibirPrecosANP ? precos.DieselS10 : precosSugestao.DieselS10
+                }
+              />
+              <PrecoCard
+                titulo="DieselS5"
+                preco={
+                  exibirPrecosANP ? precos.DieselS5 : precosSugestao.DieselS5
+                }
+              />
+              <PrecoCard
+                titulo="GNV"
+                preco={exibirPrecosANP ? precos.GNV : precosSugestao.GNV}
+              /> 
+               </>
+             )}
+
             </div>
 
-            <div className={styles.divSugerirPreco} onClick={handleSugerirPrecoClick}>
+            <div
+              className={styles.divSugerirPreco}
+              onClick={handleSugerirPrecoClick}
+            >
               <h3>Sugerir Preço</h3>
               <BiSolidPencil className={styles.pencil} />
             </div>
 
-            {mostrarDivSecundaria && (
-                <InputSugerirPreco/>
-            )}
+            {mostrarDivSecundaria && <InputSugerirPreco />}
           </div>
         </div>
       </div>

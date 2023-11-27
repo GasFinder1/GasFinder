@@ -108,6 +108,7 @@
     max-width: 800px;
     max-height: 400px;
     overflow: auto;
+    
 }
 
 .switchPrice {
@@ -137,6 +138,7 @@ label.switch {
     justify-content: center;
     width: 60px;
     height: 34px;
+    
 }
 
 /* label.switch input {
@@ -196,13 +198,27 @@ input:checked + .slider:before {
     flex-direction: column;
     align-items: center;
     justify-content: space-evenly;
-    background-color: #FFF;
+    background-color: #004EB6;
+
     width: 180px;
     /* max-width: 280px;
     min-width: 180px; */
     height: 110px;
     margin: 8px;    
     border-radius: 5px
+}
+
+.arrowClose {
+    position: absolute;
+    top: 5%;
+    font-size: 40px;
+    left: 5%;
+    transition: all .5s;
+    cursor: pointer;
+}
+
+.arrowClose:hover {
+    color: #469fe0;
 }
 
 .title {

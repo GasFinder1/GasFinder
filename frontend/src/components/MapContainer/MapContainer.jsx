@@ -5,9 +5,11 @@ import {
   DirectionsRenderer,
 } from "@react-google-maps/api";
 import { Autocomplete } from "@react-google-maps/api";
+import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import axios from "axios";
 import "./MapContainer.css";
+import StatePool from "state-pool";
 import {
   Box,
   Button,
@@ -23,6 +25,8 @@ import { PiMagnifyingGlassDuotone } from "react-icons/pi";
 import { FaLocationArrow, FaTimes } from "react-icons/fa";
 import { FaRoute } from "react-icons/fa";
 import { BiCurrentLocation } from "react-icons/bi";
+import { useContext } from "react";
+import { LocationContext } from "../../context/LocationContext";
 
 const containerStyle = {
   width: "100%",
@@ -30,8 +34,10 @@ const containerStyle = {
 };
 
 function MapContainer() {
+  // const {location} = useContext(LocationContext)
   const apiKey = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   const mapsId = process.env.REACT_APP_MAP_ID;
+  const [btnClassInput, setBtnClassInput] = useState(false);
 
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
@@ -47,11 +53,15 @@ function MapContainer() {
   const [duration, setDuration] = useState("");
   const [searchBox, setSearchBox] = useState("");
 
+  const { location, setLocation } = useContext(LocationContext);
+
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const { latitude, longitude } = position.coords;
         setCurrentLocation({ lat: latitude, lng: longitude });
+        console.log("LOCALIZAÇÃO DO USUARIO: ", currentLocation)
+        setLocation(currentLocation)
       },
       (error) => {
         console.error(error);
@@ -106,7 +116,7 @@ function MapContainer() {
         console.log("Cep: ", cep);
         console.log("Id do local:", placeId);
         // console.log(response.data.results[1].address_components);
-        console.log("Latitude: ", latitude, "Longitude: ", longitude)
+        console.log("Latitude: ", latitude, "Longitude: ", longitude);
       } else {
         console.error("Erro ao buscar o endereço");
       }
@@ -132,6 +142,7 @@ function MapContainer() {
       // eslint-disable-next-line no-undef
       travelMode: window.google.maps.TravelMode.DRIVING,
     });
+    console.log("resultado", results);
     setDirectionsResponse(results);
     setDistance(results.routes[0].legs[0].distance.text);
     setDuration(results.routes[0].legs[0].duration.text);
@@ -172,8 +183,7 @@ function MapContainer() {
       );
       map.panTo(response.data.results[0].geometry.location);
       map.setZoom(10);
-      setSearchBox("")
-
+      setSearchBox("");
     } catch (error) {
       alert("Erro ao buscar o endereço:");
     }
@@ -450,7 +460,7 @@ function MapContainer() {
         </Box>
         <Box
           p={4}
-          className="containerCardRoutes"
+          className={`containerCardRoutes ${!btnClassInput ? '' : 'closeClassBtnInput'}`}
           borderRadius="lg"
           m={4}
           bgColor="white"
@@ -461,7 +471,8 @@ function MapContainer() {
           minW="container.md"
           zIndex="1"
         >
-          <div className="inputsRoutes">
+          <div className='inputsRoutes'>
+            <button className="btnCloseInputRoutes" onClick={() => setBtnClassInput(!btnClassInput)}>{!btnClassInput ? <FaArrowLeft /> : <FaArrowRight/> }</button>
             <div>
               <Autocomplete>
                 <Input type="text" placeholder="Partida" ref={originRef} />
@@ -495,7 +506,7 @@ function MapContainer() {
             <Text>Tempo: {duration} </Text>
             <IconButton
               aria-label="center back"
-              icon={<BiCurrentLocation/>}
+              icon={<BiCurrentLocation />}
               title="Voltar ao meu local atual"
               isRound
               className="btnLocationUser"
