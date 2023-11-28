@@ -41,17 +41,17 @@ function InfoPosto(props) {
     Etanol: 4.39,
     GasolinaC: 3.39,
     GasolinaADT: 5.39,
-    DieselS10: 3.39,
-    DieselS5: 6.39,
+    'Diesel S10': 3.39,
+    'Diesel S500': 6.39,
     GNV: 3.39,
   };
 
   const precosSugestao = {
     Etanol: 3.5,
     GasolinaC: 3.55,
-    GasolinaADT: 3.6,
-    DieselS10: 3.45,
-    DieselS5: 3.4,
+    'Gasolina Aditivada': 3.6,
+    ' Diesel S10': 3.45,
+    'Diesel S500': 3.4,
     GNV: 3.3,
   };
 
@@ -72,7 +72,7 @@ function InfoPosto(props) {
         <h3>{titulo}</h3>
       </div>
       <div className={styles.preco}>
-        <h2>R$ {preco.toFixed(2)}</h2>
+        <h2>R$ {preco?.toFixed(2)}</h2>
       </div>
     </div>
   );
@@ -80,9 +80,9 @@ function InfoPosto(props) {
   const titleToStyleMap = {
     Etanol: "titleEtanol",
     Gasolina: "titleGasolinaC",
-    "Gasolina Aditivada": "titleGasolinaADT",
-    DieselS10: "titleDieselS10",
-    DieselS5: "titleDieselS5",
+    'Gasolina Aditivada': "titleGasolinaADT",
+    'Diesel S10': "titleDieselS10",
+    'Diesel S500': "titleDieselS500",
     GNV: "titleGNV",
   };
 
@@ -145,11 +145,11 @@ function InfoPosto(props) {
              ) : (
                <>
               <PrecoCard
-                titulo="GasolinaADT"
+                titulo="Gasolina"
                 preco={
                   exibirPrecosANP
                     ? precos.GasolinaADT
-                    : precosSugestao.GasolinaADT
+                    : precosSugestao.gasolina
                 }
               />
               <PrecoCard
@@ -159,9 +159,9 @@ function InfoPosto(props) {
                 }
               />
               <PrecoCard
-                titulo="DieselS5"
+                titulo="DieselS500"
                 preco={
-                  exibirPrecosANP ? precos.DieselS5 : precosSugestao.DieselS5
+                  exibirPrecosANP ? precos.DieselS500 : precosSugestao.DieselS500
                 }
               />
               <PrecoCard

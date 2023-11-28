@@ -9,7 +9,6 @@ import { FaArrowLeft, FaArrowRight } from "react-icons/fa";
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import axios from "axios";
 import "./MapContainer.css";
-import StatePool from "state-pool";
 import {
   Box,
   Button,
@@ -60,8 +59,8 @@ function MapContainer() {
       (position) => {
         const { latitude, longitude } = position.coords;
         setCurrentLocation({ lat: latitude, lng: longitude });
-        console.log("LOCALIZAÇÃO DO USUARIO: ", currentLocation)
-        setLocation(currentLocation)
+        console.log("LOCALIZAÇÃO DO USUARIO: ", currentLocation);
+        setLocation(currentLocation);
       },
       (error) => {
         console.error(error);
@@ -176,11 +175,14 @@ function MapContainer() {
 
   async function centeredMap(address) {
     try {
+      console.log(address);
       const response = await axios.get(
         `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
           address
         )}&key=${apiKey}`
       );
+      console.log(apiKey);
+      console.log(response.data.results[0].geometry.location);
       map.panTo(response.data.results[0].geometry.location);
       map.setZoom(10);
       setSearchBox("");
@@ -188,7 +190,7 @@ function MapContainer() {
       alert("Erro ao buscar o endereço:");
     }
   }
-
+  console.log(searchBox);
   return isLoaded ? (
     <div className="containerMap">
       <div className="inputSearchBox">
@@ -460,7 +462,9 @@ function MapContainer() {
         </Box>
         <Box
           p={4}
-          className={`containerCardRoutes ${!btnClassInput ? '' : 'closeClassBtnInput'}`}
+          className={`containerCardRoutes ${
+            !btnClassInput ? "" : "closeClassBtnInput"
+          }`}
           borderRadius="lg"
           m={4}
           bgColor="white"
@@ -471,8 +475,13 @@ function MapContainer() {
           minW="container.md"
           zIndex="1"
         >
-          <div className='inputsRoutes'>
-            <button className="btnCloseInputRoutes" onClick={() => setBtnClassInput(!btnClassInput)}>{!btnClassInput ? <FaArrowLeft /> : <FaArrowRight/> }</button>
+          <div className="inputsRoutes">
+            <button
+              className="btnCloseInputRoutes"
+              onClick={() => setBtnClassInput(!btnClassInput)}
+            >
+              {!btnClassInput ? <FaArrowLeft /> : <FaArrowRight />}
+            </button>
             <div>
               <Autocomplete>
                 <Input type="text" placeholder="Partida" ref={originRef} />

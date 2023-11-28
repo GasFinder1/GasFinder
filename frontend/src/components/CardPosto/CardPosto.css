@@ -150,6 +150,7 @@
   cursor: pointer;
   font-size: 16px;
   max-width: 450px;
+  transition: all .5s;
 }
 
 .maisInfo-container:hover {

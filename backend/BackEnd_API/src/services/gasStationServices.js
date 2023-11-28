@@ -323,6 +323,7 @@ async function getAllGasStationByNeighborhoodAndMunicipaly(municipality, neighbo
 };
 
 async function getStationByDistance(maxLat, minLat, maxLng, minLng) {
+    console.log(`SELECT * FROM localizacao_dados_posto WHERE (latitude BETWEEN ${maxLat} AND ${minLat} OR latitude BETWEEN ${minLat} AND ${maxLat}) AND (longitude BETWEEN ${maxLng} AND ${minLng} OR longitude BETWEEN ${minLng} AND ${maxLng});`)
     let conn = await database.getConnection();
     if (conn == null) {
         console.log("banco de dados off-line");

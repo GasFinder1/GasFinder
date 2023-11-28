@@ -9,7 +9,7 @@ import "./CardPosto.css";
 import { useFavoriteContext } from "../../context/Favorites";
 
 const CardPosto = (props) => {
-  console.log('props', props)
+  // console.log('props', props)
   const { idPosto } = props;
   const estiloGasolina = {
     backgroundColor: "#F8333C",
