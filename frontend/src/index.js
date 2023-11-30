@@ -4,12 +4,15 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { LocationContextProvider } from './context/LocationContext';
+import { DistanceContextProvider } from './context/DistanceContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <LocationContextProvider>
-      <App />
+      <DistanceContextProvider>
+        <App />
+      </DistanceContextProvider>
     </LocationContextProvider>
   </React.StrictMode>
 );

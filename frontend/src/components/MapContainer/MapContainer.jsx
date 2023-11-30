@@ -52,6 +52,7 @@ function MapContainer() {
   const [duration, setDuration] = useState("");
   const [searchBox, setSearchBox] = useState("");
 
+  console.log('Localização no componente do mapa: ', currentLocation)
   const { location, setLocation } = useContext(LocationContext);
 
   useEffect(() => {
@@ -59,8 +60,8 @@ function MapContainer() {
       (position) => {
         const { latitude, longitude } = position.coords;
         setCurrentLocation({ lat: latitude, lng: longitude });
-        console.log("LOCALIZAÇÃO DO USUARIO: ", currentLocation);
-        setLocation(currentLocation);
+        // console.log("LOCALIZAÇÃO DO USUARIO: ", currentLocation);
+        setLocation(currentLocation !== null ? currentLocation : '');
       },
       (error) => {
         console.error(error);

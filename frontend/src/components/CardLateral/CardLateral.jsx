@@ -2,24 +2,33 @@ import "./CardLateral.css";
 import CardPosto from "../CardPosto/CardPosto";
 import { useState, useEffect, useContext } from "react";
 import { LocationContext } from "../../context/LocationContext";
+import { DistanceContext } from "../../context/DistanceContext";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import FilterButton from "../FilterButton/FilterButton";
 import api from "../../api";
-import axios from 'axios'
 
 const CardLateral = () => {
+  const { distance } = useContext(DistanceContext);
+
   const [btnState, setBtnState] = useState(false);
   const [loader, setLoader] = useState(false);
-  const {location} = useContext(LocationContext)
+  const { location } = useContext(LocationContext);
+  // const [data, setData] = useState({});
+  let data = {};
   // console.log(location.lat)
   // console.log(location.lat)
-  console.log(location)
+  // console.log("Essa é a localização do usuário context: ", location.lng);
 
-  const data = {
-    latitude: -23.6395783,
-    longitude: -46.8384364,
-    distanceKm: 10
-  };
+  useEffect(() => {
+    data = {
+      latitude: -23.543718812328965,
+      longitude: -46.73251873419983,
+      distanceKm: distance
+    };
+
+    console.log(data)
+    getPricesGss(data);
+  }, [location, distance]);
 
   const [price, setPrice] = useState([]);
 
@@ -28,32 +37,30 @@ const CardLateral = () => {
       setLoader(true);
       const response = await api.post("/station/all/", data);
       setPrice(response.data);
-      console.log(response.data)
+      console.log(response.data);
       setLoader(false);
     } catch (err) {
       setLoader(false);
     }
   }
 
-  useEffect(() => {
-    getPricesGss(data);
+  //useEffect(() => {
     // calcularDistancia(origem, destino, chaveAPI)
-  }, []);
+  //}, []);
 
-  const getFlagGss = (flag)  => {
+  const getFlagGss = (flag) => {
     // if(flag == )
-  }
-
+  };
 
   // const calcularDistancia = async (origem, destino, chaveAPI) => (
   //   (await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origem}&destinations=${destino}&key=${chaveAPI}`))
   //     .data.rows[0].elements[0].distance.text
   // );
-  
+
   // const chaveAPI = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
   // const origem = 'ETEC DE EMBU';
   // const destino = 'Padaria casa nossa';
-  
+
   // calcularDistancia(origem, destino, chaveAPI)
   //   .then(distancia => console.log(`Distância: ${distancia}`))
   //   .catch(error => console.error(error));
@@ -79,23 +86,22 @@ const CardLateral = () => {
           </div>
         ) : (
           <ul>
-            {price && price.map((item, i) => (
-              <CardPosto
-                key={"cardlateralpost"+i}
-                nomePosto={price[i].nome_posto}
-                endereco={`${price[i].endereco}, ${price[i].numero}.`}
-                url="https://logodownload.org/wp-content/uploads/2014/07/shell-logo-0.png"
-                distancia="100"
-                idPosto={price[i].place_ID}
-                precoGasolina={price[i].produtos[0]?.valor?.toFixed(2)}
-                precoEtanol={price[i].produtos[1]?.valor?.toFixed(2)}
-                precoDiesel={price[i].produtos[2]?.valor?.toFixed(2)}
-              />
-            ))}
+            {price &&
+              price.map((item, i) => (
+                <CardPosto
+                  key={"cardlateralpost" + i}
+                  nomePosto={price[i].nome_posto}
+                  endereco={`${price[i].endereco}, ${price[i].numero}.`}
+                  url="https://logodownload.org/wp-content/uploads/2014/07/shell-logo-0.png"
+                  distancia="100"
+                  idPosto={price[i].place_ID}
+                  precoGasolina={price[i].produtos[0]?.valor?.toFixed(2)}
+                  precoEtanol={price[i].produtos[1]?.valor?.toFixed(2)}
+                  precoDiesel={price[i].produtos[2]?.valor?.toFixed(2)}
+                />
+              ))}
           </ul>
         )}
-
-
 
         {/* <CardPosto
           nomePosto="Shell Brasil"

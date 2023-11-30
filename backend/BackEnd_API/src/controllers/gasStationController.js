@@ -143,6 +143,7 @@ route.post('/get/', async (request, response) => {
 route.post('/all/', async (request, response) => {
     try {
         let { latitude, longitude, distanceKm } = request.body;
+        console.log(request.body)
         if (!([1, 2, 5, 10, 15, 20, 25].includes(distanceKm))) {
             distanceKm = 5;
         }
