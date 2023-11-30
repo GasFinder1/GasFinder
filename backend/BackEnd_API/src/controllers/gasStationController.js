@@ -157,10 +157,19 @@ route.post('/all/', async (request, response) => {
         mapsApiUses += 1;
         if (!("error_message" in data)) {
             // return response.json(data.data);
-            const neighborhood = data.data.results[0].address_components[2].long_name;
-            const city = data.data.results[0].address_components[3].long_name;
+            let neighborhood = undefined;
+            let city = undefined;
+            for(let i = 0; i < data.data.results[0].address_components.length; i++){
+                if(data.data.results[0].address_components[i].types.includes("sublocality_level_1")){
+                    neighborhood = data.data.results[0].address_components[i].long_name;
+                }
+                if(data.data.results[0].address_components[i].types.includes("sublocality_level_1")){
+                    city = data.data.results[0].address_components[i].long_name;
+                }
+            }
             if ((!(neighborhood || false) && !(city || false))) throw new Error("não foi possível pegar o endereço");
             //pegar todos os postos da tbl_posto com base na cidade e bairro
+            console.log(city, neighborhood)
             data = await gss.getAllGasStationByNeighborhoodAndMunicipaly(city, neighborhood);
             if (data.length >= 1) {
                 let gs_data = [];
