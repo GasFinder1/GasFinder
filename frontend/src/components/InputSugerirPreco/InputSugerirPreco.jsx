@@ -13,7 +13,7 @@ const InputSugerirPreco = ({ userId }) => {
     GasolinaC: '',
     GasolinaADT: '',
     DieselS10: '',
-    DieselS5: '',
+    DieselS500: '',
     GNV: '',
   });
 

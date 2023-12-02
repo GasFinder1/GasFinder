@@ -159,7 +159,7 @@
 
 .btnCalcRoute {
   position: absolute !important;
-  right: 20px;
+  right: 15px;
   top: 50px;
   background-color: #2a7fef;
   color: #fff;
@@ -180,7 +180,7 @@
   width: 40px;
   border-radius: 50%;
   position: absolute !important;
-  right: 20px;
+  right: 15px;
   top: 110px;
   cursor: pointer;
   transition: all 0.5s;
@@ -193,7 +193,7 @@
   width: 40px;
   border-radius: 50%;
   position: absolute !important;
-  right: 20px;
+  right: 15px;
   top: 220px;
   cursor: pointer;
   transition: all 0.5s;
@@ -206,7 +206,7 @@
   width: 40px;
   border-radius: 50%;
   position: absolute !important;
-  right: 20px;
+  right: 15px;
   top: 165px;
   cursor: pointer;
   font-size: 25px;
