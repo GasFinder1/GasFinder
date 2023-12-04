@@ -6,6 +6,8 @@ import gasStation from "./controllers/gasStationController.js"
 import gs_Confirmation from "./controllers/gasStationConfirmationController.js";
 import evaluation from "./controllers/evaluationController.js";
 import gasStationPrices from "./controllers/userFuelValuesController.js";
+import favorite from "./controllers/favoriteController.js";
+import { verifyJWT } from "./middleswares/jwt.js";
 
 const routes = express();
 
@@ -16,6 +18,7 @@ routes.use('/station', gasStation);
 routes.use('/confirmGasStation', gs_Confirmation);
 routes.use('/evaluation', evaluation);
 routes.use('/gasStationPrices', gasStationPrices);
+routes.use('/favorite', verifyJWT, favorite);
 
 
 export default routes;

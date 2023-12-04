@@ -143,7 +143,6 @@ route.post('/get/', async (request, response) => {
 route.post('/all/', async (request, response) => {
     try {
         let { latitude, longitude, distanceKm } = request.body;
-        console.log(request.body)
         if (!([1, 2, 5, 10, 15, 20, 25].includes(distanceKm))) {
             distanceKm = 5;
         }
@@ -152,16 +151,24 @@ route.post('/all/', async (request, response) => {
         }
         let mapsApiUses = 0;
         //pegar o endereço com base na latitude e longitude
-        let data = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.MAPS_API_KEY}`);
-        //---------------------------------------------------------------------
-        // let data = geocodeAPI;
+        // let data = await axios.get(`https://maps.googleapis.com/maps/api/geocode/json?latlng=${latitude},${longitude}&key=${process.env.MAPS_API_KEY}`);
+        let data = geocodeAPI;
         mapsApiUses += 1;
         if (!("error_message" in data)) {
             // return response.json(data.data);
-            const neighborhood = data.data.results[0].address_components[2].long_name;
-            const city = data.data.results[0].address_components[3].long_name;
+            let neighborhood = undefined;
+            let city = undefined;
+            for(let i = 0; i < data.data.results[0].address_components.length; i++){
+                if(data.data.results[0].address_components[i].types.includes("sublocality_level_1")){
+                    neighborhood = data.data.results[0].address_components[i].long_name;
+                }
+                if(data.data.results[0].address_components[i].types.includes("administrative_area_level_2")){
+                    city = data.data.results[0].address_components[i].long_name;
+                }
+            }
             if ((!(neighborhood || false) && !(city || false))) throw new Error("não foi possível pegar o endereço");
             //pegar todos os postos da tbl_posto com base na cidade e bairro
+            console.log(city, neighborhood)
             data = await gss.getAllGasStationByNeighborhoodAndMunicipaly(city, neighborhood);
             if (data.length >= 1) {
                 let gs_data = [];
@@ -195,35 +202,32 @@ route.post('/all/', async (request, response) => {
                 for (let i = 0; i < data.length; i++) {
                     gscs.removeGS(data[i].id_posto);
                 }
-                // return response.json(data);
                 gs_data = [];
                 queue = [];
-                for (let i = 0; i < data.length; i++) {
-                    const gs_id = data[i].id_posto;
-                    queue.push(new Promise((resolve, reject) => {
+                // for (let i = 0; i < data.length; i++) {
+                    // console.log(1)
+                    // const gs_id = data[i].id_posto;
+                    // queue.push(new Promise((resolve, reject) => {
                         //número do estabelecimento se tiver?
-                        axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${data[i].nome_posto}, ${neighborhood}, ${city}&key=${process.env.MAPS_API_KEY}`)
-                            .then(response => {
-                                resolve({ id_posto: gs_id, data: response.data.results });
-                                mapsApiUses += 1;
-                            })
-                            .catch(err => {
-                                gscs.removeGS(gs_id);
-                                mapsApiUses += 1;
-                                console.log(err);
-                                reject({ id_posto: gs_id, error: err });
-                            });
-                    }));
-                }
-                await Promise.all(queue).then((values) => {
-                    gs_data = values;
-                }).catch(err => console.log(err));
+                        // axios.get(`https://maps.googleapis.com/maps/api/place/textsearch/json?query=${data[i].nome_posto}, ${neighborhood}, ${city}&key=${process.env.MAPS_API_KEY}`)
+                        //     .then(response => {
+                        //         resolve({ id_posto: gs_id, data: response.data.results });
+                        //         mapsApiUses += 1;
+                        //     })
+                        //     .catch(err => {
+                        //         gscs.removeGS(gs_id);
+                        //         mapsApiUses += 1;
+                        //         console.log(err);
+                        //         reject({ id_posto: gs_id, error: err });
+                        //     });
+                    // }));
+                // }
+                // await Promise.all(queue).then((values) => {
+                //     gs_data = values;
+                // }).catch(err => console.log(err));
 
-                // gs_data = placesAPI;
-                // return response.json(gs_data);
+                gs_data = placesAPI;
                 gs_data = infoFormatter.mapsToObj(gs_data);
-                //---------------------------------------
-                // return response.status(200).send(gs_data);
                 queue = [];
                 gs_data.data.map((value) => {
                     queue.push(new Promise((resolve, reject) => {

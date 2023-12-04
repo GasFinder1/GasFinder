@@ -337,7 +337,7 @@ async function getStationByDistance(maxLat, minLat, maxLng, minLng) {
             return rows
         }
         else {
-            throw new Error({ error: "não foi possível pegar postos nessa área" });
+            return { error: "não foi possível pegar postos nessa área" };
         }
     }
     catch (err) {
