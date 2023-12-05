@@ -1,5 +1,6 @@
 import express from "express";
-import database from "../services/loginServices.js";
+import bcrypt from 'bcrypt';
+import database from "../services/userServices.js";
 import { generateToken } from "../helpers/userFeatures.js";
 
 const route = express.Router();
@@ -10,19 +11,23 @@ route.post('/', async (request, response) => {
     if ([email ?? false, password ?? false].includes(false)) {
       return response.status(400).json({ error: "O email e senha precisam ser preenchidos" });
     }
-    const users = await database.login(email, password);
+    const users = await database.checkEmail(email);
     if (users.length > 0) {
-      const id_user = users[0].id_usuario;
-      const email_user = users[0].email;
-      const nomeUsuario = users[0].nome_usuario;
-      const token = generateToken(id_user, email_user);
-      if (!(token ?? false)){
-        return response.status(500).json({error: "não foi possível gerar o token de acesso"});
+      const hashedPassword = users[0].senha;
+      const passwordMatch = await bcrypt.compare(password, hashedPassword);
+
+      if (passwordMatch) {
+        const id_user = users[0].id_usuario;
+        const email_user = users[0].email;
+        const name = users[0].nome_usuario;
+        const token = generateToken(id_user, email_user, name);
+
+        return response.status(200).send({ message: "Login efetuado com sucesso", token, name });
+      } else {
+        return response.status(401).send({ error: 'Login incorreto' });
       }
-      return response.status(200).send({ message: "Login efetuado com sucesso", token, nomeUsuario });
-    } else {
-      return response.status(401).send({ error: 'Login incorreto' });
     }
+    return response.status(401).send({ error: 'usuario inexistente' });
   }
   catch (err) {
     //LOG_HERE

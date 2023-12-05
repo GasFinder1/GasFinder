@@ -1,37 +1,27 @@
 import express from 'express';
-import database from '../services/checkServices.js';
+import bcrypt from 'bcrypt';
+import database from '../services/userServices.js';
 import { generatePassword } from '../helpers/recoverPassword.js';
-import nodemailer from 'nodemailer';
+import { transporter } from '../helpers/transporter.js';
 import 'dotenv/config';
 
 const router = express.Router();
+const saltRounds = 10;
 
 router.post('/', async (request, response) => {
   try {
-    const { email: userEmail } = request.body; // Renomeie a variável para evitar conflito
+    const { email: userEmail } = request.body;
+    const newPassword = generatePassword();
+    const hash = await bcrypt.hash(newPassword, saltRounds);
+
     const user = await database.checkEmail(userEmail);
-    console.log(user);
 
     if (user.length > 0) {
-      const newPassword = generatePassword();
-      await database.changePassword(userEmail, newPassword);
-
-      const transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        secure: true,
-        port: 465,
-        auth: {
-          user: process.env.NODEMAILER_USER,
-          pass: process.env.NODEMAILER_PASS,
-        },
-        tls: {
-          rejectUnauthorized: false,
-        },
-      });
+      await database.changePassword(userEmail, hash);
 
       transporter.sendMail({
         from: 'GasFinder <testesgasfinder@gmail.com>',
-        to: userEmail, // Usar a variável userEmail aqui
+        to: userEmail,
         subject: 'Pedido de nova senha realizado.',
         html: `<h1>Senha alterada com sucesso</h1>
         <p>Prezado Usuário,</p>
