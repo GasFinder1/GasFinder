@@ -1,8 +1,10 @@
 import express, { request, response } from "express";
 import database from "../services/userServices.js";
-import {verifyJWT} from "../middleswares/jwt.js";
+import { verifyJWT } from "../middleswares/jwt.js";
+import bcrypt from 'bcrypt';
 
 const route = express.Router();
+const saltRounds = 10;
 
 route.post('/', async (request, response) => {
   try {
@@ -10,7 +12,11 @@ route.post('/', async (request, response) => {
     if ([name ?? false, email ?? false, password ?? false].includes(false)) {
       return response.status(400).json({ error: "não foram enviados todos os dados necessários" })
     }
-    const res = await database.CreateUser(name, email, password);
+    let hash
+    if (password) { hash = await bcrypt.hash(password, saltRounds) };
+    console.log(hash);
+
+    const res = await database.CreateUser(name, email, hash);
     if (typeof res === "object" && res != null) {
       if (!("error" in res)) {
         return response.status(200).json({ message: 'Registrado com sucesso' });
@@ -41,8 +47,11 @@ route.put('/', verifyJWT, async (request, response) => {
     if ([name ?? false, email ?? false, password ?? false, idUser ?? false].includes(false)) {
       return response.status(400).json({ error: "todos os dados devem ser preênchidos, e você precisa estar logado" });
     }
+    let hash
+    if (password) { hash = await bcrypt.hash(password, saltRounds) };
+    console.log(hash);
     //PROCEDURE?
-    await database.UpdateUser(name, email, password, idUser);
+    await database.UpdateUser(name, email, hash, idUser);
     return response.status(200).json({ message: 'Atualizado com sucesso' });
   } catch (err) {
     //LOG_HERE
@@ -50,11 +59,9 @@ route.put('/', verifyJWT, async (request, response) => {
   }
 });
 
-route.delete('/:idUser', verifyJWT, async (request, response) => {
+route.delete('/', verifyJWT, async (request, response) => {
   try {
-    //trocar por JSON
     const idUser = request.infoUser.id_usuario;
-    // const { idUser } = request.params;
     await database.DeleteUser(idUser);
 
     return response.status(200).send({ message: 'Excluído com sucesso' });
