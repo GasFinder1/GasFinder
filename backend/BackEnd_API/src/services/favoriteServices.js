@@ -1,4 +1,5 @@
 import database from "../repository/connection.js";
+import infoFormatter from "../utils/infoFormatter.js";
 
 async function CreateFavorite(idUser, idTlc) {
   const sql = "insert into tbl_favoritos(fk_id_usuario, fk_id_tlp) values (?,?)"
@@ -43,14 +44,14 @@ async function DeleteFavorite(idFavorite) {
 }
 
 async function getFavorites(idUser) {
-  const sql = "SELECT * from tbl_favoritos WHERE fk_id_usuario = ?";
+  const sql = "SELECT * from get_favorites WHERE fk_id_usuario = ?";
   const conn = await database.getConnection();
   if (conn == null) {
     return { error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções", error_code: 500 };
   }
   try {
     const [rows] = await conn.execute(sql, [idUser]);
-    if (rows.length > 0) return rows;
+    if (rows.length > 0) return infoFormatter.favoriteInfoOrganizer(rows);
     throw new Error("não foi possível pegar nenhum dado");
   }
   catch (err) {

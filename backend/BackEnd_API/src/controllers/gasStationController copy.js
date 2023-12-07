@@ -6,7 +6,6 @@ import infoFormatter from "../utils/infoFormatter.js";
 import localizationFeatures from "../utils/localizationFeatures.js";
 import geocodeAPI from "../test/geocodeAPI.js";
 import placesAPI from "../test/placesAPI.js";
-import timeoutPromise from "../helpers/timeOut.js";
 const route = express.Router();
 
 route.get('/', async (request, response) => {
@@ -231,15 +230,15 @@ route.post('/all/', async (request, response) => {
                 gs_data = infoFormatter.mapsToObj(gs_data);
                 queue = [];
                 gs_data.data.map((value) => {
-                    queue.push(Promise.race([new Promise((resolve, reject) => {
+                    queue.push(new Promise((resolve, reject) => {
                         gscs.insertBySimilarity(value)
                             .then(response => resolve(response))
                             .catch(err => reject(err))
-                    }), timeoutPromise(6000)]));
+                    }));
                 });
                 await Promise.all(queue).then((values) => {
                     gs_data = values
-                }).catch(err => console.error(err));
+                }).catch(err => reject(err));
             }
         }
         console.log("usos da api do google: " + mapsApiUses);
