@@ -1,12 +1,40 @@
 import "./CardLateral.css";
 import CardPosto from "../CardPosto/CardPosto";
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect, useContext, useLayoutEffect } from "react";
 import { LocationContext } from "../../context/LocationContext";
 import { DistanceContext } from "../../context/DistanceContext";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import FilterButton from "../FilterButton/FilterButton";
 import api from "../../api";
 import axios from "axios";
+
+import ipiranga from "../../img/bandeiras/Ipiranga.png";
+import ale from "../../img/bandeiras/alesat.png";
+import atem from "../../img/bandeiras/atem.png";
+import atlantica from "../../img/bandeiras/atlantica.png";
+import charrua from "../../img/bandeiras/charrua.png";
+import ciapetro from "../../img/bandeiras/ciapetro.png";
+import dibrape from "../../img/bandeiras/dibrape.png";
+import dmais from "../../img/bandeiras/dmais.png";
+import estrada from "../../img/bandeiras/estrada.png";
+import fan from "../../img/bandeiras/fan.png";
+import federal from "../../img/bandeiras/federal.png";
+import idaza from "../../img/bandeiras/idaza.png";
+import larco from "../../img/bandeiras/larco.png";
+import masut from "../../img/bandeiras/masut.png";
+import maxsul from "../../img/bandeiras/maxsul.png";
+import onpetro from "../../img/bandeiras/onpetro.png";
+import padrao from "../../img/bandeiras/padrao2.png";
+import padrao2 from "../../img/bandeiras/padrao.png";
+import petrobahia from "../../img/bandeiras/petrobahia.png";
+import petrobras from "../../img/bandeiras/petrobras.jpg";
+import potencial from "../../img/bandeiras/potencial.png";
+import petrox from "../../img/bandeiras/pretrox.png";
+import raizen from "../../img/bandeiras/raizen.png";
+import riobranco from "../../img/bandeiras/riobranco.png";
+import rodoil from "../../img/bandeiras/rodoil.png";
+import setta from "../../img/bandeiras/setta.png";
+import simarelli from "../../img/bandeiras/simarelli.png";
 
 const CardLateral = () => {
   const { distance } = useContext(DistanceContext);
@@ -22,12 +50,15 @@ const CardLateral = () => {
 
   useEffect(() => {
     data = {
-      latitude: -23.543617079423655,
-      longitude: -46.732223246545004,
-      distanceKm: distance
+      // latitude: location.latitude,
+      // longitude: location.longitude,
+      latitude: -23.641866162601666,
+      longitude: -46.83600825648072,
+      distanceKm: distance,
     };
 
-    console.log('localização atual: ',data)
+    console.log("localização atual: ", data);
+    console.log(location);
     getPricesGss(data);
   }, [location, distance]);
 
@@ -38,49 +69,131 @@ const CardLateral = () => {
       setLoader(true);
       const response = await api.post("/station/all/", data);
       setPrice(response.data);
-      console.log(response.data);
+      console.log("Dados do banco: ", response.data);
       setLoader(false);
     } catch (err) {
       setLoader(false);
     }
   }
 
+  const [distancia, setDistancia] = useState(null);
+
   useEffect(() => {
     // calcularDistancia(origem, destino, chaveAPI)
+    if (!distancia) {
+      let result = calcularDistancia("etec de embu", "Avenida Rotary, 2991.");
+      // setDistancia(result);
+      // console.log('RESULTADO', distancia)
+    }
   }, []);
 
-  async function calculateRoute() {
-  
-    // eslint-disable-next-line no-undef
-    const directionsService = new window.google.maps.DirectionsService();
-    const results = await directionsService.route({
-      // origin: originRef.current.value,
-      // destination: destiantionRef.current.value,
-      // eslint-disable-next-line no-undef
-      travelMode: window.google.maps.TravelMode.DRIVING,
-    });
-    // console.log("resultado", results);
-    // setDirectionsResponse(results);
-    // setDistance(results.routes[0].legs[0].distance.text);
-    // setDuration(results.routes[0].legs[0].duration.text);
-  }
-
   const getFlagGss = (flag) => {
-    // if(flag == )
+    switch (flag) {
+      case "simarelli":
+        return simarelli;
+      // break;
+      case "ipiranga":
+        return ipiranga;
+      // break;
+      case "vibra":
+        return petrobras;
+      // break;
+      case "alesat":
+        return ale;
+      // break;
+      case "atem' s":
+        return atem;
+      // break;
+      case "atlantica":
+        return atlantica;
+      // break;
+      case "charrua":
+        return charrua;
+      // break;
+      case "ciapetro":
+        return ciapetro;
+      // break;
+      case "dibrape":
+        return dibrape;
+      // break;
+      case "d`mais":
+        return dmais;
+      // break;
+      case "estrada":
+        return estrada;
+      // break;
+      case "fan":
+        return fan;
+      // break;
+      case "federal":
+        return federal;
+      // break;
+      case "idaza":
+        return idaza;
+      // break;
+      case "larco":
+        return larco;
+      // break;
+      case "masut":
+        return masut;
+      // break;
+      case "maxsul":
+        return maxsul;
+      // break;
+      case "onpetro":
+        return onpetro;
+      // break;
+      case "petrobahia":
+        return petrobahia;
+      // break;
+      case "potencial":
+        return potencial;
+      // break;
+      case "petrox":
+        return petrox;
+      // break;
+      case "raizen":
+        return raizen;
+      // break;
+      case "rio branco":
+        return riobranco;
+      // break;
+      case "rodoil":
+        return rodoil;
+      // break;
+      case "setta":
+        return setta;
+      case "branca":
+        return padrao2;
+      // break;
+      default:
+        return padrao;
+    }
   };
 
-  const calcularDistancia = async (origem, destino, chaveAPI) => (
-    (await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origem}&destinations=${destino}&key=${chaveAPI}`))
-      .data.rows[0].elements[0].distance.text
-  );
+  const calcularDistancia = async (origem, destino) => {
+    try {
+      const distance = await axios.get(
+        `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origem}&destinations=${destino}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
+      );
+      console.log("tempo: ", distance.data.rows[0].elements[0].distance.text);
 
-  const chaveAPI = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-  const origem = 'ETEC DE EMBU';
-  const destino = 'Padaria casa nossa';
+      setDistancia(distance?.data?.rows[0]?.elements[0]?.distance?.text);
+      return distance?.data?.rows[0]?.elements[0]?.distance?.text;
+    } catch (err) {
+      console.log("erro :", err);
+    }
+  };
 
-  calcularDistancia(origem, destino, chaveAPI)
-    .then(distancia => console.log(`Distância: ${distancia}`))
-    .catch(error => console.error(error));
+  async function convertAdress(address) {
+    const response = await axios.get(
+      `https://maps.googleapis.com/maps/api/geocode/json?address=${encodeURIComponent(
+        address
+      )}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY};
+      }`
+    );
+  }
+
   return (
     <section
       className={`main-container-CardLateral ${!btnState ? "" : "ocult"}`}
@@ -104,19 +217,27 @@ const CardLateral = () => {
         ) : (
           <ul>
             {price &&
-              price.map((item, i) => (
-                <CardPosto
-                  key={"cardlateralpost" + i}
-                  nomePosto={price[i].nome_posto}
-                  endereco={`${price[i].endereco}, ${price[i].numero}.`}
-                  url="https://logodownload.org/wp-content/uploads/2014/07/shell-logo-0.png"
-                  distancia="100"
-                  idPosto={price[i].place_ID}
-                  precoGasolina={price[i].produtos[0]?.valor?.toFixed(2)}
-                  precoEtanol={price[i].produtos[1]?.valor?.toFixed(2)}
-                  precoDiesel={price[i].produtos[2]?.valor?.toFixed(2)}
-                />
-              ))}
+              Promise.all(
+                price.map(async (item, i) => {
+                  const distancia = await calcularDistancia(
+                    "Etec de Embu",
+                    "Avenida Elias Yasbek, 2345"
+                  );
+                  return (
+                    <CardPosto
+                      key={"cardlateralpost" + i}
+                      nomePosto={price[i]?.nome_posto}
+                      endereco={`${price[i]?.endereco}, ${price[i]?.numero}.`}
+                      url={getFlagGss(price[i]?.bandeira)}
+                      distancia={distancia}
+                      idPosto={price[i]?.place_ID}
+                      precoGasolina={price[i]?.produtos[0]?.valor?.toFixed(2)}
+                      precoEtanol={price[i]?.produtos[1]?.valor?.toFixed(2)}
+                      precoDiesel={price[i]?.produtos[2]?.valor?.toFixed(2)}
+                    />
+                  );
+                })
+              )}
           </ul>
         )}
 
@@ -124,7 +245,7 @@ const CardLateral = () => {
           nomePosto="Shell Brasil"
           endereco = "R. Solano Trindade"
           url="https://logodownload.org/wp-content/uploads/2014/07/shell-logo-0.png"
-          distancia="100"
+          distancia={calcularDistancia('Etec de Embu', 'Avenida Elias Yasbek, 2345')}
           precoGasolina="5,19"
           precoEtanol="4,05"
           precoDiesel="5,40"

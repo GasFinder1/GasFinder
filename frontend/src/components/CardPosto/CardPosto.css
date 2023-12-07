@@ -74,6 +74,10 @@
   max-width: 50px;
 }
 
+.div-bandeira h3 {
+  font-size: 15px;
+}
+
 .container-bandeira-e-distancia {
   display: flex;
   flex-direction: column;
@@ -93,12 +97,9 @@
   flex-wrap: wrap;
 }
 
-/* .div-distancia {
-    width: 100%;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-evenly;
-} */
+.div-distancia .paragraphDistance {
+  text-transform: uppercase;
+}
 
 .div-favoritar-posto,
 .div-distancia {
@@ -150,7 +151,7 @@
   cursor: pointer;
   font-size: 16px;
   max-width: 450px;
-  transition: all .5s;
+  transition: all 0.5s;
 }
 
 .maisInfo-container:hover {
