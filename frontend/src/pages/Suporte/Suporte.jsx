@@ -14,6 +14,8 @@ const Suporte = () => {
             className={`${styles.inputForm} ${styles.inputEmail}`}
             placeholder="E-mail"
             required
+            disabled
+            value="encheotanquetec@gmail.com"
           />
           <textarea
             type="text"

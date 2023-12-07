@@ -59,7 +59,7 @@ const CardPosto = (props) => {
               </div>
               <div className="div-distancia">
                 <BiMapPin size={28} color="#467BEC" />
-                <p>A {props.distancia} metros</p>
+                <p className="paragraphDistance">A {props.distancia}</p>
               </div>
               <div className="div-favoritar-posto">
                 <i
