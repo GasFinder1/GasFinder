@@ -226,4 +226,48 @@ function mapsToObj(maps) {
     return valuesToReturn;
 }
 
-export default { gasInfoFormat, removeDoubleSpaces, removeLetters, removeGasStationGenericWords, genericComparator1, gsInfoOrganizer, gsInfoNoRepeat, isFloat, mapsToObj }
+function favoriteInfoOrganizer(data) {
+    let organizedData = []
+    for (let i = 0; i < data.length; i++) {
+        const indexOfGasStation = organizedData.findIndex(obj => obj.id_posto === data[i].id_posto);
+        if (indexOfGasStation === -1) {
+            organizedData.push({
+                id_favorito: data[i].id_favorito,
+                place_ID: data[i].place_ID,
+                latitude: data[i].latitude,
+                longitude: data[i].longitude,
+                id_posto: data[i].id_posto,
+                cnpj: data[i].cnpj,
+                nome_posto: data[i].nome_posto.toLowerCase(),
+                endereco: data[i].endereco.toLowerCase(),
+                cep: data[i].cep,
+                municipio: data[i].municipio.toLowerCase(),
+                bandeira: data[i].bandeira.toLowerCase(),
+                numero: data[i].numero,
+                bairro: data[i].bairro.toLowerCase(),
+                uf: data[i].uf,
+                estado: data[i].estado.toLowerCase(),
+                produtos:
+                    [
+                        {
+                            valor: data[i].valor,
+                            nome_combustivel: data[i].nome_combustivel.toLowerCase(),
+                            unid_medida: data[i].unid_medida,
+                            data_informacao: data[i].data_informacao
+                        }
+                    ]
+            });
+        }
+        else {
+            organizedData[indexOfGasStation]["produtos"].push({
+                valor: data[i].valor,
+                nome_combustivel: data[i].nome_combustivel.toLowerCase(),
+                unid_medida: data[i].unid_medida,
+                data_informacao: data[i].data_informacao
+            });
+        }
+    }
+    return organizedData;
+}
+
+export default { favoriteInfoOrganizer, gasInfoFormat, removeDoubleSpaces, removeLetters, removeGasStationGenericWords, genericComparator1, gsInfoOrganizer, gsInfoNoRepeat, isFloat, mapsToObj }
