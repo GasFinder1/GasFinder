@@ -29,14 +29,12 @@ route.post('/', async (request, response) => {
     const idTlp = idTlpResult.id_tlp;
     try {
       await database.CreateFavorite(idUser, idTlp);
-      response.status(200).send({ message: 'Posto favoritado com sucesso' });
+      return response.status(200).send({ message: 'Posto favoritado com sucesso' });
     } catch (error) {
-      response.status(500).send({ message: `Erro ao favoritar` });
-      return
+      return response.status(500).send({ message: `Erro ao favoritar` });
     }
   } catch (error) {
-    response.status(500).send({ message: `Erro na requisição: \n ${error}` });
-    return
+    return response.status(500).send({ message: `Erro na requisição: \n ${error}` });
   }
 });
 
@@ -46,10 +44,10 @@ route.delete('/', async (request, response) => {
     // const { idFavorite } = request.params;
     await database.DeleteFavorite(idFavorite);
 
-    response.status(200).send({ message: 'Excluído com sucesso' });
+    return response.status(200).send({ message: 'Excluído com sucesso' });
   } catch (err) {
     console.error(err)
-    response.status(500).send({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
+    return response.status(500).send({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
   }
 });
 
@@ -59,11 +57,11 @@ route.get('/', async (request, response) => {
     const idUser = infoUser.id_usuario;
     const rows = await database.getFavorites(idUser);
     if(rows && rows.length > 0)
-    response.status(200).json(rows);
+    return response.status(200).json(rows);
     throw new Error("não foi possível encontrar nenhum dado");
   } catch (err) {
     console.error(err)
-    response.status(500).send({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
+    return response.status(500).send({ error: "houve algum problema com a sua solicitação, um log com as informações será registrado para realização de correções" });
   }
 });
 
