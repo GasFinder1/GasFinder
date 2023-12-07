@@ -228,7 +228,7 @@ const CardLateral = () => {
                       endereco={`${price[i]?.endereco}, ${price[i]?.numero}.`}
                       url={getFlagGss(price[i]?.bandeira)}
                       // distancia={distancia}
-                      distancia={calcularDistancia('Etec de embu', 'villa lobos office park')}
+                      // distancia={calcularDistancia('Etec de embu', 'villa lobos office park')}
                       idPosto={price[i]?.place_ID}
                       precoGasolina={price[i]?.produtos[0]?.valor?.toFixed(2)}
                       precoEtanol={price[i]?.produtos[1]?.valor?.toFixed(2)}
