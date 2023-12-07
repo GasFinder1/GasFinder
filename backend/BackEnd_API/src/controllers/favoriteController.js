@@ -15,7 +15,7 @@ route.post('/', async (request, response) => {
     }
 
     const placeID = request.body.idPosto;
-   
+
     if (!placeID) {
       return response.status(400).send({ message: 'ID do lugar não fornecido' });
     }
@@ -40,9 +40,17 @@ route.post('/', async (request, response) => {
 
 route.delete('/', async (request, response) => {
   try {
-    const { idFavorite } = request.body;
+    const infoUser = request.infoUser;
+    const idUser = infoUser.id_usuario;
+    const userExists = await database.CheckUserExists(idUser);
+
+    if (!userExists) {
+      return response.status(404).send({ message: 'Usuário não encontrado' });
+    }
+    const { placeID } = request.body;
     // const { idFavorite } = request.params;
-    await database.DeleteFavorite(idFavorite);
+    const result = await database.DeleteFavorite(idUser, placeID);
+    if("error" in result) return response.status(400).send({ message: 'os dados não foram excluidos' });
 
     return response.status(200).send({ message: 'Excluído com sucesso' });
   } catch (err) {
@@ -57,8 +65,8 @@ route.get('/', async (request, response) => {
     const idUser = infoUser.id_usuario;
     console.log('informações: ', infoUser, 'id: ', idUser)
     const rows = await database.getFavorites(idUser);
-    if(rows && rows.length > 0)
-    return response.status(200).json(rows);
+    if (rows && rows.length > 0)
+      return response.status(200).json(rows);
     throw new Error("não foi possível encontrar nenhum dado");
   } catch (err) {
     console.error(err)
