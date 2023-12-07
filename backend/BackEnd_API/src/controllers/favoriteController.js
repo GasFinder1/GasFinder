@@ -63,6 +63,7 @@ route.get('/', async (request, response) => {
   try {
     const infoUser = request.infoUser;
     const idUser = infoUser.id_usuario;
+    console.log('informações: ', infoUser, 'id: ', idUser)
     const rows = await database.getFavorites(idUser);
     if (rows && rows.length > 0)
       return response.status(200).json(rows);

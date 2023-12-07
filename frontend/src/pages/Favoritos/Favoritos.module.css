@@ -18,6 +18,7 @@
     max-width: 832px;
     height: 80%;
     background-color: rgba(0, 0, 0, 0.612);
+    overflow-y: scroll;
 }
 
 .title {
