@@ -49,7 +49,8 @@ route.delete('/', async (request, response) => {
     }
     const { placeID } = request.body;
     // const { idFavorite } = request.params;
-    await database.DeleteFavorite(placeID);
+    const result = await database.DeleteFavorite(idUser, placeID);
+    if("error" in result) return response.status(400).send({ message: 'os dados não foram excluidos' });
 
     return response.status(200).send({ message: 'Excluído com sucesso' });
   } catch (err) {
