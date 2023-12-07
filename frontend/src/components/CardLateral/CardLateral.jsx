@@ -79,12 +79,7 @@ const CardLateral = () => {
   const [distancia, setDistancia] = useState(null);
 
   useEffect(() => {
-    // calcularDistancia(origem, destino, chaveAPI)
-    if (!distancia) {
-      let result = calcularDistancia("etec de embu", "Avenida Rotary, 2991.");
-      // setDistancia(result);
-      // console.log('RESULTADO', distancia)
-    }
+    // calcularDistancia("Etec de embu", "Avenida Rotary, 2991.");
   }, []);
 
   const getFlagGss = (flag) => {
@@ -174,12 +169,18 @@ const CardLateral = () => {
   const calcularDistancia = async (origem, destino) => {
     try {
       const distance = await axios.get(
-        `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origem}&destinations=${destino}&key=${process.env.REACT_APP_GOOGLE_MAPS_API_KEY}`
+        `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${encodeURIComponent(
+          origem
+        )}&destinations=${encodeURIComponent(destino)}&key=${
+          process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+        }`
       );
       console.log("tempo: ", distance.data.rows[0].elements[0].distance.text);
 
       setDistancia(distance?.data?.rows[0]?.elements[0]?.distance?.text);
-      return distance?.data?.rows[0]?.elements[0]?.distance?.text;
+      // return distance?.data?.rows[0]?.elements[0]?.distance?.text;
+      setDistancia(null)
+      return distancia;
     } catch (err) {
       console.log("erro :", err);
     }
@@ -217,22 +218,25 @@ const CardLateral = () => {
         ) : (
           <ul>
             {price &&
-                price.map( (item, i) => {
-                  return (
+              price.map((item, i) => {
+                // calcularDistancia("Etec de embu", price[i]?.endereco);
+                return (
+                  // distancia && (
                     <CardPosto
                       key={"cardlateralpost" + i}
                       nomePosto={price[i]?.nome_posto}
                       endereco={`${price[i]?.endereco}, ${price[i]?.numero}.`}
                       url={getFlagGss(price[i]?.bandeira)}
                       // distancia={distancia}
+                      distancia={calcularDistancia('Etec de embu', 'villa lobos office park')}
                       idPosto={price[i]?.place_ID}
                       precoGasolina={price[i]?.produtos[0]?.valor?.toFixed(2)}
                       precoEtanol={price[i]?.produtos[1]?.valor?.toFixed(2)}
                       precoDiesel={price[i]?.produtos[2]?.valor?.toFixed(2)}
                     />
-                  );
-                }
-              )}
+                  // )
+                );
+              })}
           </ul>
         )}
 

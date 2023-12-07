@@ -44,23 +44,44 @@ const CardPosto = (props) => {
   /*const isFavorite = favorite.some((fav) => fav.id === id)*/
   /*const icone = !isFavorite ? AiOutlineStar : AiFillStar*/
   async function favoriteGss(idPosto) {
-    const jwt = localStorage.getItem("token");
-    const data = {
-      idPosto,
-    };
-    console.log(data);
+    if (!active) {
+      const jwt = localStorage.getItem("token");
+      const data = {
+        idPosto,
+      };
 
-    try {
-      const response = await api.post("/favorite", data, {
-        headers: {
-          Authorization: `Bearer ${jwt}`,
-          "Content-Type": "application/json", // Pode ser necessário ajustar conforme a necessidade da sua API
-        },
-      });
+      try {
+        const response = await api.post("/favorite", data, {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+            "Content-Type": "application/json",
+          },
+        });
 
-      console.log("Posto favoritado com sucesso:", response.data);
-    } catch (err) {
-      console.log("Não foi possivel favoritar posto: ", err);
+        setActive(true);
+        console.log("Posto favoritado com sucesso:", response.data);
+      } catch (err) {
+        console.log("Não foi possivel favoritar posto: ", err);
+      }
+    } else {
+      const jwt = localStorage.getItem("token");
+      const data = {
+        idPosto,
+      };
+      console.log(jwt);
+      try {
+        const response = await api.delete("/favorite", data, {
+          headers: {
+            Authorization: `Bearer ${jwt}`,
+            "Content-Type": "application/json",
+          },
+        });
+
+        setActive(false);
+        console.log("Posto excluído dos favoritos com sucesso:", response.data);
+      } catch (err) {
+        console.log("Não foi possivel excluir posto: ", err);
+      }
     }
   }
 
@@ -90,7 +111,7 @@ const CardPosto = (props) => {
                 }}
                 className="icon-favoritar-posto"
               >
-                {iconType === "outline" ? <AiOutlineStar /> : <AiFillStar />}
+                {!active ? <AiOutlineStar /> : <AiFillStar />}
               </i>
               <p>Favoritar posto</p>
             </div>
