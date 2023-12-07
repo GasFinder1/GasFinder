@@ -6,6 +6,7 @@ import { DistanceContext } from "../../context/DistanceContext";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import FilterButton from "../FilterButton/FilterButton";
 import api from "../../api";
+import axios from "axios";
 
 const CardLateral = () => {
   const { distance } = useContext(DistanceContext);
@@ -21,12 +22,12 @@ const CardLateral = () => {
 
   useEffect(() => {
     data = {
-      latitude: -23.543718812328965,
-      longitude: -46.73251873419983,
+      latitude: -23.543617079423655,
+      longitude: -46.732223246545004,
       distanceKm: distance
     };
 
-    console.log(data)
+    console.log('localização atual: ',data)
     getPricesGss(data);
   }, [location, distance]);
 
@@ -44,26 +45,42 @@ const CardLateral = () => {
     }
   }
 
-  //useEffect(() => {
+  useEffect(() => {
     // calcularDistancia(origem, destino, chaveAPI)
-  //}, []);
+  }, []);
+
+  async function calculateRoute() {
+  
+    // eslint-disable-next-line no-undef
+    const directionsService = new window.google.maps.DirectionsService();
+    const results = await directionsService.route({
+      // origin: originRef.current.value,
+      // destination: destiantionRef.current.value,
+      // eslint-disable-next-line no-undef
+      travelMode: window.google.maps.TravelMode.DRIVING,
+    });
+    // console.log("resultado", results);
+    // setDirectionsResponse(results);
+    // setDistance(results.routes[0].legs[0].distance.text);
+    // setDuration(results.routes[0].legs[0].duration.text);
+  }
 
   const getFlagGss = (flag) => {
     // if(flag == )
   };
 
-  // const calcularDistancia = async (origem, destino, chaveAPI) => (
-  //   (await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origem}&destinations=${destino}&key=${chaveAPI}`))
-  //     .data.rows[0].elements[0].distance.text
-  // );
+  const calcularDistancia = async (origem, destino, chaveAPI) => (
+    (await axios.get(`https://maps.googleapis.com/maps/api/distancematrix/json?origins=${origem}&destinations=${destino}&key=${chaveAPI}`))
+      .data.rows[0].elements[0].distance.text
+  );
 
-  // const chaveAPI = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
-  // const origem = 'ETEC DE EMBU';
-  // const destino = 'Padaria casa nossa';
+  const chaveAPI = process.env.REACT_APP_GOOGLE_MAPS_API_KEY;
+  const origem = 'ETEC DE EMBU';
+  const destino = 'Padaria casa nossa';
 
-  // calcularDistancia(origem, destino, chaveAPI)
-  //   .then(distancia => console.log(`Distância: ${distancia}`))
-  //   .catch(error => console.error(error));
+  calcularDistancia(origem, destino, chaveAPI)
+    .then(distancia => console.log(`Distância: ${distancia}`))
+    .catch(error => console.error(error));
   return (
     <section
       className={`main-container-CardLateral ${!btnState ? "" : "ocult"}`}
