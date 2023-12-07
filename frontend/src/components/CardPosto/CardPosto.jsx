@@ -38,67 +38,87 @@ const CardPosto = (props) => {
   const { favorite, addFavorite } = useFavoriteContext();
   const isFavorite = favorite.some((fav) => fav.id === props.id);
   const icone = !isFavorite ? AiOutlineStar : AiFillStar;
+  const [active, setActive] = useState(false);
 
   // const { favorite, addFavorite } = useFavoriteContext()
   /*const isFavorite = favorite.some((fav) => fav.id === id)*/
   /*const icone = !isFavorite ? AiOutlineStar : AiFillStar*/
+  async function favoriteGss(idPosto) {
+    const jwt = localStorage.getItem("token");
+    const data = {
+      idPosto,
+    };
+    console.log(data);
+
+    try {
+      const response = await api.post("/favorite", data, {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+          "Content-Type": "application/json", // Pode ser necessário ajustar conforme a necessidade da sua API
+        },
+      });
+
+      console.log("Posto favoritado com sucesso:", response.data);
+    } catch (err) {
+      console.log("Não foi possivel favoritar posto: ", err);
+    }
+  }
 
   return (
-    <>
-      <div className="div-ajuste">
-        <div className="main-container-cardPosto">
-          <div className="container-dados-posto">
-            <div className="container-bandeira-e-distancia">
-              <div className="div-bandeira">
-                <img src={props.url} alt="Bandeira do posto" />
-                <h3>{props.nomePosto}</h3>
-              </div>
-              <div className="div-distancia">
-                <BiSolidMap size={28} color="#F8333C" />
-                <p>{props.endereco}</p>
-              </div>
-              <div className="div-distancia">
-                <BiMapPin size={28} color="#467BEC" />
-                <p className="paragraphDistance">A {props.distancia}</p>
-              </div>
-              <div className="div-favoritar-posto">
-                <i
-                  onClick={() => {
-                    handleIconToggle();
-                    addFavorite({ id: props.id });
-                  }}
-                  className="icon-favoritar-posto"
-                >
-                  {iconType === "outline" ? <AiOutlineStar /> : <AiFillStar />}
-                </i>
-                <p>Favoritar posto</p>
-              </div>
+    <div className="div-ajuste">
+      <div className="main-container-cardPosto">
+        <div className="container-dados-posto">
+          <div className="container-bandeira-e-distancia">
+            <div className="div-bandeira">
+              <img src={props.url} alt="Bandeira do posto" />
+              <h3>{props.nomePosto}</h3>
             </div>
-            <div className="container-valores-postos">
-              <div style={estiloGasolina} className="div-combustiveis">
-                <h3>G</h3>
-                <p>R$ {props.precoGasolina}</p>
-              </div>
-              <div style={estiloEtanol} className="div-combustiveis">
-                <h3>E</h3>
-                <p>R$ {props.precoEtanol}</p>
-              </div>
-              <div style={estiloDiesel} className="div-combustiveis">
-                <h3>D</h3>
-                <p>R$ {props.precoDiesel}</p>
-              </div>
+            <div className="div-distancia">
+              <BiSolidMap size={28} color="#F8333C" />
+              <p>{props.endereco}</p>
+            </div>
+            <div className="div-distancia">
+              <BiMapPin size={28} color="#467BEC" />
+              <p className="paragraphDistance">A {props.distancia}</p>
+            </div>
+            <div className="div-favoritar-posto">
+              <i
+                onClick={() => {
+                  // handleIconToggle();
+                  // addFavorite({ id: props.id });
+                  favoriteGss(idPosto);
+                }}
+                className="icon-favoritar-posto"
+              >
+                {iconType === "outline" ? <AiOutlineStar /> : <AiFillStar />}
+              </i>
+              <p>Favoritar posto</p>
+            </div>
+          </div>
+          <div className="container-valores-postos">
+            <div style={estiloGasolina} className="div-combustiveis">
+              <h3>G</h3>
+              <p>R$ {props.precoGasolina}</p>
+            </div>
+            <div style={estiloEtanol} className="div-combustiveis">
+              <h3>E</h3>
+              <p>R$ {props.precoEtanol}</p>
+            </div>
+            <div style={estiloDiesel} className="div-combustiveis">
+              <h3>D</h3>
+              <p>R$ {props.precoDiesel}</p>
             </div>
           </div>
         </div>
-        <div
-          className="maisInfo-container"
-          onClick={() => navigate("/infoPosto/" + idPosto)}
-        >
-          <AiOutlineInfoCircle className="icon-info-posto" />
-          Mais Informações
-        </div>
       </div>
-    </>
+      <div
+        className="maisInfo-container"
+        onClick={() => navigate("/infoPosto/" + idPosto)}
+      >
+        <AiOutlineInfoCircle className="icon-info-posto" />
+        Mais Informações
+      </div>
+    </div>
   );
 };
 

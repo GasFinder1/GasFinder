@@ -29,7 +29,7 @@ const Login = () => {
 
       const response = await api.post("/login", data);
       const responseToken = response.data.token;
-      const responseName = response.data.nomeUsuario;
+      const responseName = response.data.name;
       localStorage.setItem('token', responseToken)
       localStorage.setItem('name_user', responseName)
 

@@ -212,31 +212,26 @@ const CardLateral = () => {
         </div>
         {loader ? (
           <div className="containerLoaderCard">
-            <div class="custom-loader"></div>
+            <div className="custom-loader"></div>
           </div>
         ) : (
           <ul>
             {price &&
-              Promise.all(
-                price.map(async (item, i) => {
-                  const distancia = await calcularDistancia(
-                    "Etec de Embu",
-                    "Avenida Elias Yasbek, 2345"
-                  );
+                price.map( (item, i) => {
                   return (
                     <CardPosto
                       key={"cardlateralpost" + i}
                       nomePosto={price[i]?.nome_posto}
                       endereco={`${price[i]?.endereco}, ${price[i]?.numero}.`}
                       url={getFlagGss(price[i]?.bandeira)}
-                      distancia={distancia}
+                      // distancia={distancia}
                       idPosto={price[i]?.place_ID}
                       precoGasolina={price[i]?.produtos[0]?.valor?.toFixed(2)}
                       precoEtanol={price[i]?.produtos[1]?.valor?.toFixed(2)}
                       precoDiesel={price[i]?.produtos[2]?.valor?.toFixed(2)}
                     />
                   );
-                })
+                }
               )}
           </ul>
         )}

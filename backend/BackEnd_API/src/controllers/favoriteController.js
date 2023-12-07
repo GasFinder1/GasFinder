@@ -14,8 +14,8 @@ route.post('/', async (request, response) => {
       return response.status(404).send({ message: 'Usuário não encontrado' });
     }
 
-    const { placeID } = request.body;
-
+    const placeID = request.body.idPosto;
+   
     if (!placeID) {
       return response.status(400).send({ message: 'ID do lugar não fornecido' });
     }

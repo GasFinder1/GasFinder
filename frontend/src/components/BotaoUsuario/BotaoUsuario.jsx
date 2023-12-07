@@ -99,7 +99,7 @@ function BotaoUsuario() {
           </div>
         ) : (
           <div className="containerOptions">
-            <p className="paragraphWelcome"><span>Bem-vindo(a)</span>{nameLocal ? `, ${nameLocal} !` : ''}</p>
+            <p className="paragraphWelcome"><span>Bem-vindo(a)</span>{nameLocal ? `, ${nameLocal}` : ''}</p>
             <Link to="/" className="options">
               <span>Home</span>{" "}
               <span>
@@ -138,6 +138,7 @@ function BotaoUsuario() {
             </Link>
             <Link to="/" className="options logout" onClick={() => {
               localStorage.removeItem('token')
+              localStorage.removeItem('name_user')
               setLogin(false)
               }}>
               <span >Sair</span>
