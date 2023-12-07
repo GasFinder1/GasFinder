@@ -44,7 +44,7 @@ const CardPosto = (props) => {
   /*const isFavorite = favorite.some((fav) => fav.id === id)*/
   /*const icone = !isFavorite ? AiOutlineStar : AiFillStar*/
   async function favoriteGss(idPosto) {
-    if (!active) {
+    if (active === false) {
       const jwt = localStorage.getItem("token");
       const data = {
         idPosto,
@@ -65,16 +65,16 @@ const CardPosto = (props) => {
       }
     } else {
       const jwt = localStorage.getItem("token");
-      const data = {
-        idPosto,
-      };
-      console.log(jwt);
+
+      console.log('id aqui: ',data);
+      console.log('jwt aqui: ',jwt);
       try {
-        const response = await api.delete("/favorite", data, {
+        const response = await api.delete("/favorite", {
           headers: {
             Authorization: `Bearer ${jwt}`,
             "Content-Type": "application/json",
           },
+          data: {placeID: idPosto}
         });
 
         setActive(false);

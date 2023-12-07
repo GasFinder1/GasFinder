@@ -158,13 +158,14 @@ function Favoritos() {
           {dataFavorites && dataFavorites.map((item, i) => (
             <CardPosto
               key={i}
-              id={dataFavorites[i].id_favorito}
+              idPosto={dataFavorites[i].place_ID}
               nomePosto={dataFavorites[i]?.nome_posto}
               url={getFlagGss(dataFavorites[i]?.bandeira)}
+              endereco={`${dataFavorites[i]?.endereco}, ${dataFavorites[i]?.numero}`}
               // distancia={dataFavorites[i]?.id_favorito}
-              precoGasolina={dataFavorites[i].produtos[1]?.valor?.toFixed(2)}
-              precoEtanol={dataFavorites[i].id_favorito}
-              precoDiesel={dataFavorites[i].id_favorito}
+              precoGasolina={dataFavorites[i]?.produtos[0]?.valor?.toFixed(2)}
+              precoEtanol={dataFavorites[i]?.produtos[1]?.valor?.toFixed(2)}
+              precoDiesel={dataFavorites[i]?.produtos[2]?.valor?.toFixed(2)}
             />
           ))}
         </div>
