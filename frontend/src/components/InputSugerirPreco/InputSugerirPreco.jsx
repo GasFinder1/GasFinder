@@ -5,8 +5,17 @@ import { FaRegQuestionCircle } from 'react-icons/fa';
 import { IoCloseCircleOutline } from 'react-icons/io5';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useParams } from "react-router-dom";
+import api from "../../api";
+
+
+
 
 const InputSugerirPreco = ({ userId }) => {
+
+  const params = useParams();
+  const { postoId } = params;
+
   const [showModal, setShowModal] = useState(true);
   const [sugestoes, setSugestoes] = useState({
     Etanol: '',
@@ -48,7 +57,7 @@ const InputSugerirPreco = ({ userId }) => {
     }));
   };
 
-  const handleSalvarAlteracoes = () => {
+  const handleSalvarAlteracoes = async() => {
     const sugestoesParaBackend = Object.fromEntries(
       Object.entries(sugestoes).map(([combustivel, valor]) => [
         combustivel,
@@ -89,6 +98,24 @@ const InputSugerirPreco = ({ userId }) => {
       return;
     }
 
+    try {
+    const jwt = localStorage.getItem("token");
+    console.log("token:", jwt)
+    sugestoesParaBackend.placeID = postoId
+    const response = await api.post("/gasStationPrices", {
+      headers: {
+        authorization: `Bearer ${jwt}`,
+        "Content-Type": "application/json",
+      },
+      sugestoesParaBackend
+    });
+    } catch (err) {
+      console.log(err)
+    }
+
+
+    
+
     setSugestoes({
       Etanol: '',
       GasolinaC: '',
@@ -98,8 +125,9 @@ const InputSugerirPreco = ({ userId }) => {
       GNV: '',
     });
 
+
     notifySuccess('Sugestões enviadas com sucesso!');
-    console.log('Sugestões enviadas:', sugestoesParaBackend);
+    console.log('Sugestões enviadas:', sugestoesParaBackend, postoId);
   };
 
   const handleCloseModal = () => {
