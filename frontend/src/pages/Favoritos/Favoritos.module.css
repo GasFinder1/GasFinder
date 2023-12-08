@@ -41,6 +41,15 @@
     color: #FFB800;
 }
 
+.textEmptyData {
+    color: #fff;
+    position: absolute;
+    top: 45%;
+    font-weight: 400;
+    font-size: 20px;
+    margin: 0 auto;
+}
+
 .cardsContainer {
     display: flex;
     flex-wrap: wrap;

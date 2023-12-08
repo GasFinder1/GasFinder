@@ -9,6 +9,7 @@ import "./CardPosto.css";
 import { useFavoriteContext } from "../../context/Favorites";
 
 const CardPosto = (props) => {
+  const [distancia, setDistancia] = useState()
   // console.log('props', props)
   const { idPosto } = props;
   const estiloGasolina = {
@@ -21,6 +22,27 @@ const CardPosto = (props) => {
   const estiloDiesel = {
     backgroundColor: "#FCAB10",
   };
+
+  const calcularDistancia = async () => {
+    console.log('chamou')
+    try {
+      const distance = await axios.get(
+        `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${encodeURIComponent(
+          props.origem
+        )}&destinations=${encodeURIComponent(props.destino)}&key=${
+          process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+        }`
+      );
+      console.log("tempo: ", distance.data.rows[0].elements[0].distance.text);
+
+      setDistancia(distance?.data?.rows[0]?.elements[0]?.distance?.text);
+      // return distancia;
+    } catch (err) {
+      console.log("erro :", err);
+    }
+  };
+
+  calcularDistancia()
 
   const [iconType, setIconType] = useState("outline");
 
@@ -100,7 +122,7 @@ const CardPosto = (props) => {
             </div>
             <div className="div-distancia">
               <BiMapPin size={28} color="#467BEC" />
-              <p className="paragraphDistance">A {props.distancia}</p>
+              <p className="paragraphDistance">A {distancia}</p>
             </div>
             <div className="div-favoritar-posto">
               <i
@@ -113,7 +135,7 @@ const CardPosto = (props) => {
               >
                 {!active ? <AiOutlineStar /> : <AiFillStar />}
               </i>
-              <p>Favoritar posto</p>
+              <p>{!active ? 'Favoritar Posto' : "Posto Favoritado"}</p>
             </div>
           </div>
           <div className="container-valores-postos">

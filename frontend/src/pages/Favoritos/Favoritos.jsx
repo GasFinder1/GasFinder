@@ -36,7 +36,7 @@ import simarelli from "../../img/bandeiras/simarelli.png";
 
 function Favoritos() {
   const { favorite } = useFavoriteContext();
-  const [dataFavorites, setDataFavorites] = useState("")
+  const [dataFavorites, setDataFavorites] = useState("");
 
   const token = localStorage.getItem("token");
 
@@ -49,8 +49,8 @@ function Favoritos() {
         },
       });
 
-      setDataFavorites(response.data)
-      console.log("FAVORITOS: ", response)
+      setDataFavorites(response.data);
+      console.log("FAVORITOS: ", response);
     } catch (err) {
       console.log("Não foi posssível realizar a requisição: ", err);
     }
@@ -155,19 +155,23 @@ function Favoritos() {
           <h1>Postos Favoritos</h1>
         </div>
         <div className={styles.cardsContainer}>
-          {dataFavorites && dataFavorites.map((item, i) => (
-            <CardPosto
-              key={i}
-              idPosto={dataFavorites[i].place_ID}
-              nomePosto={dataFavorites[i]?.nome_posto}
-              url={getFlagGss(dataFavorites[i]?.bandeira)}
-              endereco={`${dataFavorites[i]?.endereco}, ${dataFavorites[i]?.numero}`}
-              // distancia={dataFavorites[i]?.id_favorito}
-              precoGasolina={dataFavorites[i]?.produtos[0]?.valor?.toFixed(2)}
-              precoEtanol={dataFavorites[i]?.produtos[1]?.valor?.toFixed(2)}
-              precoDiesel={dataFavorites[i]?.produtos[2]?.valor?.toFixed(2)}
-            />
-          ))}
+          {!dataFavorites ? (
+            <h2 className={styles.textEmptyData}>Nenhum posto está favoritado.</h2>
+          ) : (
+            dataFavorites.map((item, i) => (
+              <CardPosto
+                key={i}
+                idPosto={dataFavorites[i].place_ID}
+                nomePosto={dataFavorites[i]?.nome_posto}
+                url={getFlagGss(dataFavorites[i]?.bandeira)}
+                endereco={`${dataFavorites[i]?.endereco}, ${dataFavorites[i]?.numero}`}
+                // distancia={dataFavorites[i]?.id_favorito}
+                precoGasolina={dataFavorites[i]?.produtos[0]?.valor?.toFixed(2)}
+                precoEtanol={dataFavorites[i]?.produtos[1]?.valor?.toFixed(2)}
+                precoDiesel={dataFavorites[i]?.produtos[2]?.valor?.toFixed(2)}
+              />
+            ))
+          )}
         </div>
       </div>
     </section>

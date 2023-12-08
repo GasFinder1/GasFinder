@@ -43,24 +43,22 @@ const CardLateral = () => {
   const [loader, setLoader] = useState(false);
   const { location } = useContext(LocationContext);
   // const [data, setData] = useState({});
-  let data = {};
   // console.log(location.lat)
   // console.log(location.lat)
   // console.log("Essa é a localização do usuário context: ", location.lng);
 
-  useEffect(() => {
-    data = {
-      // latitude: location.latitude,
-      // longitude: location.longitude,
-      latitude: -23.641866162601666,
-      longitude: -46.83600825648072,
-      distanceKm: distance,
-    };
+  let data = {
+    latitude: !location.lat ? -23.641866162601666 : location.lat,
+    longitude: !location.lng ? -46.83600825648072 : location.lng,
+    // latitude: -23.641866162601666,
+    // longitude: -46.83600825648072,
+    distanceKm: distance,
+  };
 
+  useEffect(() => {
     console.log("localização atual: ", data);
-    console.log(location);
     getPricesGss(data);
-  }, [location, distance]);
+  }, [distance]);
 
   const [price, setPrice] = useState([]);
 
@@ -77,10 +75,6 @@ const CardLateral = () => {
   }
 
   const [distancia, setDistancia] = useState(null);
-
-  useEffect(() => {
-    // calcularDistancia("Etec de embu", "Avenida Rotary, 2991.");
-  }, []);
 
   const getFlagGss = (flag) => {
     switch (flag) {
@@ -166,25 +160,25 @@ const CardLateral = () => {
     }
   };
 
-  const calcularDistancia = async (origem, destino) => {
-    try {
-      const distance = await axios.get(
-        `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${encodeURIComponent(
-          origem
-        )}&destinations=${encodeURIComponent(destino)}&key=${
-          process.env.REACT_APP_GOOGLE_MAPS_API_KEY
-        }`
-      );
-      console.log("tempo: ", distance.data.rows[0].elements[0].distance.text);
+  // const calcularDistancia = async (origem, destino) => {
+  //   try {
+  //     const distance = await axios.get(
+  //       `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${encodeURIComponent(
+  //         origem
+  //       )}&destinations=${encodeURIComponent(destino)}&key=${
+  //         process.env.REACT_APP_GOOGLE_MAPS_API_KEY
+  //       }`
+  //     );
+  //     console.log("tempo: ", distance.data.rows[0].elements[0].distance.text);
 
-      setDistancia(distance?.data?.rows[0]?.elements[0]?.distance?.text);
-      // return distance?.data?.rows[0]?.elements[0]?.distance?.text;
-      setDistancia(null)
-      return distancia;
-    } catch (err) {
-      console.log("erro :", err);
-    }
-  };
+  //     setDistancia(distance?.data?.rows[0]?.elements[0]?.distance?.text);
+  //     // return distance?.data?.rows[0]?.elements[0]?.distance?.text;
+  //     setDistancia(null);
+  //     return distancia;
+  //   } catch (err) {
+  //     console.log("erro :", err);
+  //   }
+  // };
 
   async function convertAdress(address) {
     const response = await axios.get(
@@ -219,21 +213,24 @@ const CardLateral = () => {
           <ul>
             {price &&
               price.map((item, i) => {
+                // Favorite.map
                 // calcularDistancia("Etec de embu", price[i]?.endereco);
                 return (
                   // distancia && (
-                    <CardPosto
-                      key={"cardlateralpost" + i}
-                      nomePosto={price[i]?.nome_posto}
-                      endereco={`${price[i]?.endereco}, ${price[i]?.numero}.`}
-                      url={getFlagGss(price[i]?.bandeira)}
-                      // distancia={distancia}
-                      // distancia={calcularDistancia('Etec de embu', 'villa lobos office park')}
-                      idPosto={price[i]?.place_ID}
-                      precoGasolina={price[i]?.produtos[0]?.valor?.toFixed(2)}
-                      precoEtanol={price[i]?.produtos[1]?.valor?.toFixed(2)}
-                      precoDiesel={price[i]?.produtos[2]?.valor?.toFixed(2)}
-                    />
+                  <CardPosto
+                    key={"cardlateralpost" + i}
+                    nomePosto={price[i]?.nome_posto}
+                    endereco={`${price[i]?.endereco}, ${price[i]?.numero}.`}
+                    url={getFlagGss(price[i]?.bandeira)}
+                    // distancia={distancia}
+                    origem={"etec de embu"}
+                    destino={`${price[i]?.municipio}, ${price[i]?.estado} ${price[i]?.endereco}, ${price[i]?.numero}.`}
+                    idPosto={price[i]?.place_ID}
+                    precoGasolina={price[i]?.produtos[0]?.valor?.toFixed(2)}
+                    precoEtanol={price[i]?.produtos[1]?.valor?.toFixed(2)}
+                  // {price[i].placeid == favorito.fk_id_posto ?}
+                    precoDiesel={price[i]?.produtos[2]?.valor?.toFixed(2)}
+                  />
                   // )
                 );
               })}

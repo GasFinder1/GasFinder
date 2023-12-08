@@ -175,6 +175,7 @@ route.post('/all/', async (request, response) => {
                 let gs_data = [];
                 let queue = [];
                 //verificar se existe algum posto linkado á uma place_ID
+                console.log(1)
                 data.map((value) => {
                     queue.push(gss.getLocalizationById_posto(value.id_posto));
                 })
@@ -182,6 +183,7 @@ route.post('/all/', async (request, response) => {
                     gs_data = values;
                 }).catch(err => console.log(err));
                 //remoção de postos que já estão linkados a uma place_ID
+                console.log(2)
                 gs_data.map(value => {
                     //pega o indice da array data onde o valor for igual ao de value.id_posto do Array.map, e o remove, precisa ser corrigido
                     const index = data.findIndex(objeto => objeto.id_posto === value.fk_id_posto);
@@ -189,8 +191,10 @@ route.post('/all/', async (request, response) => {
                         data.splice(index, 1);
                     }
                 });
+                console.log(3)
                 //remover os postos que estão na tabela de remoção
                 const removedData = await gscs.getRemovedGS();
+                console.log(4)
                 if (removedData != null) {
                     for (let i = 0; i < removedData.length; i++) {
                         const index = data.findIndex(objeto => objeto.id_posto === removedData[i].fk_id_posto);
@@ -199,6 +203,7 @@ route.post('/all/', async (request, response) => {
                         }
                     }
                 }
+                console.log(5)
                 console.log("data.length: " + data.length);
                 for (let i = 0; i < data.length; i++) {
                     gscs.removeGS(data[i].id_posto);

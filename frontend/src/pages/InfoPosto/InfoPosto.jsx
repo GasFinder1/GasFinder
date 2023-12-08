@@ -153,15 +153,15 @@ function InfoPosto(props) {
                 }
               />
               <PrecoCard
-                titulo="DieselS10"
+                titulo="Diesel S10"
                 preco={
-                  exibirPrecosANP ? precos.DieselS10 : precosSugestao.DieselS10
+                  exibirPrecosANP ? precos['Diesel S10'] : precosSugestao['Diesel S10']
                 }
               />
               <PrecoCard
-                titulo="DieselS500"
+                titulo="Diesel S500"
                 preco={
-                  exibirPrecosANP ? precos.DieselS500 : precosSugestao.DieselS500
+                  exibirPrecosANP ? precos['Diesel S500'] : precosSugestao['Diesel S500']
                 }
               />
               <PrecoCard

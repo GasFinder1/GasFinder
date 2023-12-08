@@ -334,6 +334,7 @@ async function getStationByDistance(maxLat, minLat, maxLng, minLng) {
     try {
         const [rows] = await conn.execute(sql, values);
         if (rows.length >= 1) {
+            console.log("retorno dos dados")
             return rows
         }
         else {
