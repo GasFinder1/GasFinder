@@ -150,7 +150,7 @@ function Favoritos() {
   }, []);
 
   useEffect(() => {
-    getGssFavorites(token);
+     getGssFavorites(token);
   }, [control]);
 
   return (

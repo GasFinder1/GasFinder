@@ -223,15 +223,14 @@ const CardLateral = () => {
                     nomePosto={price[i]?.nome_posto}
                     endereco={`${price[i]?.endereco}, ${price[i]?.numero}.`}
                     url={getFlagGss(price[i]?.bandeira)}
-                    // distancia={distancia}
                     origem={"etec de embu"}
                     destino={`${price[i]?.municipio}, ${price[i]?.estado} ${price[i]?.endereco}, ${price[i]?.numero}.`}
                     idPosto={price[i]?.place_ID}
-                    precoGasolina={price[i]?.produtos[0]?.valor?.toFixed(2)}
-                    precoEtanol={price[i]?.produtos[1]?.valor?.toFixed(2)}
-                    // {price[i].placeid == favorito.fk_id_posto ?}
+                    // precoGasolina={price[i]?.produtos[0]?.valor?.toFixed(2)}
+                    precoGasolina={price[i]?.produtos[i]?.nome_combustivel == "gasolina" ? price[i]?.produtos[1]?.valor?.toFixed(2) : price[i]?.produtos[0]?.valor?.toFixed(2)}
+                    precoEtanol={price[i]?.produtos[i]?.nome_combustivel == 'etanol' ? price[i]?.produtos[i]?.valor?.toFixed(2) : price[i]?.produtos[1]?.valor?.toFixed(2)}
                     favorito={true}
-                    precoDiesel={price[i]?.produtos[2]?.valor?.toFixed(2)}
+                    precoDiesel={price[i]?.produtos[i]?.nome_combustivel == "diesel s10" ||  price[i]?.produtos[i].nome_combustivel == 'diesel s500' ? price[i]?.produtos[i]?.valor?.toFixed(2) : price[i]?.produtos[2]?.valor?.toFixed(2)}
                   />
                   // )
                 );
