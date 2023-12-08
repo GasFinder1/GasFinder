@@ -38,12 +38,12 @@ function InfoPosto(props) {
   }, [postoId]);
 
   const precos = {
-    Etanol: 4.39,
-    GasolinaC: 3.39,
-    GasolinaADT: 5.39,
-    'Diesel S10': 3.39,
-    'Diesel S500': 6.39,
-    GNV: 3.39,
+    Etanol: "---",
+    GasolinaC: "---",
+    GasolinaADT: "---",
+    'Diesel S10': "---",
+    'Diesel S500': "---",
+    GNV: "---",
   };
 
   const precosSugestao = {
@@ -72,7 +72,7 @@ function InfoPosto(props) {
         <h3>{titulo}</h3>
       </div>
       <div className={styles.preco}>
-        <h2>R$ {preco?.toFixed(2)}</h2>
+        <h2>R$ {preco}</h2>
       </div>
     </div>
   );
@@ -160,6 +160,18 @@ function InfoPosto(props) {
               />
               <PrecoCard
                 titulo="Diesel S500"
+                preco={
+                  exibirPrecosANP ? precos['Diesel S500'] : precosSugestao['Diesel S500']
+                }
+              />
+              <PrecoCard
+                titulo="Etanol"
+                preco={
+                  exibirPrecosANP ? precos['Diesel S500'] : precosSugestao['Diesel S500']
+                }
+              />
+              <PrecoCard
+                titulo="Gasolina Aditivada"
                 preco={
                   exibirPrecosANP ? precos['Diesel S500'] : precosSugestao['Diesel S500']
                 }
