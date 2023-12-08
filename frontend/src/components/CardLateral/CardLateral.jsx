@@ -230,7 +230,7 @@ const CardLateral = () => {
                     precoGasolina={price[i]?.produtos[i]?.nome_combustivel == "gasolina" ? price[i]?.produtos[1]?.valor?.toFixed(2) : price[i]?.produtos[0]?.valor?.toFixed(2)}
                     precoEtanol={price[i]?.produtos[i]?.nome_combustivel == 'etanol' ? price[i]?.produtos[i]?.valor?.toFixed(2) : price[i]?.produtos[1]?.valor?.toFixed(2)}
                     favorito={true}
-                    precoDiesel={price[i]?.produtos[i]?.nome_combustivel == "diesel s10" ||  price[i]?.produtos[i].nome_combustivel == 'diesel s500' ? price[i]?.produtos[i]?.valor?.toFixed(2) : price[i]?.produtos[2]?.valor?.toFixed(2)}
+                    precoDiesel={price[i]?.produtos[i]?.nome_combustivel == "diesel s10" ||  price[i]?.produtos[i]?.nome_combustivel == 'diesel s500' ? price[i]?.produtos[i]?.valor?.toFixed(2) : price[i]?.produtos[2]?.valor?.toFixed(2)}
                   />
                   // )
                 );

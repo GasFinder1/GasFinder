@@ -40,6 +40,7 @@ function Favoritos() {
   const { favorite } = useFavoriteContext();
   const [dataFavorites, setDataFavorites] = useState("");
   const { control } = useContext(ControlContext);
+console.log(control)
 
   const token = localStorage.getItem("token");
 
