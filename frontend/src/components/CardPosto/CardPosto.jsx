@@ -1,15 +1,18 @@
 import "./CardPosto.css";
 import { useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { AiOutlineInfoCircle, AiOutlineStar, AiFillStar } from "react-icons/ai";
 import axios from "axios";
 import api from "../../api";
 import { BiMapPin, BiSolidMap } from "react-icons/bi";
 import "./CardPosto.css";
 import { useFavoriteContext } from "../../context/Favorites";
+import { ControlContext } from "../../context/ControlContext";
+import { IoMdClose } from "react-icons/io";
+import { ToastContainer, toast } from "react-toastify";
 
 const CardPosto = (props) => {
-  const [distancia, setDistancia] = useState()
+  const [distancia, setDistancia] = useState();
   // console.log('props', props)
   const { idPosto } = props;
   const estiloGasolina = {
@@ -24,7 +27,7 @@ const CardPosto = (props) => {
   };
 
   const calcularDistancia = async () => {
-    console.log('chamou')
+    console.log("chamou");
     try {
       const distance = await axios.get(
         `https://maps.googleapis.com/maps/api/distancematrix/json?origins=${encodeURIComponent(
@@ -42,7 +45,7 @@ const CardPosto = (props) => {
     }
   };
 
-  calcularDistancia()
+  calcularDistancia();
 
   const [iconType, setIconType] = useState("outline");
 
@@ -56,6 +59,8 @@ const CardPosto = (props) => {
     latitude: -23.644313612253786,
     longitude: -46.89789512355279,
   };
+
+  const { control, setControl } = useContext(ControlContext);
 
   const { favorite, addFavorite } = useFavoriteContext();
   const isFavorite = favorite.some((fav) => fav.id === props.id);
@@ -88,15 +93,15 @@ const CardPosto = (props) => {
     } else {
       const jwt = localStorage.getItem("token");
 
-      console.log('id aqui: ',data);
-      console.log('jwt aqui: ',jwt);
+      console.log("id aqui: ", data);
+      console.log("jwt aqui: ", jwt);
       try {
         const response = await api.delete("/favorite", {
           headers: {
             Authorization: `Bearer ${jwt}`,
             "Content-Type": "application/json",
           },
-          data: {placeID: idPosto}
+          data: { placeID: idPosto },
         });
 
         setActive(false);
@@ -104,6 +109,38 @@ const CardPosto = (props) => {
       } catch (err) {
         console.log("Não foi possivel excluir posto: ", err);
       }
+    }
+  }
+
+  async function removeFavorite(idPosto) {
+    const jwt = localStorage.getItem("token");
+    const data = {
+      idPosto,
+    };
+
+    try {
+      const response = await api.delete("/favorite", {
+        headers: {
+          Authorization: `Bearer ${jwt}`,
+          "Content-Type": "application/json",
+        },
+        data: { placeID: idPosto },
+      });
+      setControl(!control);
+      setActive(false);
+      toast.info(`Posto removido dos favoritos`, {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
+      console.log(control);
+    } catch (err) {
+      console.log("Não foi possivel remover posto: ", err);
     }
   }
 
@@ -124,19 +161,33 @@ const CardPosto = (props) => {
               <BiMapPin size={28} color="#467BEC" />
               <p className="paragraphDistance">A {distancia}</p>
             </div>
-            <div className="div-favoritar-posto">
-              <i
-                onClick={() => {
-                  // handleIconToggle();
-                  // addFavorite({ id: props.id });
-                  favoriteGss(idPosto);
-                }}
-                className="icon-favoritar-posto"
-              >
-                {!active ? <AiOutlineStar /> : <AiFillStar />}
-              </i>
-              <p>{!active ? 'Favoritar Posto' : "Posto Favoritado"}</p>
-            </div>
+            {props.favorito ? (
+              <div className="div-favoritar-posto">
+                <i
+                  onClick={() => {
+                    // handleIconToggle();
+                    // addFavorite({ id: props.id });
+                    favoriteGss(idPosto);
+                  }}
+                  className="icon-favoritar-posto"
+                >
+                  {!active ? <AiOutlineStar /> : <AiFillStar />}
+                </i>
+                <p>{!active ? "Favoritar Posto" : "Posto Favoritado"}</p>
+              </div>
+            ) : (
+              <div className="div-favoritar-posto">
+                <i
+                  onClick={() => {
+                    removeFavorite(idPosto);
+                  }}
+                  className="icon-favoritar-posto"
+                >
+                  <IoMdClose />
+                </i>
+                <p>Remover posto</p>
+              </div>
+            )}
           </div>
           <div className="container-valores-postos">
             <div style={estiloGasolina} className="div-combustiveis">

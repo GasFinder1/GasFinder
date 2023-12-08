@@ -5,15 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { LocationContextProvider } from './context/LocationContext';
 import { DistanceContextProvider } from './context/DistanceContext';
+import { ControlContextProvider } from './context/ControlContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <LocationContextProvider>
-      <DistanceContextProvider>
-        <App />
-      </DistanceContextProvider>
-    </LocationContextProvider>
+    <ControlContextProvider>
+      <LocationContextProvider>
+        <DistanceContextProvider>
+          <App />
+        </DistanceContextProvider>
+      </LocationContextProvider>
+    </ControlContextProvider>
   </React.StrictMode>
 );
 

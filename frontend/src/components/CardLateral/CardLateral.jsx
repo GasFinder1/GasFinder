@@ -35,6 +35,7 @@ import riobranco from "../../img/bandeiras/riobranco.png";
 import rodoil from "../../img/bandeiras/rodoil.png";
 import setta from "../../img/bandeiras/setta.png";
 import simarelli from "../../img/bandeiras/simarelli.png";
+import shell from "../../img/ipiranga.png";
 
 const CardLateral = () => {
   const { distance } = useContext(DistanceContext);
@@ -152,8 +153,8 @@ const CardLateral = () => {
       // break;
       case "setta":
         return setta;
-      case "branca":
-        return padrao2;
+      case "shell":
+        return shell;
       // break;
       default:
         return padrao;
@@ -228,7 +229,8 @@ const CardLateral = () => {
                     idPosto={price[i]?.place_ID}
                     precoGasolina={price[i]?.produtos[0]?.valor?.toFixed(2)}
                     precoEtanol={price[i]?.produtos[1]?.valor?.toFixed(2)}
-                  // {price[i].placeid == favorito.fk_id_posto ?}
+                    // {price[i].placeid == favorito.fk_id_posto ?}
+                    favorito={true}
                     precoDiesel={price[i]?.produtos[2]?.valor?.toFixed(2)}
                   />
                   // )

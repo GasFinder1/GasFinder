@@ -2,8 +2,9 @@ import styles from "./Favoritos.module.css";
 import Navbar from "../../components/NavBar/NavBar";
 import { AiFillStar } from "react-icons/ai";
 import CardPosto from "../../components/CardPosto/CardPosto";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useFavoriteContext } from "../../context/Favorites";
+import { ControlContext } from "../../context/ControlContext";
 import api from "../../api";
 
 import ipiranga from "../../img/bandeiras/Ipiranga.png";
@@ -33,10 +34,12 @@ import riobranco from "../../img/bandeiras/riobranco.png";
 import rodoil from "../../img/bandeiras/rodoil.png";
 import setta from "../../img/bandeiras/setta.png";
 import simarelli from "../../img/bandeiras/simarelli.png";
+import shell from "../../img/ipiranga.png";
 
 function Favoritos() {
   const { favorite } = useFavoriteContext();
   const [dataFavorites, setDataFavorites] = useState("");
+  const { control } = useContext(ControlContext);
 
   const token = localStorage.getItem("token");
 
@@ -135,6 +138,8 @@ function Favoritos() {
       case "branca":
         return padrao2;
       // break;
+      case "shell":
+        return shell;
       default:
         return padrao;
     }
@@ -143,6 +148,10 @@ function Favoritos() {
   useEffect(() => {
     getGssFavorites(token);
   }, []);
+
+  useEffect(() => {
+    getGssFavorites(token);
+  }, [control]);
 
   return (
     <section className={styles.containerFavoritos}>
@@ -156,7 +165,9 @@ function Favoritos() {
         </div>
         <div className={styles.cardsContainer}>
           {!dataFavorites ? (
-            <h2 className={styles.textEmptyData}>Nenhum posto está favoritado.</h2>
+            <h2 className={styles.textEmptyData}>
+              Nenhum posto está favoritado.
+            </h2>
           ) : (
             dataFavorites.map((item, i) => (
               <CardPosto
@@ -165,10 +176,12 @@ function Favoritos() {
                 nomePosto={dataFavorites[i]?.nome_posto}
                 url={getFlagGss(dataFavorites[i]?.bandeira)}
                 endereco={`${dataFavorites[i]?.endereco}, ${dataFavorites[i]?.numero}`}
-                // distancia={dataFavorites[i]?.id_favorito}
+                origem={"etec de embu"}
+                destino={`${dataFavorites[i]?.municipio}, ${dataFavorites[i]?.estado} ${dataFavorites[i]?.endereco}, ${dataFavorites[i]?.numero}.`}
                 precoGasolina={dataFavorites[i]?.produtos[0]?.valor?.toFixed(2)}
                 precoEtanol={dataFavorites[i]?.produtos[1]?.valor?.toFixed(2)}
                 precoDiesel={dataFavorites[i]?.produtos[2]?.valor?.toFixed(2)}
+                favorito={false}
               />
             ))
           )}
