@@ -102,13 +102,13 @@ const InputSugerirPreco = ({ userId }) => {
     const jwt = localStorage.getItem("token");
     console.log("token:", jwt)
     sugestoesParaBackend.placeID = postoId
-    const response = await api.post("/gasStationPrices", {
+    const response = await api.post("/gasStationPrices", sugestoesParaBackend, {
       headers: {
         authorization: `Bearer ${jwt}`,
         "Content-Type": "application/json",
       },
-      sugestoesParaBackend
     });
+    notifySuccess('Sugestões enviadas com sucesso!');
     } catch (err) {
       console.log(err)
     }
@@ -126,7 +126,6 @@ const InputSugerirPreco = ({ userId }) => {
     });
 
 
-    notifySuccess('Sugestões enviadas com sucesso!');
     console.log('Sugestões enviadas:', sugestoesParaBackend, postoId);
   };
 

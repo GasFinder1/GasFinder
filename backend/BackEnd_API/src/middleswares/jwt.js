@@ -4,6 +4,7 @@ import 'dotenv/config';
 
 function verifyJWT(request, response, next) {
    // return next();
+   console.log("token aqui: ", request.headers)
    const secret = process.env.JWT_PASSWORD;
    
    const authHeader = request.headers.authorization;

@@ -11,7 +11,7 @@ route.post('/', verifyJWT, async (request, response) => {
 
         if (!placeID) return response.status(400).json({ error: "a placeID é inválida" });
         if (!idUser) return response.status(400).json({ error: "a idUser está invalida" });
-        if (values.filter(valor => !valor).length === values.length) return response.status(400).json({ error: "precisa retornar pelo menos um valor de combustível" });
+        // if (values.filter(valor => !valor).length === values.length) return response.status(400).json({ error: "precisa retornar pelo menos um valor de combustível" });
 
         let queue = [];
         let data = [];
