@@ -45,6 +45,7 @@ console.log(control)
   const token = localStorage.getItem("token");
 
   async function getGssFavorites(token) {
+    setDataFavorites('')
     try {
       const response = await api.get("/favorite", {
         headers: {
